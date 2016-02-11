@@ -1,0 +1,37 @@
+<!Doctype html>
+
+<head>
+    <title>World Translator</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <script type="text/javascript" src="index/Bacon.min.js"></script> 
+
+    <script>
+       
+        function helloWorld(language) {
+            console.log("The language is: ", language);
+
+            var result;
+            if (language == "en") {
+                result = "hello,World";
+            } 
+            else if (language == "zul") {
+                result = "sawubona,Mhlaba";
+            }
+             else {
+                result= "hello,World";
+            }
+            console.log(result);
+        }
+        this.helloWorld("en");
+        this.helloWorld("zul");
+        this.helloWorld("afr");
+
+    </script>
+</head>
+
+<body>
+</body>
+
+</html>

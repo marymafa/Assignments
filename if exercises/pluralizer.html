@@ -1,0 +1,25 @@
+<!Doctype html>
+<head>
+ <title>The Grade Assigner</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <script>
+    function pluralize(number,noun){
+        var result;
+        if(noun.match(/e/g).length > 1){
+            result= number + noun;
+         } else if(number > 1){
+        result = number + noun +"s";
+         } else if(number == 1){
+       result= number + noun;
+        }
+        console.log(result);
+        }
+    this.pluralize(3, "geese");
+
+    </script>
+</head>
+<body>
+</body>
+</html>

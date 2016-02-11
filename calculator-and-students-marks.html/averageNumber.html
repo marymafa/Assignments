@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset=utf-8 />
+<title>Compute the average marks and grade</title>
+<script>
+    var studentsMarks=[['Themba',60],['Zandi',77],['Lerato',88],['Tshepo',95],['Thomas',45]];
+function calculateAverage(studentsMarks){ 
+    var average=0;
+
+    for(var i=0; i<studentsMarks.length; i++){
+        average += studentsMarks[i][1]/studentsMarks.length;
+    }
+    return average;
+}
+      function determineGrade(average){
+            var grade="";
+      
+if(average < 60){
+   Grade="F";
+}else if(average< 70){
+ Grade="D";
+}else if(average < 80){
+    Grade="C";
+}else if(average < 90){
+     Grade="B"; 
+}else if(average< 100){
+  Grade="A"; 
+}
+
+return Grade;
+      }
+
+var studentsAverage=calculateAverage(studentsMarks);
+var studentsGrade=determineGrade(studentsAverage);
+
+console.log(studentsAverage);
+console.log(studentsGrade);
+
+
+var students2Marks=[['Themba',65],['Zandi',30],['Lerato',87],['Tshepo',50],['Thomas',80]];
+
+var students2Average=calculateAverage(students2Marks);
+var students2Grade=determineGrade(students2Average);
+
+console.log(students2Average);
+console.log(students2Grade);
+
+
+</script>
+</head>
+<body>
+</body>
+</html>
