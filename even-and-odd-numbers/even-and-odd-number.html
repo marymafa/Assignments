@@ -4,23 +4,26 @@
 <head>
     <title>PrintNumbers</title>
     <script>
-        num = 50;
+        var output = "";
+        var result = "";
+        var maxNumber = 50;
         function printnumbers(num) {
-              var output = "";
+            var output = ""
+            var results = ""
+            for (var i = 0; i <= maxNumber; i++) {
+                var number = i;
+                if (i % 2 === 0) {
+                    results = `${i} is even\n`;
+                } else {
+                    results = `${i} is odd\n`;
+                }
 
-            for (var i = 1; i < num; i++) {
-             var result 
+                output += results;
 
-            } if (i % 2 === 0) {
-                result= `${i}, "is Even"`;
-            } else {
-                result = `${i}, "is Even"`;
             }
-            console.log( result);
+            return output;
         }
-        console.log(printnumbers(num));
-       // this.printNumbers(even); 
-       // this.printNumbers(odd);
+        console.log(this.printnumbers(maxNumber));
     </script>
 </head>
 
