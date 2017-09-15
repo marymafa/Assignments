@@ -4,18 +4,21 @@
 <meta charset=utf-8 />
 <title>Write a JavaScript function that accepts two integers and display the smaller</title>
 <script>
-function smallerNumber(firstNumber,secondNumber){
-         var result;
-            if (firstNumber < secondNumber) {
-                result= "the smaller number of " + firstNumber + " and " + secondNumber + " is " + firstNumber;
-            } else if (firstNumber > secondNumber) {
-                result= "the smaller number of " + firstNumber + " and " + secondNumber + " is " + secondNumber;
-            } 
-            console.log(result);
-        }
-        this.smallerNumber(40,70);
+function smallerInteger(firstInteger,secondInteger){
+         var smallerIteger;
 
+            if (firstInteger < secondInteger) {
+                smallerIteger=firstInteger;
+            } else if (firstInteger > secondInteger) {
+              smallerIteger=secondInteger;
+            }else{
+            Error("Unexpexted value");
+            }
+        return smallerIteger;
+}
+console.log(smallerInteger(40,45));
 
+    //this.smallerInteger(40,45);
 </script>
 </head>
 <body>
