@@ -1,0 +1,36 @@
+<html>
+
+<head>
+    <title>solution</title>
+    <script>
+        function solution(num) {
+            var arg = 0;
+            var result = "";
+
+
+            for (var i = 0; i < num.length; i++) {
+                arg += num[i];
+                if (arg >= 1) {
+                    result = true;
+                } else {
+                    result = false;
+                }
+            }
+            return result;
+        }
+        var num = [1,2,3];
+        console.log(this.solution(num));
+
+        var num = [1,2,3,2];
+        console.log(this.solution(num));
+
+        var num = ['1','2','3','2'];
+        console.log(this.solution(num));
+
+    </script>
+</head>
+
+<body>
+</body>
+
+</html>

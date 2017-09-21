@@ -1,0 +1,36 @@
+<html>
+
+<head>
+    <title>numbers</title>
+    <script>
+        function numbers(num) {
+            var arg = 0;
+            var result = "";
+
+
+            for (var i = 0; i < num.length; i++) {
+                arg += num[i];
+                if (arg >= null) {
+                    result = true;
+                } else {
+                    result = false;
+                }
+            }
+            return result;
+        }
+        var num = [1, 4, 3, 2, 5];
+        console.log(this.numbers(num));
+
+        var num = [2, "a", 2, 7];
+        console.log(this.numbers(num));
+
+        var num = [4, 2, "7", 2, 5];
+        console.log(this.numbers(num));
+
+    </script>
+</head>
+
+<body>
+</body>
+
+</html>
