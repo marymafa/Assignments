@@ -1,0 +1,31 @@
+<!Doctype html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>celsiusToFahrenheit</title>
+    <script>
+        function celsiusToFahrenheit(celsius) {
+            var Fahrenheit = (celsius * 9 / 5) + 32;
+            var output = `${celsius} °C is ${Fahrenheit} °F`;
+            return output;
+        }
+        function FahrenheitToCelsius(Fahrenheit) {
+            var Celsius = (Fahrenheit - 32) / 1.8;
+            var output = `${Fahrenheit} °C is ${Celsius} °c`;
+            return output;
+        }
+        console.log(celsiusToFahrenheit(10));
+        console.log(celsiusToFahrenheit(20));
+        console.log(celsiusToFahrenheit(30));
+
+
+        console.log(FahrenheitToCelsius(40));
+        console.log(FahrenheitToCelsius(50));
+        console.log(FahrenheitToCelsius(60));
+    </script>
+</head>
+
+<body>
+</body>
+
+</html>
