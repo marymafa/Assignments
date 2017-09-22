@@ -1,0 +1,23 @@
+<!Doctype html>
+<html>
+
+<head>
+    <title> calculateSupply</title>
+    <script>
+        function calculateSupply(age, amountPerday) {
+             var maxAge = 100;
+             var numPerDay=2;
+  var totalNeeded = (numPerDay * 365) * (maxAge - age);
+  var message = 'You will need ' + totalNeeded + 'snack  to last you until the ripe old age of ' + maxAge;
+console.log(message);
+        }
+        console.log(calculateSupply(21, 4,5));
+        console.log(calculateSupply(10, 7,30));
+        console.log(calculateSupply(60, 8,4));
+    </script>
+</head>
+
+<body>
+</body>
+
+</html>
