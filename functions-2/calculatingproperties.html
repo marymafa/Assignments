@@ -1,0 +1,32 @@
+<!Doctype html>
+<html>
+
+<head>
+    <title>calcCircumfrence</title>
+    <script>
+        function calcCircumfrence(radius) {
+            var pie = 3.141592;
+            var circumference = (2 * radius) * pie;
+            var output = `The circumference is ${circumference}`;
+            return output;
+        }
+        function calcArea(radius) {
+            var pie = 3.141592;
+            var area = pie * (radius * radius);
+            var output = `The area is ${area}`;
+            return output;
+        }
+        console.log(calcCircumfrence(8));
+        console.log(calcCircumfrence(16));
+        console.log(calcCircumfrence(49));
+
+        console.log(calcArea(6));
+        console.log(calcArea(20));
+        console.log(calcArea(50));
+    </script>
+</head>
+
+<body>
+</body>
+
+</html>
