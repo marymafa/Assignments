@@ -1,0 +1,106 @@
+<head>
+  <link href="https://fonts.googleapis.com/css?family=Lobster" rel="stylesheet">
+</head>
+
+<body>
+  <div class="container">
+    <div class="center">
+      <h1> Current Weather</h1>
+      <p id="city"></p>
+      <p id="typeWeather"></p>
+      <p id="fTemp" class="btn btn-default"> </p>
+      <p id="windSpeed"></p>
+      <p style = "color:white;">designed by: Irvin3 </p>     
+    </div>      
+   </div>  
+</body>
+.container{
+  background: #3e95f9;
+  width: 100%;
+  height: 100vh;
+  padding-top: 40px;
+}
+.center{
+  text-align: center;
+  
+}
+h1{
+  font-family: 'Lobster', cursive;
+  font-size: 60px;
+}
+#city{
+  font-size: 23px;
+  color: white;
+  text-decoration: underline;
+}
+#fTemp{
+  font-size: 50px;
+  box-shadow: 5px 5px 10px black;
+  margin-bottom: 10px;
+}
+#typeWeather{
+  font-size:20px;
+  color: white;
+}
+#windSpeed{
+  font-size:20px;
+  color: white;
+}
+#info{
+  margin-top: 150px;
+}
+
+alert("Thanks for checking out my weather app. This app uses the wunderground weather API to populate your current local weather info. Enjoy!");
+	weatherAPI();
+
+
+
+function weatherAPI(){
+var apiKey = "66d813667c145df9";    
+
+var api = "https://api.wunderground.com/api/" + apiKey + "/conditions/forecast/geolookup/q/autoip.json"
+    //console.log(api);
+  
+     //Pulls info such as temps and windspeed from your location
+    $.ajax({
+      url: api,
+      dataType: "json",
+      success: function(data){
+    
+    var typeWeather = data.current_observation.weather;
+    var fTemp = data.current_observation.temp_f;
+    var cTemp = data.current_observation.temp_c;
+    var city = data.current_observation.display_location.full; 
+    var windSpeed = data.current_observation.wind_mph;
+     
+   
+       
+     
+    $("#city").html(city);
+    $("#fTemp").html(fTemp + " &#8457");
+        
+      // control the temp button
+         var tempSwitch = false;
+    $("#fTemp").click(function(){
+      if(tempSwitch === false){
+        $("#fTemp").html(cTemp + " &#8451");
+        tempSwitch = true;
+      }
+      else{
+        $("#fTemp").html(fTemp + " &#8457");
+        tempSwitch = false;
+      }
+      
+    });
+   
+      
+     //outputs type of weather in mph
+    $("#typeWeather").html(typeWeather);
+    //outputs wind speed
+    $("#windSpeed").html("Wind Speed: "+windSpeed + " mph");
+    
+     
+      
+      }
+    });
+}
