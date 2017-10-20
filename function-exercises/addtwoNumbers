@@ -1,0 +1,5 @@
+function addTwoNumbers(firstnumber,lastnumber){
+return firstnumber + lastnumber;
+
+}
+console.log(1,3);

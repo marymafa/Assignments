@@ -1,15 +1,18 @@
-<!DOCTYPE html> 
-<head>
-</head>
-<body>
-<script>
- var myArray = [0,-3,2, 1,4]; 
- var newArry= "";
+<!DOCTYPE html>
+<html>
 
- myArray.sort(function(a,b){
- return b-a; 
- });
- console.log( myArray);
-</script>
+<head>
+    <meta charset=utf-8 />
+    <script>
+        function reverse_a_number(n) {
+            n = n + "";
+            return n.split("").reverse().join("");
+        }
+        console.log(reverse_a_number(32243));
+    </script>
+</head>
+
+<body>
 </body>
+
 </html>
