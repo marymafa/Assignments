@@ -5,9 +5,8 @@
     <meta charset="uft-8">
     <script>
         function namedNumbers(num) {
-            var num=num.search;
 
-            if (num === null && num === NaN) {
+            if (num !== null || num == NaN) {
                 return "false";
             } else {
                 return "True";
