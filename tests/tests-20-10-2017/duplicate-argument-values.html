@@ -4,14 +4,17 @@
     <title>duplicate argument values</title>
     <meta charset="uft-8">
     <script>
-        function duplicateArgumentValues(value) {
-            if (value.duplicate != value.duplicate ) {
-                return false;
-            } 
-                return true;
-            }
-        
-        console.log(duplicateArgumentValues(1, 2, 3,));
+        function duplicateArgumentValues(args) {
+             var args = Array.from(arguments);
+    for (var i = 0; i < args.length; i++) {
+        if (typeof args[i] === "string") {
+            return true;
+        }
+    }
+    return false;
+}
+
+        console.log(duplicateArgumentValues(1, 2, 3, ));
         console.log(duplicateArgumentValues(1, 2, 3, 2));
         console.log(duplicateArgumentValues('1', '2', '3', '2'));
     </script>
