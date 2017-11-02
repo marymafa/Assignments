@@ -1,18 +1,19 @@
+function smaller(num) {
+    this.num = num;
+}
+smaller.prototype.test = function (array) {
+    var newArray = [];
 
-
-        function returnSmaller(arr, num) {
-            var newArray = [];
-            var sortedArr=arr.sort(function (a,b) {
-                return a - b;
-            });
-            for(var i=0; i<sortedArr.length; i++){
-                if(sortedArr[i]< num){
-                newArray.push(sortedArr[i]);
-                }
-            }
-            
-            return  newArray;
+    for (var i = 0; i < array.length; i++) {
+        if (array[i] < this.num) {
+            newArray.push(array[i]);
         }
-            console.log( returnSmaller([100, 3, 6, 9, 10, 16, 20],12));
+    }
 
-   
+    return newArray;
+}
+var num1 = new smaller(12);
+var num2 = new smaller(16);
+
+console.log(num1.test([100, 3, 6, 9, 10, 16, 20]));
+console.log(num2.test([50, 2, 7, 9, 20, 10]));;
