@@ -1,6 +1,4 @@
-function duplify() {
-    var num="";
-    var str = "cryto";
-    return  str.repeat(4);
+function duplify(str,num) {
+    return  str.repeat(num);
 }
-console.log(duplify("cryto"), );
+console.log(duplify('cryto',4));
