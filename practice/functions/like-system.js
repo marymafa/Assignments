@@ -1,5 +1,4 @@
 function likes(names){
-    var args=array.from(arguments);
     for(var i=0; i<names.length; i++){
         if(emptystring){
             return "no one likes this";

@@ -16,5 +16,9 @@ var obj={
 }
 }
 ### Solution:
-Name is outside var obj,pro,and getFullName(), And obj is the parent of pro and getFullName but does not have access on them. It will output Adam Back because getFullName have access on pro.
+fullname will and getFullName output Adam Back because they have same scoping meaning they have acess on prop.
+Obj is the parent of prop, getFullName and fullName but does not have access on them.
+Also nams does not have access on prop, getFullName and fullName.
+
+
 
