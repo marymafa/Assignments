@@ -9,9 +9,9 @@ function bragFirst()
 function bragAgain()
 {
   return
-  {
+ {
       brag: "Ska ba forgiva!"
   };
 }
-//console.log(bragFirst());
+console.log(bragFirst());
 console.log(bragAgain());
