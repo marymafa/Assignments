@@ -1,23 +1,21 @@
-function int_Add(str) {
-    var array = [];
-    var replaceArr = str.replace(/\n/g,",");
+function addInt(str) {
+    var newArr = [];
+    var splittedStr = str.split(",");
+    var newLine= str.replace(/\n/g, ",");
 
-    // for (var i = 0; i < replceArr.length; i++) {
-    //     array.push(replceArr[i]);
-    //     if (replceArr[i] == "") {
-    //         return 0;
 
-    //     }
-    // }
-    // var finalAnswer = array.reduce(function (a, r) {
-    //     return parseInt(a) + parseInt(r);
-    // });
-    return replaceArr;
-
+    for(var i=0; i<splittedStr.length; i++){
+        newArr.push(parseInt(splittedStr[i]));
+        if(splittedStr[i]== ""){
+        return 0;
+    }else if(newLine){
+        str.replace(/\n/g, ",");
+    }
+    } 
+    return newArr.reduce(function(a,r){
+        return a + r;
+    });
 }
-
-console.log(int_Add(""));
-console.log(int_Add("1"));
-console.log(int_Add("1\n2,3"));
-console.log(int_Add("1,2"));
-
+console.log(addInt("1"));
+console.log(addInt("1/n2,3"));
+console.log(addInt(""));
