@@ -1,6 +1,6 @@
 function addInt(numbers) {
     //var newArr = [];
-  //  var splittedStr = str.split(",");
+    //  var splittedStr = str.split(",");
     //var newLine = str.replace(/\n/g, ",");
     // for (var i = 0; i < splittedStr.length; i++) {
     //     newArr.push(parseInt(splittedStr[i]));
@@ -18,14 +18,15 @@ function addInt(numbers) {
 
     let numbersFormatted = numbers.split(',');
     let itemSum = 0;
-   for(var i = 0; i < numbersFormatted.length; i++ ) {
-      if(numbersFormatted[i] == "") {
-        return 0;
+    for (var i = 0; i < numbersFormatted.length; i++) {
+        if (numbersFormatted[i] == "") {
+            return 0;
+        }if (numbersFormatted[i] ==="\n") {
+            numbers.replace("\n", ",");
+        }else {
+            itemSum += (parseInt(numbersFormatted[i]))
+        }
     }
-    else {
-     itemSum += (parseInt(numbersFormatted[i]))
-    }
-   }
 
     return itemSum;
 }
@@ -33,6 +34,5 @@ function addInt(numbers) {
 console.log(addInt("")); // output = 0
 console.log(addInt("1")); //output= 1
 console.log(addInt("1,2")); //output = 3
-
-// console.log(addInt("1\n2,3"));
+console.log(addInt("1\n2,3"));
 
