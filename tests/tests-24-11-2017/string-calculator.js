@@ -16,16 +16,23 @@ function addInt(numbers) {
     //     return a + r;
     // });
 
-    if(numbers == "") {
+    let numbersFormatted = numbers.split(',');
+    let itemSum = 0;
+   for(var i = 0; i < numbersFormatted.length; i++ ) {
+      if(numbersFormatted[i] == "") {
         return 0;
     }
-    if(parseInt(numbers)) {
-        return numbers;
+    else {
+     itemSum += (parseInt(numbersFormatted[i]))
     }
+   }
+
+    return itemSum;
 }
 
 console.log(addInt("")); // output = 0
 console.log(addInt("1")); //output= 1
-// console.log(addInt("1,2"));
+console.log(addInt("1,2")); //output = 3
+
 // console.log(addInt("1\n2,3"));
 
