@@ -1,18 +1,21 @@
 function int_Add(str) {
-    var newArray = [];
+    var arr = [];
     var splittedStr = str.split(",");
 
     for (var i = 0; i < splittedStr.length; i++) {
-        if (parseInt(splittedStr[i]) == " ") {
-            newArray.push(0);
+           arr.push(splittedStr[i]);
+    }if(arr== ""){
+        return 0;
+    
         } else {
-            newArray.push(parseInt(splittedStr[i]));
+            arr.push(parseInt(splittedStr[i]));
         }
-    }
-    return newArray.reduce(function(a,r){
+         return arr.reduce(function(a,r){
         return a + r;
     });
-}
+    }
+   
+
 
 console.log(int_Add(""));
 console.log(int_Add("1,3"));
