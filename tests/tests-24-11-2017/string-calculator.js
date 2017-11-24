@@ -19,12 +19,13 @@ function addInt(numbers) {
     if(numbers == "") {
         return 0;
     }
-
-
+    if(parseInt(numbers)) {
+        return numbers;
+    }
 }
 
-console.log(addInt(""));
-//console.log(addInt("1"));
+console.log(addInt("")); // output = 0
+console.log(addInt("1")); //output= 1
 // console.log(addInt("1,2"));
 // console.log(addInt("1\n2,3"));
 
