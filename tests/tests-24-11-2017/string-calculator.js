@@ -1,38 +1,33 @@
 function addInt(numbers) {
-    //var newArr = [];
-    //  var splittedStr = str.split(",");
-    //var newLine = str.replace(/\n/g, ",");
-    // for (var i = 0; i < splittedStr.length; i++) {
-    //     newArr.push(parseInt(splittedStr[i]));
-    //     if (splittedStr[i] == "") {
-    //         return 0;
-    //     } else if (splittedStr[i] ==="\n") {
-    //         str.replace("\n", ",");
-    //     } else if (splittedStr[i]  < 0) {
-    //         throw error(`{negatives are not allowed}`);
-    //     }
-    // }
-    // return newArr.reduce(function (a, r) {
-    //     return a + r;
-    // });
+    var sum = 0;
 
-    let numbersFormatted = numbers.split(',');
-    let itemSum = 0;
-    for (var i = 0; i < numbersFormatted.length; i++) {
-        if (numbersFormatted[i] == "") {
-            return 0;
-        }if (numbersFormatted[i] ==="\n") {
-            numbers.replace("\n", ",");
-        }else {
-            itemSum += (parseInt(numbersFormatted[i]))
+    // var regex = (/^-?[0-9]\d*(\.\d+)?$/);
+    var numlistNewLine = numbers.replace(/[\n]/g, ',');
+    var splitted = numlistNewLine.split(',');
+    if (splitted == "") {
+        return 0;
+    }
+    for (var i = 0; i < splitted.length; i++) {
+        if (splitted.Length == 1) {
+            return parseInt(numbers);
         }
+        sum = splitted.reduce(function (a, b) {
+             if (parseInt(a)  < 0 || parseInt(b) < 0) {
+            return new Error(`{sorry negatives not allowed}`);
+        }
+
+            return parseInt(a) + parseInt(b);
+        });
+
     }
 
-    return itemSum;
-}
+    return sum;
 
-console.log(addInt("")); // output = 0
-console.log(addInt("1")); //output= 1
-console.log(addInt("1,2")); //output = 3
+}
+console.log(addInt(""));
+console.log(addInt("1"));
+console.log(addInt("1,2"));
 console.log(addInt("1\n2,3"));
+console.log(addInt("-4,3"));
+
 
