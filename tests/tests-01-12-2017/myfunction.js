@@ -1,8 +1,8 @@
 
-function myFunction(ele){
-    if(ele<0){
+function myFunction(val){
+    if(val<0){
         return "Or";
-    }else if(ele>0){
+    }else if(val>0){
         return "And";
     }else{
         return "None";
