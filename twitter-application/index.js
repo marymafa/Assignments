@@ -2,6 +2,9 @@ var request = require('request');
 var express = require("express");
 var myapp = express();
 const url = 'https://api.twitter.com/1.1/statuses/update.json';
+
+myapp.use(express.static('public'));
+
 var oauth = {
     consumer_key: "ZbhKdT6PRuFtUAJrDpnLo1Y4q",
     consumer_secret: "MlxNWXkT3xZASZkOIdTy0j7ardAXipWiRCvw8C4tIwgDp6HkhX",
