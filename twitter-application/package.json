@@ -10,8 +10,10 @@
   "license": "ISC",
   "dependencies": {
     "express": "^4.16.2",
+    "qs": "^6.5.1",
     "request": "^2.83.0",
     "require": "^2.4.20",
-    "response-time": "^2.3.2"
+    "response-time": "^2.3.2",
+    "save": "^2.3.2"
   }
 }
