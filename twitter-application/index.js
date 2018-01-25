@@ -16,7 +16,7 @@ access_point = {
     url: url,
     oauth: oauth,
     qs: {
-        status: "It's working"
+        status: " working"
     }
 };
 
