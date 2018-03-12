@@ -31,27 +31,23 @@ class Form extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      lastName: '',
-      firstName: '',
-      contactNo: '',
-      EmailAddress: '',
-      options: [
-        { value: 'one', label: 'One' },
-        { value: 'two', label: 'Two' }
-      ]
+      value: ""
     };
+    this.handleSubmit = this.handleSubmit.bind(this);
   }
 
-  onSubmit = (data) => {
-    alert(`Hey, thanks for submitting ${data.lastName.firstName}`);
+  handleSubmit(event) {
+    alert('Thanksnfor submitting,A name was submitted: ' + this.state.value);
+    event.preventDefault();
   }
 
   render() {
     return (
-
+ 
       <form value={this.state}
         onSubmit={this.onSubmit}>
-        Form:<br />
+
+        React form:<br />
         <label>
           Firstname:
     <input type="text" name="firstname" placeholder="firstname" />
