@@ -1,0 +1,20 @@
+#cover-sec{
+    background-image: url("calculator-img.jpg");
+    color: antiquewhite;
+}
+
+#inputEmail{
+    width: 20%
+}
+#inputPassword{
+    width: 20%
+}
+#signin-bttn{
+    width: 20%
+}
+#remember-me{
+    width: 20%
+}
+#form-signin{
+    margin-top:20%;
+}
