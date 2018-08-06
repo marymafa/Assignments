@@ -1,37 +1,125 @@
 <!doctype html>
 <html lang="en">
-  <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <meta name="description" content="">
-    <meta name="author" content="">
-    <link rel="icon" href="../../../../favicon.ico">
-<link rel="stylesheet" href="app.css">
-    <title>Math App</title>
 
-    <!-- Bootstrap core CSS -->
-    <link href="../../dist/css/bootstrap.min.css" rel="stylesheet">
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.2/css/bootstrap.min.css" integrity="sha384-Smlep5jCw/wG7hdkwQ/Z5nLIefveQRIY9nfy6xoR1uRYBtpZgI6339F5dgvm/e9B" crossorigin="anonymous">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="description" content="">
+  <meta name="author" content="">
+  <link rel="icon" href="../../../../favicon.ico">
+  <link rel="stylesheet" href="app.css">
+  <title>Math App</title>
 
-    <!-- Custom styles for this template -->
-    <link href="album.css" rel="stylesheet">
-  </head>
+  <!-- Bootstrap core CSS -->
+  <link href="../../dist/css/bootstrap.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.2/css/bootstrap.min.css" integrity="sha384-Smlep5jCw/wG7hdkwQ/Z5nLIefveQRIY9nfy6xoR1uRYBtpZgI6339F5dgvm/e9B"
+    crossorigin="anonymous">
 
-  <body>
-<main>
+  <!-- Custom styles for this template -->
+  <link href="album.css" rel="stylesheet">
+</head>
+<script>
+  var inputVal = ''
+  function chosenOpt(choice){
+    val = choice+'.html'
+    return val
+  }
+</script>
+<body>
+  <main>
     <div>
+      <div>
         <div>
-<h3>Please choose your grade.</h3>
-<button>Grade 8 and 9</button>
-<button>Grade 10 to 12</button>
+          <nav class="navbar navbar-expand-lg navbar-light bg-col">
+            <a class="navbar-brand" href="#">(+/-)MathApp</a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
+              aria-expanded="false" aria-label="Toggle navigation">
+              <span class="navbar-toggler-icon"></span>
+            </button>
+
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+              <ul class="navbar-nav mr-auto">
+                <li class="nav-item">
+                  <a class="nav-link" href="index.html">Home
+                    <span class="sr-only">(current)</span>
+                  </a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link" href="#">Contact</a>
+                </li>
+                <li class="nav-item">
+
+                </li>
+              </ul>
+              <a class="nav-link txt">
+                &#127908;
+              </a>
+              <form class="form-inline my-2 my-lg-0">
+                <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
+                <button class="btn btn-outline-primary my-2 my-sm-0" type="submit">Search</button>
+              </form>
+            </div>
+          </nav>
+        </div>
+        <div class="container">
+        <div class="row">
+          <div class="col-md-12">
+            <h2>Welcome</h2>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-md-12">
+            <h4>About Mathematical App</h4>
+            <div>
+              <p>
+                This app is all about mathematics, so this app basically do it gives tutorial lessons to the students who struggles with
+                mathematics. Especially to those 'academically' challenged learners ..who finds the math subject difficult.
+                (As we all know that that most of south African students especially in our townships).
+              </p>
+
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-md-12">
+            <h4>How it Works</h4>
+            <div>
+              <p> Teacher's or educator's who knows and understand maths can post videos of themselves teaching maths.They'll
+                get paid by the number of views and ratings meaning they'll be paid through each subscriber. It will be charged
+                per download and payed per click.
+              </p>
+            </div>
+          </div>
         </div>
         <div>
-<h3>Please pick your choice of learning.</h3>
-<button>books</button>
-<button>videos</button>
+          <form action='books.html'>
+            <h4>Please pick your grade and choice of learning.</h4>
+            <br/>
+            <input value = "books" name="books" type="button">
+            <input value = "videos" name="videos" type="button">
+            <br/>
+            <label id="select-opt" for="select">Grade:</label>
+            <select name="select">
+              <option value="8">select your grade</option>
+              <option value="8">8</option>
+              <option value="8">9</option>
+              <option value="10">10</option>
+              <option value="11">11</option>
+              <option value="12">12</option>
+            </select>
+            <br/>
+            <button type = "submit">Next</button>
+
+          </form>
         </div>
+      </div>
+      <div>
+      </div>
 
     </div>
-</main>
-  </body>
+</div>
+    </div>
+  </main>
+</body>
+
 </html>

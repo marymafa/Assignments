@@ -1,20 +1,51 @@
-#cover-sec{
-    background-image: url("calculator-img.jpg");
-    color: antiquewhite;
+#inputEmail {
+    width: 20%
 }
 
-#inputEmail{
+#inputPassword {
     width: 20%
 }
-#inputPassword{
+
+#signin-bttn {
     width: 20%
 }
-#signin-bttn{
+
+#remember-me {
     width: 20%
 }
-#remember-me{
-    width: 20%
+
+#form-signin {
+    margin-top: 20%;
 }
-#form-signin{
-    margin-top:20%;
+
+.bg-col{
+    background-color: rgb(192, 189, 189);
+}
+#select-opt {
+    padding-top: 3%;
+}
+
+h4 {
+    font-size: 40px;
+    color: green;
+    padding-top: 4%;
+}
+h2 {
+    font-size: 40px;
+    color: green;
+    padding-top: 4%;
+}
+
+body {
+    /* background-image: url("group-study.jpg  "); */
+}
+
+.container {}
+
+.container-fluid {}
+
+.btn {}
+
+.txt {
+    text-align: left
 }
