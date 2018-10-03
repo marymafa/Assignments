@@ -30,22 +30,37 @@ unit_type_id INT REFERENCES unit_types(id) NOT NULL
 );
 
 INSERT INTO 
-business(id,name,contact_name,contact_number,contact_email)
+business(name,contact_name,contact_number,contact_email)
 VALUES
-(4,'tcg','thabiso',0616118909,'mafay@gmail.com');
+('gwfm','mary',0616118909,'mafay@gmail.com');
 INSERT INTO 
-location(id,address,business_id)
+location(address,business_id)
 VALUES
-(2,'riverside',2);
+('riverside',3),
+('diepsloot',3);
 INSERT INTO 
-block(id,name,location_id)
+block(name,location_id)
 VALUES
-(1,'block-3',2);
+('block-3',10);
 INSERT INTO 
-unit(id ,name,block_id,unit_type_id)
+unit(name,block_id,unit_type_id)
 VALUES
-(2,'room-4',1,2);
+('room-9',10,10);
 INSERT INTO 
-unit_types(id,name,length,height,width )
+unit_types(name,length,height,width )
 VALUES
-(2,'garage',10,10,6);
+('garage',10,10,6),
+('training-room',5,5,3)
+;
+
+SELECT * FROM business;
+SELECT * FROM block;
+SELECT * FROM location;
+SELECT * FROM unit
+INNER JOIN unit_types
+ON unit_types.id=unit.unit_type_id
+WHERE unit_types.name='garage';
+SELECT * FROM unit
+INNER JOIN unit_types
+ON unit_types.id=unit.unit_type_id
+WHERE unit_types.width>3;
