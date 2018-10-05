@@ -36,26 +36,35 @@ VALUES
 INSERT INTO 
 location(address,business_id)
 VALUES
-('riverside',3),
-('diepsloot',3);
+('riverside',1),
+('diepsloot',1);
 INSERT INTO 
 block(name,location_id)
 VALUES
-('block-3',10);
+('block-3',3);
 INSERT INTO 
 unit(name,block_id,unit_type_id)
 VALUES
-('room-9',10,10);
+('room-9',4,4);
 INSERT INTO 
 unit_types(name,length,height,width )
 VALUES
-('garage',10,10,6),
-('training-room',5,5,3)
-;
+('garage',10,10,6);
 
-SELECT * FROM business;
 SELECT * FROM block;
-SELECT * FROM location;
+SELECT * FROM business
+INNER JOIN location
+ON business.id=location.business_id
+INNER JOIN block
+ON location.id=block.location_id
+INNER JOIN unit
+ON block.id=unit.block_id
+INNER JOIN unit_types
+ON unit.unit_type_id=unit_types.id;
+SELECT * FROM  location
+INNER JOIN business
+ON business.id=location.business_id
+WHERE business.id=1;
 SELECT * FROM unit
 INNER JOIN unit_types
 ON unit_types.id=unit.unit_type_id
