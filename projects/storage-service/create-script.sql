@@ -1,75 +1,78 @@
-CREATE TABLE IF NOT EXISTS business(
+CREATE TABLE IF NOT EXISTS businesses(
 id serial PRIMARY KEY,
-name VARCHAR(100),
-contact_name VARCHAR(100),
-contact_number VARCHAR(100),
-contact_email VARCHAR(100)
+name VARCHAR(100) NOT NULL,
+contact_name VARCHAR(100) NOT NULL,
+contact_number VARCHAR(100) NOT NULL,
+contact_email VARCHAR(100) NOT NULL
 );
-CREATE TABLE IF NOT EXISTS location(
+CREATE TABLE IF NOT EXISTS locations(
 id serial  PRIMARY KEY,
-address VARCHAR(100),
-business_id INT REFERENCES business(id) NOT NULL
+address VARCHAR(100) NOT NULL,
+businesses_id INT REFERENCES businesses(id) NOT NULL
 );
-CREATE TABLE IF NOT EXISTS block(
+CREATE TABLE IF NOT EXISTS blocks(
 id serial  PRIMARY KEY,
-name VARCHAR(100),
-location_id INT REFERENCES location(id) NOT NULL
+name VARCHAR(100) NOT NULL,
+locations_id INT REFERENCES locations(id) NOT NULL
 );
-CREATE TABLE IF NOT EXISTS unit_types(
+CREATE TABLE IF NOT EXISTS units_types(
 id serial  PRIMARY KEY,
-name VARCHAR(100),
-length INT NOT NULL,
-height INT NOT NULL  ,
-width INT NOT NULL
+name VARCHAR(100) NOT NULL,
+length DECIMAL NOT NULL,
+height DECIMAL NOT NULL  ,
+width DECIMAL NOT NULL
 );
-CREATE TABLE IF NOT EXISTS unit(
+CREATE TABLE IF NOT EXISTS units(
 id serial  PRIMARY KEY,
-name VARCHAR(100),
-block_id INT REFERENCES block(id) NOT NULL,
-unit_type_id INT REFERENCES unit_types(id) NOT NULL
+name VARCHAR(100) NOT NULL,
+blocks_id INT REFERENCES blocks(id) NOT NULL,
+units_type_id INT REFERENCES units_types(id) NOT NULL
 );
 
 INSERT INTO 
-business(name,contact_name,contact_number,contact_email)
+businesses(name,contact_name,contact_number,contact_email)
 VALUES
-('gwfm','mary',0616118909,'mafay@gmail.com');
+('gwfm','mary','0616118909','mafay@gmail.com'),
+('lsbn','mackay','0616118909','mafay@gmail.com');
 INSERT INTO 
-location(address,business_id)
+locations(address,businesses_id)
 VALUES
 ('riverside',1),
-('diepsloot',1);
+('diepsloot',2);
 INSERT INTO 
-block(name,location_id)
+blocks(name,locations_id)
 VALUES
-('block-3',3);
+('blocks-3',1),
+('blocks-3',2);
 INSERT INTO 
-unit(name,block_id,unit_type_id)
+units(name,blocks_id,units_type_id)
 VALUES
-('room-9',4,4);
+('room-2',1,1);
 INSERT INTO 
-unit_types(name,length,height,width )
+units_types(name,length,height,width )
 VALUES
-('garage',10,10,6);
+('garage',10,10,6),
+('training-room',10,10,6);
 
-SELECT * FROM block;
-SELECT * FROM business
-INNER JOIN location
-ON business.id=location.business_id
-INNER JOIN block
-ON location.id=block.location_id
-INNER JOIN unit
-ON block.id=unit.block_id
-INNER JOIN unit_types
-ON unit.unit_type_id=unit_types.id;
-SELECT * FROM  location
-INNER JOIN business
-ON business.id=location.business_id
-WHERE business.id=1;
-SELECT * FROM unit
-INNER JOIN unit_types
-ON unit_types.id=unit.unit_type_id
-WHERE unit_types.name='garage';
-SELECT * FROM unit
-INNER JOIN unit_types
-ON unit_types.id=unit.unit_type_id
-WHERE unit_types.width>3;
+SELECT * FROM blocks;
+SELECT * FROM businesses
+INNER JOIN locations
+ON businesses.id=locations.businesses_id
+INNER JOIN blocks
+ON locations.id=blocks.locations_id
+INNER JOIN units
+ON blocks.id=units.blocks_id
+INNER JOIN units_types
+ON units.units_type_id=units_types.id;
+SELECT * FROM units
+INNER JOIN units_types
+ON units_types.id=units.units_type_id
+WHERE units_types.name='garage';
+SELECT * FROM  locations
+INNER JOIN businesses
+ON businesses.id=locations.businesses_id
+WHERE businesses.id=1;
+SELECT * FROM units
+INNER JOIN units_types
+ON units_types.id=units.units_type_id
+WHERE units_types.width>3;
