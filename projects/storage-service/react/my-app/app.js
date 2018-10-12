@@ -13,10 +13,11 @@ app.get("/data", function (req, res) {
     let jsonObj = { data: `${business_name} ${contactNum} ${contacNam} ${contactEml}` };
     console.log("jsonObj", jsonObj);
     res.send(jsonObj);
-    console.log("hey",req.body)
+    console.log("hey", req.body)
 });
 app.post('/data', function (req, res, next) {
     var jsonObj = { "data": req.body.name + ' ' + req.body.contact_number + '' + req.body.contact_name + '' + contact_email }
+    console.log("red.body is now called like it should", jsonObj)
     res.json(jsonObj);
 });
 app.use(bodyParser.urlencoded({ extended: false }))

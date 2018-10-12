@@ -13,6 +13,14 @@ class BusinessFrom extends React.Component {
         this.inputContactEmail = this.inputContactEmail.bind(this);
         this.inputContactNumber = this.inputContactNumber.bind(this);
     }
+    componentDidMount() {
+
+    }
+    async  postData() {
+        console.log("props", this.props);
+        
+        var postNewData = await axios.post('http://localhost:3002/data')
+    }
     inputBusinessName(e) {
         this.props.updateName(e.target.value)
     }
@@ -30,7 +38,7 @@ class BusinessFrom extends React.Component {
     }
 
     render() {
-        console.log("redux props", this.props)
+        //console.log("redux props", this.props)
 
         return (
             <div>
@@ -52,7 +60,7 @@ class BusinessFrom extends React.Component {
                     <label>Contact Number</label>
                     <input type="tel" data-toggle="tooltip" data-placement="top" title=" contact number" onChange={this.inputContactNumber} />
                 </div>
-                <button onClick={this.handleSubmit}>Submit</button>
+                <button onClick={() => this.postData()}>Submit</button>
             </div>
         )
     }
