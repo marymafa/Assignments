@@ -1,0 +1,22 @@
+input[type=text] {
+    width: 20%;
+  font-family: sanFranciscoBold;
+  color: #015665;
+  padding: 3px;
+  border-bottom: 1px solid #74b9f5;
+  border-top: none;
+  border-right: none;
+  border-left: none;
+  outline: none;
+}
+.button{
+     font-size: 1em;
+  display: inline-block;
+  color: #015665;
+}
+body{
+    background: #F0F8FF;
+    color:black;
+}
+ 
+
