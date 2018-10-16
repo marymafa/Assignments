@@ -13,13 +13,16 @@ class BusinessFrom extends React.Component {
         this.inputContactEmail = this.inputContactEmail.bind(this);
         this.inputContactNumber = this.inputContactNumber.bind(this);
     }
-    componentDidMount() {
 
-    }
     async  postData() {
         console.log("props", this.props);
-        
-        var postNewData = await axios.post('http://localhost:3002/data')
+
+        var postNewData = await axios.post('http://localhost:3002/data', {
+            name: this.props.name,
+            contact_name: this.props.contact_name,
+            contact_email: this.props.contact_email,
+            contact_number: this.props.contact_number
+        });
     }
     inputBusinessName(e) {
         this.props.updateName(e.target.value)
@@ -38,8 +41,6 @@ class BusinessFrom extends React.Component {
     }
 
     render() {
-        //console.log("redux props", this.props)
-
         return (
             <div>
                 <h1>Storage Service</h1>

@@ -13,7 +13,7 @@ export const saveContactNumber = (contact_Number) => {
 };
 export const onSubmit = (data) => {
     return { type: "SUBMIT_VALUES", value: data }
-}
+};
 export const businessLocation = (address) => {
     return { type: "ADDRESS", value: address }
 };

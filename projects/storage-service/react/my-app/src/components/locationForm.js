@@ -1,18 +1,21 @@
 import React from "react";
 import { connect } from "react-redux";
 import * as action from "../redux/actions";
+import axios from "axios";
 
 class LocationForm extends React.Component {
     constructor(props) {
         super(props);
-        this.state = {
-            address: this.props.address
-        }
     }
-    handleSubmit() {
+    async  postData() {
+        console.log("props", this.props);
 
+        var postNewData = await axios.post('http://localhost:3002/locationData', {
+            address: this.props.address
+        });
     }
     render() {
+        console.log("this.props.location", this.state.props)
         return (
             <div>
                 <h1>Storage Service</h1>
@@ -29,7 +32,7 @@ class LocationForm extends React.Component {
 
 const mapStateToProps = (state) => {
     return {
-        address: state.address
+        address: state.businessLocations.address
     }
 }
 
