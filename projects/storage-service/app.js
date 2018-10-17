@@ -12,25 +12,15 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({
     extended: false
 }));
-
-app.get("/data", function (req, res) {
-
-    const client = new Client({
-        connectionString: connectionString,
-    })
-    client.connect();
-
-    client.query('SELECT * FROM businesses WHERE id =id', (err, res) => {
-        console.log(err, res)
-        client.end()
-    })
-
+const client = new Client({
+    connectionString: connectionString,
+})
+client.connect();
+app.get("/data", async function (req, res) {
+    var data = await client.query(`SELECT * FROM businesses`)
+    res.send(data.rows).status(201).end();
 });
 app.post('/data', function (req, res) {
-    const client = new Client({
-        connectionString: connectionString,
-    })
-    client.connect();
 
     client.query(`INSERT INTO businesses(name,contact_name,contact_email,contact_number) VALUES('${req.body.name}' , ' ${req.body.contact_name}' , ' ${req.body.contact_name}' , ' ${req.body.contact_number}')`, (err, res) => {
         console.log(err, res)
@@ -38,8 +28,6 @@ app.post('/data', function (req, res) {
     })
     res.status(201).end()
 });
-
-
 
 app.listen(PORT, () => {
     console.log(`Server is listening on port ${PORT}`);

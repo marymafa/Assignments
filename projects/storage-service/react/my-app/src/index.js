@@ -6,6 +6,7 @@ import BlockForm from "./components/blockForm";
 import LocationForm from "./components/locationForm";
 import UnitsFrom from "./components/unitsFrom";
 import UnitTypesFrom from "./components/unitTypesForm";
+import viewData from "./components/viewData";
 import { Provider } from 'react-redux';
 import { BrowserRouter as Router, Route } from "react-router-dom"
 import "./app.css";
@@ -19,6 +20,8 @@ ReactDOM.render(
                 <Route path='/locations' component={LocationForm} />
                 <Route path='/units' component={UnitsFrom} />
                 <Route path='/unit_types' component={UnitTypesFrom} />
+                <Route path='/view_business' component={viewData} />
+                
             </div>
         </Router>
     </Provider>,
