@@ -21,6 +21,7 @@ export default class viewData extends Component {
                 <div>
                     <thead>
                         <tr>
+                            <th>Reference Number</th>
                             <th>Name</th>
                             <th>Contact Name</th>
                             <th>Contact Number</th>
@@ -29,7 +30,8 @@ export default class viewData extends Component {
                     </thead>
                     <tbody>
                         {this.state.business.map(element => {
-                            return <tr>
+                            return <tr name={`row-${element.id}`} key={this.state.business.indexOf(element)}>
+                                <td>{element.id === "undefined" ? "" : element.id}</td>
                                 <td>{element.name}</td>
                                 <td>{element.contact_name}</td>
                                 <td>{element.contact_number}</td>
