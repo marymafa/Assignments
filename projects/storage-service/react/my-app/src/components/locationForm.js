@@ -6,6 +6,7 @@ import axios from "axios";
 class LocationForm extends React.Component {
     constructor(props) {
         super(props);
+        this.inputBusinessName = this.inputBusinessName.bind(this)
     }
     async  postData() {
         console.log("props", this.props);
@@ -14,8 +15,12 @@ class LocationForm extends React.Component {
             address: this.props.address
         });
     }
+
+    inputBusinessName(e) {
+        this.props.updateAddress(e.target.value)
+    }
     render() {
-        console.log("this.props.location", this.state.props)
+
         return (
             <div>
                 <h1>Storage Service</h1>
@@ -24,7 +29,7 @@ class LocationForm extends React.Component {
                     <label>Address</label>
                     <input data-toggle="tooltip" data-placement="top" title=" addrres" type="text" />
                 </div>
-                <input type="button" value="Submit" />
+                <input type="button" value="Submit" onClick={() => this.postData()} />
             </div>
         )
     }
