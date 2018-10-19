@@ -6,7 +6,8 @@ import axios from "axios";
 class LocationForm extends React.Component {
     constructor(props) {
         super(props);
-        this.inputBusinessName = this.inputBusinessName.bind(this)
+        this.inputAddress = this.inputAddress.bind(this);
+        this.inputBusinessCountry = this.inputBusinessCountry.bind(this);
     }
     async  postData() {
         console.log("props", this.props);
@@ -16,9 +17,17 @@ class LocationForm extends React.Component {
         });
     }
 
-    inputBusinessName(e) {
+    inputAddress(e) {
         this.props.updateAddress(e.target.value)
+        console.log("address", this.props.updateAddress(e.target.value))
     }
+    input
+    inputBusinessCountry(e) {
+        this.props.updateCountry(e.target.value)
+        console.log("country", this.props.updateCountry(e.target.value));
+
+    }
+
     render() {
 
         return (
@@ -27,7 +36,11 @@ class LocationForm extends React.Component {
                 <h2> Enter the location of the business</h2>
                 <div>
                     <label>Address</label>
-                    <input data-toggle="tooltip" data-placement="top" title=" addrres" type="text" />
+                    <input data-toggle="tooltip" data-placement="top" title=" addrres" type="text" onChange={this.inputAddress} />
+                </div>
+                <div>
+                    <label>County</label>
+                    <input data-toggle="tooltip" data-placement="top" title=" country" type="text" onChnage={this.inputBusinessCountry} />
                 </div>
                 <input type="button" value="Submit" onClick={() => this.postData()} />
             </div>
@@ -37,7 +50,8 @@ class LocationForm extends React.Component {
 
 const mapStateToProps = (state) => {
     return {
-        address: state.businessLocations.address
+        address: state.businessLocations.address,
+        country: state.businessLocations.country
     }
 }
 
@@ -46,6 +60,9 @@ const mapDispatchToProps = (dispatch) => {
         updateAddress: (address) => {
             dispatch(action.businessLocation(address))
         },
+        updateCountry: (country) => {
+            dispatch(action.countryOfTHEBusiness(country))
+        }
     }
 }
 export default connect(

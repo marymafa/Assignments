@@ -1,12 +1,15 @@
 import React from "react";
 import { connect } from "react-redux";
 import * as action from "../redux/actions";
+import { Redirect } from 'react-router-dom';
 import axios from 'axios';
 
 class BusinessFrom extends React.Component {
     constructor(props) {
         super(props);
-
+        this.state = {
+            redirect: false
+        }
         this.inputBusinessName = this.inputBusinessName.bind(this);
         this.handleSubmit = this.handleSubmit.bind(this);
         this.inputContactName = this.inputContactName.bind(this);
@@ -23,6 +26,9 @@ class BusinessFrom extends React.Component {
             contact_email: this.props.contact_email,
             contact_number: this.props.contact_number
         });
+        this.setState({
+            redirect: true
+        })
     }
     inputBusinessName(e) {
         this.props.updateName(e.target.value)
@@ -39,8 +45,14 @@ class BusinessFrom extends React.Component {
     handleSubmit(val) {
         this.props.submitNewData(this.props.name, this.props.contact_name, this.props.contact_email, this.props.contact_number)
     }
-
+    renderRedirect = () => {
+        if (this.state.redirect) {
+            return <Redirect to='/locations' />
+        }
+    }
     render() {
+        console.log("this is my email", this.state.email);
+        
         return (
             <div>
                 <h1>Storage Service</h1>
@@ -61,6 +73,7 @@ class BusinessFrom extends React.Component {
                     <label>Contact Number</label>
                     <input type="tel" data-toggle="tooltip" data-placement="top" title=" contact number" onChange={this.inputContactNumber} />
                 </div>
+                {this.renderRedirect()}
                 <button onClick={() => this.postData()}>Submit</button>
             </div>
         )

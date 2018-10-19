@@ -22,12 +22,13 @@ app.get("/data", async function (req, res) {
 });
 
 app.get("/locationData", async function (req, res) {
-    console.log("gaibo")
-    var locationData = await client.query(`SELECT * FROM locations`)
+    var locationData = await client.query('SELECT * FROM locations')
+    console.log("gaibo", locationData)
     res.send(locationData.rows).status(201).end();
 });
 
 app.post('/data', function (req, res) {
+    console.log("this is my body", req.body);
 
     client.query(`INSERT INTO businesses(name,contact_name,contact_email,contact_number) VALUES('${req.body.name}' , ' ${req.body.contact_name}' , ' ${req.body.contact_name}' , ' ${req.body.contact_number}')`, (err, res) => {
         console.log(err, res)
@@ -38,8 +39,7 @@ app.post('/data', function (req, res) {
 
 
 app.post('/locationData', function (req, res) {
-    console.log("hella")
-    client.query(`INSERT INTO locations(address,businesses_id) VALUES(' ${req.body.address}')`, (err, res) => {
+    client.query(`INSERT INTO locations(address,country) VALUES('${req.body.address}','${req.body.country}')`, (err, res) => {
         console.log(err, res)
         client.end()
     })

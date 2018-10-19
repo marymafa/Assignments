@@ -8,6 +8,7 @@ contact_email VARCHAR(100) NOT NULL
 CREATE TABLE IF NOT EXISTS locations(
 id serial  PRIMARY KEY,
 address VARCHAR(100) NOT NULL,
+country  VARCHAR(100) NOT NULL,
 businesses_id INT REFERENCES businesses(id) NOT NULL
 );
 CREATE TABLE IF NOT EXISTS blocks(
@@ -32,18 +33,15 @@ units_type_id INT REFERENCES units_types(id) NOT NULL
 INSERT INTO 
 businesses(name,contact_name,contact_number,contact_email)
 VALUES
-('gwfm','mary','0616118909','mafay@gmail.com'),
-('lsbn','mackay','0616118909','mafay@gmail.com');
+('gwfm','mary','0616118909','mafay@gmail.com');
 INSERT INTO 
-locations(address,businesses_id)
+locations(address,country,businesses_id)
 VALUES
-('riverside',1),
-('diepsloot',2);
+('riverside','South-Africa',1);
 INSERT INTO 
 blocks(name,locations_id)
 VALUES
-('blocks-3',1),
-('blocks-3',2);
+('blocks-3',1);
 INSERT INTO 
 units(name,blocks_id,units_type_id)
 VALUES
@@ -51,8 +49,7 @@ VALUES
 INSERT INTO 
 units_types(name,length,height,width )
 VALUES
-('garage',10,10,5),
-('training-room',10,10,6);
+('garage',10,10,5);
 
 SELECT * FROM blocks;
 SELECT * FROM businesses
