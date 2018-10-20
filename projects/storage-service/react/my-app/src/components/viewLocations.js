@@ -20,7 +20,7 @@ export default class ViewLocations extends Component {
         console.log("state", this.state.location);
         return (
             <div>
-                <h1>Locations of businesses</h1>
+                <h1>Locations of the Business</h1>
                 <div>
                     <thead>
                         <tr>

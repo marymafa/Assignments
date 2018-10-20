@@ -37,7 +37,6 @@ app.post('/data', function (req, res) {
     res.status(201).end()
 });
 
-
 app.post('/locationData', function (req, res) {
     client.query(`INSERT INTO locations(address,country) VALUES('${req.body.address}','${req.body.country}')`, (err, res) => {
         console.log(err, res)
@@ -49,3 +48,4 @@ app.post('/locationData', function (req, res) {
 app.listen(PORT, () => {
     console.log(`Server is listening on port ${PORT}`);
 });
+

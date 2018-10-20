@@ -33,7 +33,7 @@ class LocationForm extends React.Component {
         return (
             <div>
                 <h1>Storage Service</h1>
-                <h2> Enter the location of the business</h2>
+                <h2> Business Location</h2>
                 <div>
                     <label>Address</label>
                     <input data-toggle="tooltip" data-placement="top" title=" addrres" type="text" onChange={this.inputAddress} />
