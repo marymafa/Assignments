@@ -51,9 +51,8 @@ app.post('/locationData', function (req, res) {
 });
 
 app.post('/blockData', function (req, res) {
-    console.log("this is my body", req.body);
-
-    client.query(`INSERT INTO blocks(name) VALUES('${req.body.name}')`, (err, res) => {
+    console.log("this is my body", req.body.name);
+    client.query(`INSERT INTO blocks(name) VALUES(${req.body.name})`, (err, res) => {
         console.log(err, res)
         client.end()
     })

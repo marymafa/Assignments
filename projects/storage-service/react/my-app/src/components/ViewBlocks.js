@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
 import axios from 'axios';
+
+
 export default class ViewBlocks extends Component {
     constructor(props) {
         super(props);
@@ -10,14 +12,14 @@ export default class ViewBlocks extends Component {
 
     componentWillMount() {
         axios.get("http://localhost:3002/blockData").then(result => {
-            this.setState({ location: result.data })
+            this.setState({ block: result.data })
         })
+        console.log("block", this.state.block);
     }
     render() {
-        console.log("state", this.state.location);
         return (
             <div>
-                <h1>Blocks of the Business locations</h1>
+                <h1>Blocks for the Business locations</h1>
                 <div>
                     <thead>
                         <tr>
@@ -28,6 +30,7 @@ export default class ViewBlocks extends Component {
                     </thead>
                     <tbody>
                         {this.state.block.map(element => {
+                            console.log("element", element.id, element.name, element.locations_id);
                             return <tr name={`row-${element.id} ${element.locations_id}`} key={this.state.block.indexOf(element)}>
                                 <td>{element.id === "undefined" ? "" : element.id}</td>
                                 <td>{element.name}</td>

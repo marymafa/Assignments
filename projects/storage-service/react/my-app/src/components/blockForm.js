@@ -12,21 +12,24 @@ class BlockFrom extends React.Component {
         this.inputBlockName = this.inputBlockName.bind(this);
     }
     async  postData() {
+
         var postNewData = await axios.post('http://localhost:3002/blockData', {
-            name: this.props.name
+            name: this.state.name
         });
+        console.log("postNewData", postNewData);
+
     }
 
     inputBlockName(e) {
+        console.log("block", this.props.updateBlockName(e.target.value))
         this.props.updateBlockName(e.target.value)
-        console.log("address", this.props.updateAddress(e.target.value))
 
     }
     render() {
         return (
             <div>
                 <h1>Storage Service</h1>
-                <h2>Enter the block name of the business</h2>
+                <h2>Enter  block name for the business</h2>
                 <div>
                     <label>Block</label>
                     <input data-toggle="tooltip" data-placement="top" title=" block_name" type="text" onChange={this.inputBlockName} />
@@ -39,7 +42,7 @@ class BlockFrom extends React.Component {
 
 const mapStateToProps = (state) => {
     return {
-        name: state.name
+        name: state.businessBlocks.name
     }
 }
 
