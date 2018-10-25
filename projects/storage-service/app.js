@@ -27,6 +27,11 @@ app.get("/locationData", async function (req, res) {
     res.send(locationData.rows).status(201).end();
 });
 
+app.get("/blockData", async function (req, res) {
+    var data = await client.query(`SELECT * FROM blocks`)
+    res.send(data.rows).status(201).end();
+});
+
 app.post('/data', function (req, res) {
     console.log("this is my body", req.body);
 
@@ -39,6 +44,16 @@ app.post('/data', function (req, res) {
 
 app.post('/locationData', function (req, res) {
     client.query(`INSERT INTO locations(address,country) VALUES('${req.body.address}','${req.body.country}')`, (err, res) => {
+        console.log(err, res)
+        client.end()
+    })
+    res.status(201).end()
+});
+
+app.post('/blockData', function (req, res) {
+    console.log("this is my body", req.body);
+
+    client.query(`INSERT INTO blocks(name) VALUES('${req.body.name}')`, (err, res) => {
         console.log(err, res)
         client.end()
     })

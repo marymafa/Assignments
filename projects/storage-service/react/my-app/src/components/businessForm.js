@@ -51,8 +51,6 @@ class BusinessFrom extends React.Component {
         }
     }
     render() {
-        console.log("this is my email", this.state.email);
-        
         return (
             <div>
                 <h1>Storage Service</h1>

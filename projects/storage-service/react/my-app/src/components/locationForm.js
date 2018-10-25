@@ -1,10 +1,15 @@
 import React from "react";
 import { connect } from "react-redux";
 import * as action from "../redux/actions";
+import { Redirect } from 'react-router-dom';
 import axios from "axios";
 
 class LocationForm extends React.Component {
     constructor(props) {
+        super(props);
+        this.state = {
+            redirect: false
+        }
         super(props);
         this.inputAddress = this.inputAddress.bind(this);
         this.inputBusinessCountry = this.inputBusinessCountry.bind(this);
@@ -15,25 +20,31 @@ class LocationForm extends React.Component {
         var postNewData = await axios.post('http://localhost:3002/locationData', {
             address: this.props.address
         });
+        this.setState({
+            redirect: true
+        })
     }
 
     inputAddress(e) {
         this.props.updateAddress(e.target.value)
         console.log("address", this.props.updateAddress(e.target.value))
     }
-    input
     inputBusinessCountry(e) {
         this.props.updateCountry(e.target.value)
         console.log("country", this.props.updateCountry(e.target.value));
 
     }
-
+    renderRedirect = () => {
+        if (this.state.redirect) {
+            return <Redirect to='/blocks' />
+        }
+    }
     render() {
 
         return (
             <div>
                 <h1>Storage Service</h1>
-                <h2> Business Location</h2>
+                <h2> Business Locations</h2>
                 <div>
                     <label>Address</label>
                     <input data-toggle="tooltip" data-placement="top" title=" addrres" type="text" onChange={this.inputAddress} />
@@ -42,6 +53,7 @@ class LocationForm extends React.Component {
                     <label>County</label>
                     <input data-toggle="tooltip" data-placement="top" title=" country" type="text" onChnage={this.inputBusinessCountry} />
                 </div>
+                {this.renderRedirect()}
                 <input type="button" value="Submit" onClick={() => this.postData()} />
             </div>
         )
