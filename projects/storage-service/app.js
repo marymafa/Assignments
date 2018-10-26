@@ -27,34 +27,20 @@ app.get("/locationData", async function (req, res) {
     res.send(locationData.rows).status(201).end();
 });
 
-app.get("/blockData", async function (req, res) {
-    var data = await client.query(`SELECT * FROM blocks`)
-    res.send(data.rows).status(201).end();
-});
-
 app.post('/data', function (req, res) {
     console.log("this is my body", req.body);
 
-    client.query(`INSERT INTO businesses(name,contact_name,contact_email,contact_number) VALUES('${req.body.name}' , ' ${req.body.contact_name}' , ' ${req.body.contact_name}' , ' ${req.body.contact_number}')`, (err, res) => {
+    client.query(`INSERT INTO businesses(name,contact_name,contact_email,contact_number) VALUES('${req.body.name}' , ' ${req.body.contact_name}' , ' ${req.body.contact_email}' , ' ${req.body.contact_number}')`, (err, res) => {
         console.log(err, res)
-        client.end()
     })
     res.status(201).end()
 });
 
 app.post('/locationData', function (req, res) {
-    client.query(`INSERT INTO locations(address,country) VALUES('${req.body.address}','${req.body.country}')`, (err, res) => {
-        console.log(err, res)
-        client.end()
-    })
-    res.status(201).end()
-});
+    console.log("req", req.body.address, req.body.address);
 
-app.post('/blockData', function (req, res) {
-    console.log("this is my body", req.body.name);
-    client.query(`INSERT INTO blocks(name) VALUES(${req.body.name})`, (err, res) => {
+    client.query(`INSERT INTO locations(address,country) VALUES('${req.body.address}','${req.body.address}')`, (err, res) => {
         console.log(err, res)
-        client.end()
     })
     res.status(201).end()
 });

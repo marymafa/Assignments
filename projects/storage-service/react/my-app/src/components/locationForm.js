@@ -10,7 +10,6 @@ class LocationForm extends React.Component {
         this.state = {
             redirect: false
         }
-        super(props);
         this.inputAddress = this.inputAddress.bind(this);
         this.inputBusinessCountry = this.inputBusinessCountry.bind(this);
     }
@@ -18,7 +17,8 @@ class LocationForm extends React.Component {
         console.log("props", this.props);
 
         var postNewData = await axios.post('http://localhost:3002/locationData', {
-            address: this.props.address
+            address: this.props.address,
+            country: this.props.country
         });
         this.setState({
             redirect: true
@@ -26,12 +26,12 @@ class LocationForm extends React.Component {
     }
 
     inputAddress(e) {
-        this.props.updateAddress(e.target.value)
         console.log("address", this.props.updateAddress(e.target.value))
+        this.props.updateAddress(e.target.value)
     }
     inputBusinessCountry(e) {
-        this.props.updateCountry(e.target.value)
         console.log("country", this.props.updateCountry(e.target.value));
+        this.props.updateCountry(e.target.value)
 
     }
     renderRedirect = () => {
@@ -47,7 +47,7 @@ class LocationForm extends React.Component {
                 <h2> Business Locations</h2>
                 <div>
                     <label>Address</label>
-                    <input data-toggle="tooltip" data-placement="top" title=" addrres" type="text" onChange={this.inputAddress} />
+                    <input data-toggle="tooltip" data-placement="top" title=" address" type="text" onChange={this.inputAddress} />
                 </div>
                 <div>
                     <label>County</label>

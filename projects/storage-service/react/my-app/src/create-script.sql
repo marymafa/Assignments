@@ -45,7 +45,7 @@ VALUES
 INSERT INTO 
 units(name,blocks_id,units_type_id)
 VALUES
-('room-2',1,1);
+('room-2',2,2);
 INSERT INTO 
 units_types(name,length,height,width )
 VALUES
