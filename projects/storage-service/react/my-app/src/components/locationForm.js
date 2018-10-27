@@ -10,12 +10,8 @@ class LocationForm extends React.Component {
         this.state = {
             redirect: false
         }
-        this.inputAddress = this.inputAddress.bind(this);
-        this.inputBusinessCountry = this.inputBusinessCountry.bind(this);
     }
     async  postData() {
-        console.log("props", this.props);
-
         var postNewData = await axios.post('http://localhost:3002/locationData', {
             address: this.props.address,
             country: this.props.country
@@ -47,14 +43,14 @@ class LocationForm extends React.Component {
                 <h2> Business Locations</h2>
                 <div>
                     <label>Address</label>
-                    <input data-toggle="tooltip" data-placement="top" title=" address" type="text" onChange={this.inputAddress} />
+                    <input data-toggle="tooltip" data-placement="top" title=" address" type="text" onChange={this.inputAddress.bind(this)} />
                 </div>
                 <div>
                     <label>County</label>
-                    <input data-toggle="tooltip" data-placement="top" title=" country" type="text" onChnage={this.inputBusinessCountry} />
+                    <input data-toggle="tooltip" data-placement="top" title=" country" type="text" onChange={this.inputBusinessCountry.bind(this)} />
                 </div>
                 {this.renderRedirect()}
-                <input type="button" value="Submit" onClick={() => this.postData()} />
+                <div><button onClick={() => this.postData()}>Submit</button></div>
             </div>
         )
     }
@@ -72,8 +68,8 @@ const mapDispatchToProps = (dispatch) => {
         updateAddress: (address) => {
             dispatch(action.businessLocation(address))
         },
-        updateCountry: (country) => {
-            dispatch(action.countryOfTHEBusiness(country))
+        updateCountry: (bsn) => {
+            dispatch(action.countryOfTHEBusiness(bsn))
         }
     }
 }

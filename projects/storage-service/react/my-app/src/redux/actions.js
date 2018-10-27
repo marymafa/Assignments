@@ -35,6 +35,6 @@ export const saveUnitTypesWidth = (unit_width) => {
 export const saveUnits = (unit_name) => {
     return { type: "NAME", value: unit_name };
 };
-export const countryOfTHEBusiness = (business) => {
-    return { type: "BUSINESS_COUNTRY", payload: business }
+export const countryOfTHEBusiness = (bsnscnty) => {
+    return { type: "BUSINESS_COUNTRY", payload: bsnscnty }
 }

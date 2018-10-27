@@ -37,9 +37,9 @@ app.post('/data', function (req, res) {
 });
 
 app.post('/locationData', function (req, res) {
-    console.log("req", req.body.address, req.body.address);
+    console.log("request business country", req.body.address, req.body.country);
 
-    client.query(`INSERT INTO locations(address,country) VALUES('${req.body.address}','${req.body.address}')`, (err, res) => {
+    client.query(`INSERT INTO locations(address,country) VALUES('${req.body.address}','${req.body.country}')`, (err, res) => {
         console.log(err, res)
     })
     res.status(201).end()
