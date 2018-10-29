@@ -4,7 +4,8 @@ export default class viewData extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            business: []
+            business: [],
+            redirect: false,
         }
     }
 

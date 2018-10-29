@@ -8,27 +8,24 @@ class LocationForm extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            redirect: false
+            redirect: false,
         }
     }
     async  postData() {
         var postNewData = await axios.post('http://localhost:3002/locationData', {
             address: this.props.address,
-            country: this.props.country
+            country: this.props.country,
+            businesses_id: this.props.businesses_id
         });
         this.setState({
             redirect: true
         })
     }
-
     inputAddress(e) {
-        console.log("address", this.props.updateAddress(e.target.value))
-        this.props.updateAddress(e.target.value)
+        this.props.updateAddress(e.target.value);
     }
     inputBusinessCountry(e) {
-        console.log("country", this.props.updateCountry(e.target.value));
-        this.props.updateCountry(e.target.value)
-
+        this.props.updateCountry(e.target.value);
     }
     renderRedirect = () => {
         if (this.state.redirect) {
@@ -36,7 +33,6 @@ class LocationForm extends React.Component {
         }
     }
     render() {
-
         return (
             <div>
                 <h1>Storage Service</h1>
@@ -59,7 +55,8 @@ class LocationForm extends React.Component {
 const mapStateToProps = (state) => {
     return {
         address: state.businessLocations.address,
-        country: state.businessLocations.country
+        country: state.businessLocations.country,
+        businesses_id: state.businessLocations.businesses_id
     }
 }
 
@@ -68,8 +65,11 @@ const mapDispatchToProps = (dispatch) => {
         updateAddress: (address) => {
             dispatch(action.businessLocation(address))
         },
-        updateCountry: (bsn) => {
-            dispatch(action.countryOfTHEBusiness(bsn))
+        updateCountry: (country) => {
+            dispatch(action.countryOfTheBusiness(country))
+        },
+        updateBusinessID: (businesid) => {
+            dispatch(action.businessId(businesid))
         }
     }
 }

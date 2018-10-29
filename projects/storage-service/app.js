@@ -4,7 +4,7 @@ var cors = require('cors')
 var bodyParser = require('body-parser');
 const PORT = 3002;
 const { Client } = require('pg');
-const connectionString = 'postgres://postgres:mm1995@localhost:5432/units'
+const connectionString = 'postgres://postgres:TCGPC1@localhost:5432/units'
 
 app.use(cors());
 app.use(express.static("public"));
@@ -22,14 +22,11 @@ app.get("/data", async function (req, res) {
 });
 
 app.get("/locationData", async function (req, res) {
-    var locationData = await client.query('SELECT * FROM locations')
-    console.log("gaibo", locationData)
+    var locationData = await client.query('SELECT * FROM locations ')
     res.send(locationData.rows).status(201).end();
 });
 
 app.post('/data', function (req, res) {
-    console.log("this is my body", req.body);
-
     client.query(`INSERT INTO businesses(name,contact_name,contact_email,contact_number) VALUES('${req.body.name}' , ' ${req.body.contact_name}' , ' ${req.body.contact_email}' , ' ${req.body.contact_number}')`, (err, res) => {
         console.log(err, res)
     })
@@ -37,9 +34,9 @@ app.post('/data', function (req, res) {
 });
 
 app.post('/locationData', function (req, res) {
-    console.log("request business country", req.body.address, req.body.country);
+    console.log("body", req.body);
 
-    client.query(`INSERT INTO locations(address,country) VALUES('${req.body.address}','${req.body.country}')`, (err, res) => {
+    client.query('INSERT INTO locations(address,country,businesses_id) VALUES($1,$2,$3)', [req.body.address, req.body.country, req.body.businesses_id], (err, res) => {
         console.log(err, res)
     })
     res.status(201).end()

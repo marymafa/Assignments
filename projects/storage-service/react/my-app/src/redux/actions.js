@@ -32,8 +32,12 @@ export const saveUnitTypesWidth = (unit_width) => {
 export const saveUnits = (unit_name) => {
     return { type: "NAME", value: unit_name };
 };
-export const countryOfTHEBusiness = (country) => {
-    return { type: "BUSINESS_COUNTRY", value: country }
+export const countryOfTheBusiness = (country) => {
+    return { type: "COUNTRY", value: country }
+
+};
+export const businessId = (businessid) => {
+    return { type: "BUSINESS_ID", value: businessid }
 }
 export const businessLocation = (address) => {
     return { type: "ADDRESS", value: address }

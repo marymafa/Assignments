@@ -8,7 +8,7 @@ class BusinessFrom extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            redirect: false
+            redirect: false,
         }
         this.inputBusinessName = this.inputBusinessName.bind(this);
         this.handleSubmit = this.handleSubmit.bind(this);
@@ -27,7 +27,7 @@ class BusinessFrom extends React.Component {
             contact_number: this.props.contact_number
         });
         this.setState({
-            redirect: true
+            redirect: true,
         })
     }
     inputBusinessName(e) {
@@ -47,7 +47,7 @@ class BusinessFrom extends React.Component {
     }
     renderRedirect = () => {
         if (this.state.redirect) {
-            return <Redirect to='/locations' />
+            return <Redirect to='/view_all_businesses' />
         }
     }
     render() {

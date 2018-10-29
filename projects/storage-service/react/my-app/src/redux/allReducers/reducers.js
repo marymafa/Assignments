@@ -21,14 +21,17 @@ export const registerBusinesses = (state = { name: "", contact_name: "", contact
     }
     return newState;
 };
-export const businessLocations = (state = { address: "", country: "" }, action) => {
+export const businessLocations = (state = { address: "", country: "", businesses_id: "" }, action) => {
     let newState = state
     switch (action.type) {
         case "ADDRESS":
             newState = { ...state, address: action.value };
             break;
-        case "BUSINESS_COUNTRY":
+        case "COUNTRY":
             newState = { ...state, country: action.value };
+            break;
+        case "BUSINESS_ID":
+            newState = { ...state, businesses_id: action.value };
             break;
     }
     return newState;
