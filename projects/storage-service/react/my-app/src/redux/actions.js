@@ -14,9 +14,6 @@ export const saveContactNumber = (contact_Number) => {
 export const onSubmit = (data) => {
     return { type: "SUBMIT_VALUES", value: data }
 };
-export const businessLocation = (address) => {
-    return { type: "ADDRESS", value: address }
-};
 export const saveBlockName = (block_name) => {
     return { type: "BLOCK_NAME", value: block_name }
 };
@@ -35,6 +32,9 @@ export const saveUnitTypesWidth = (unit_width) => {
 export const saveUnits = (unit_name) => {
     return { type: "NAME", value: unit_name };
 };
-export const countryOfTHEBusiness = (bsnscnty) => {
-    return { type: "BUSINESS_COUNTRY", payload: bsnscnty }
+export const countryOfTHEBusiness = (country) => {
+    return { type: "BUSINESS_COUNTRY", value: country }
 }
+export const businessLocation = (address) => {
+    return { type: "ADDRESS", value: address }
+};
