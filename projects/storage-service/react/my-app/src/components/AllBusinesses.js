@@ -31,10 +31,12 @@ export default class AllBusinesses extends Component {
         return (
             <div>
                 <h1>All businesses</h1>
+                //google how to store selected values in react redux
                 <div className="busid">
                     <label>
                         Business:
-                            <select name="selectBusinessId" value={this.state.selectBusinessId}>
+
+                            <select name="selectBusinessId" value={this.state.selectBusinessId} onChange={}>
                             <option value={0}>All businesses</option>
                             {this.state.business.map(business => <option key={business.id} value={business.id}>{business.name}</option>)}
                         </select>
@@ -42,7 +44,7 @@ export default class AllBusinesses extends Component {
                 </div>
                 <div>
                     {this.renderRedirect()}
-                    <button onClick={() => this.redirectData()}>Next</button>
+                    <button onClick={() => this.renderRedirect()}>Next</button>
                 </div>
             </div>
         )
