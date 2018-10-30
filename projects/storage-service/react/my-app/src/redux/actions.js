@@ -42,3 +42,6 @@ export const businessId = (businessid) => {
 export const businessLocation = (address) => {
     return { type: "ADDRESS", value: address }
 };
+export function saveSelect(data) {
+    return { type: "ADD_SELECT",value: data }
+}

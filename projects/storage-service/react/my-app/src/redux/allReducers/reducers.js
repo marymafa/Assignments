@@ -21,7 +21,7 @@ export const registerBusinesses = (state = { name: "", contact_name: "", contact
     }
     return newState;
 };
-export const businessLocations = (state = { address: "", country: "", businesses_id: "" }, action) => {
+export const businessLocations = (state = { address: "", country: "", businesses_id: ''}, action) => {
     let newState = state
     switch (action.type) {
         case "ADDRESS":
@@ -32,6 +32,7 @@ export const businessLocations = (state = { address: "", country: "", businesses
             break;
         case "BUSINESS_ID":
             newState = { ...state, businesses_id: action.value };
+            console.log("business id");
             break;
     }
     return newState;
@@ -71,5 +72,13 @@ export const businessUnits = (state = { name: "" }, action) => {
     return newState;
 }
 
+export const selectValues = (state = { selections: '' }, action ) => {
+    let newState = state;
+    switch (action.type) {
+        case "ADD_SELECT":
+            newState = { ...state, selections: action.value };
+            break;
+    }
+    return newState;
 
-
+}

@@ -27,15 +27,15 @@ app.get("/locationData", async function (req, res) {
 });
 
 app.post('/data', function (req, res) {
-    client.query(`INSERT INTO businesses(name,contact_name,contact_email,contact_number) VALUES('${req.body.name}' , ' ${req.body.contact_name}' , ' ${req.body.contact_email}' , ' ${req.body.contact_number}')`, (err, res) => {
+    console.log("body", req.body);
+    client.query('INSERT INTO businesses(name,contact_name,contact_email,contact_number) VALUES($1,$2,$3,$4)', [req.body.name, req.body.contact_name, req.body.contact_email, req.body.contact_number], (err, res) => {
         console.log(err, res)
     })
     res.status(201).end()
 });
 
 app.post('/locationData', function (req, res) {
-    console.log("body", req.body);
-
+    console.log("loca",req.body)
     client.query('INSERT INTO locations(address,country,businesses_id) VALUES($1,$2,$3)', [req.body.address, req.body.country, req.body.businesses_id], (err, res) => {
         console.log(err, res)
     })

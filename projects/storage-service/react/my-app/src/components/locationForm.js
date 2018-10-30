@@ -3,6 +3,7 @@ import { connect } from "react-redux";
 import * as action from "../redux/actions";
 import { Redirect } from 'react-router-dom';
 import axios from "axios";
+import { log } from "util";
 
 class LocationForm extends React.Component {
     constructor(props) {
@@ -33,6 +34,7 @@ class LocationForm extends React.Component {
         }
     }
     render() {
+        console.log('state',this.props);
         return (
             <div>
                 <h1>Storage Service</h1>
@@ -56,7 +58,7 @@ const mapStateToProps = (state) => {
     return {
         address: state.businessLocations.address,
         country: state.businessLocations.country,
-        businesses_id: state.businessLocations.businesses_id
+        businesses_id: state.selectValues.selections,
     }
 }
 

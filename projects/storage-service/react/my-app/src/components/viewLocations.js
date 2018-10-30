@@ -5,7 +5,7 @@ export default class ViewLocations extends Component {
         super(props);
         this.state = {
             location: [],
-            selectBusinessId: ""
+           
         }
     }
     componentWillMount() {
@@ -20,15 +20,6 @@ export default class ViewLocations extends Component {
         return (
             <div>
                 <h1>Locations of the Business</h1>
-                <div className="busid">
-                    <label>
-                        Business:
-                            <select name="selectBusinessId" value={this.state.selectBusinessId}>
-                            <option value={0}>All businesses</option>
-                            {this.state.location.map(location => <option key={location.id} value={location.id}>{location.business}</option>)}
-                        </select>
-                    </label>
-                </div>
                 <div>
                     <thead>
                         <tr>
