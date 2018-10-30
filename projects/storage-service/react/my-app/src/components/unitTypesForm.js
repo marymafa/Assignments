@@ -1,16 +1,44 @@
 import React from "react";
 import { connect } from "react-redux";
 import * as action from "../redux/actions";
+import axios from 'axios';
+import { Redirect } from 'react-router-dom';
 
 class UnitTypesFrom extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            name: this.props.name
+            redirect: false
         }
+        this.inputHeight = this.inputHeight.bind(this);
+        this.inputLength = this.inputLength.bind(this);
+        this.inputWidth = this.inputWidth.bind(this);
+        this.inputName = this.inputName.bind(this);
     }
-    handleSubmit() {
 
+    async  postData() {
+        var postNewData = await axios.post('http://localhost:3002/unitTypesData', {
+            name: this.props.name,
+            length: this.props.length,
+            height: this.props.height,
+            width: this.props.width
+        });
+        this.setState({ redirect: true })
+        console.log("postNewData", postNewData);
+
+    }
+
+    inputName(e) {
+        this.props.updateUnitTypesName(e.target.value)
+    }
+    inputLength(e) {
+        this.props.updateUnitTypesLength(e.target.value)
+    }
+    inputHeight(e) {
+        this.props.updateUnitTypesHeight(e.target.value)
+    }
+    inputWidth(e) {
+        this.props.updateUnitTypesWidth(e.target.value)
     }
     render() {
         return (
@@ -19,21 +47,21 @@ class UnitTypesFrom extends React.Component {
                 <h2>Fill in the details below</h2>
                 <div>
                     <label>Name</label>
-                    <input data-toggle="tooltip" data-placement="top" title="name" type="text" />
+                    <input data-toggle="tooltip" data-placement="top" title="name" type="text" onChange={this.inputName} />
                 </div>
                 <div>
                     <label>Length</label>
-                    <input data-toggle="tooltip" data-placement="top" title="Length" type="text" />
+                    <input data-toggle="tooltip" data-placement="top" title="Length" type="text" onChange={this.inputLength} />
                 </div>
                 <div>
                     <label>Height</label>
-                    <input data-toggle="tooltip" data-placement="top" title="Height" type="text" />
+                    <input data-toggle="tooltip" data-placement="top" title="Height" type="text" onChange={this.inputHeight} />
                 </div>
                 <div>
                     <label>Width</label>
-                    <input data-toggle="tooltip" data-placement="top" title="Width" type="text" />
+                    <input data-toggle="tooltip" data-placement="top" title="Width" type="text" onChange={this.inputWidth} />
                 </div>
-                <input type="button" value="Submit" />
+                <input type="button" value="Submit" onClick={() => this.postData()} />
             </div>
         )
     }
@@ -41,10 +69,10 @@ class UnitTypesFrom extends React.Component {
 
 const mapStateToProps = (state) => {
     return {
-        name: state.name,
-        length: state.length,
-        height: state.height,
-        width: state. width
+        name: state.businessUnitTypes.name,
+        length: state.businessUnitTypes.length,
+        height: state.businessUnitTypes.height,
+        width: state.businessUnitTypes.width
 
     }
 }

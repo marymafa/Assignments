@@ -34,7 +34,6 @@ class LocationForm extends React.Component {
         }
     }
     render() {
-        console.log('state',this.props);
         return (
             <div>
                 <h1>Storage Service</h1>

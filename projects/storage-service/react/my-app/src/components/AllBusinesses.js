@@ -21,7 +21,6 @@ class AllBusinesses extends Component {
         })
 
     }
-
     SelectValue = (e) => {
         let data = {}
         data = e.target.value
@@ -34,7 +33,6 @@ class AllBusinesses extends Component {
             redirect: true,
         })
     }
-
     render() {
         if (this.state.redirect) {
             return <Redirect to='/locations' />

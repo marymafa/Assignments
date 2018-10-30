@@ -6,7 +6,7 @@ export default class ViewBlocks extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            block: []
+            block: [],
         }
     }
 

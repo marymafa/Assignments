@@ -2,30 +2,39 @@ import React from "react";
 import { connect } from "react-redux";
 import * as action from "../redux/actions";
 import axios from 'axios';
+import { Redirect } from 'react-router-dom';
 
 class BlockFrom extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            name: this.props.name
+            redirect: false,
         }
         this.inputBlockName = this.inputBlockName.bind(this);
     }
     async  postData() {
 
         var postNewData = await axios.post('http://localhost:3002/blockData', {
-            name: this.state.name
+            name: this.props.name,
+            locations_id: this.props.locations_id
         });
+        this.setState({ redirect: true })
         console.log("postNewData", postNewData);
 
     }
-
     inputBlockName(e) {
-        console.log("block", this.props.updateBlockName(e.target.value))
+        console.log("test", this.props.updateBlockName(e.target.value));
+
         this.props.updateBlockName(e.target.value)
 
     }
+    renderRedirect = () => {
+        if (this.state.redirect) {
+            return <Redirect to='/unit_types' />
+        }
+    }
     render() {
+        console.log("props", this.props.locations_id);
         return (
             <div>
                 <h1>Storage Service</h1>
@@ -34,7 +43,10 @@ class BlockFrom extends React.Component {
                     <label>Block</label>
                     <input data-toggle="tooltip" data-placement="top" title=" block_name" type="text" onChange={this.inputBlockName} />
                 </div>
-                <input type="button" value="Submit" onClick={() => this.postData()} />
+                <div>
+                    {this.renderRedirect()}
+                    <input type="button" value="Submit" onClick={() => this.postData()} />
+                </div>
             </div>
         )
     }
@@ -42,7 +54,8 @@ class BlockFrom extends React.Component {
 
 const mapStateToProps = (state) => {
     return {
-        name: state.businessBlocks.name
+        name: state.businessBlocks.name,
+        locations_id: state.selectValues.selections,
     }
 }
 
@@ -51,6 +64,9 @@ const mapDispatchToProps = (dispatch) => {
         updateBlockName: (name) => {
             dispatch(action.saveBlockName(name))
         },
+        updateLocationId: (locationid) => {
+            dispatch(action.saveLocations_Id(locationid))
+        }
     }
 }
 export default connect(
