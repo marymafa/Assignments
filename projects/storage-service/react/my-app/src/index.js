@@ -11,7 +11,8 @@ import { Provider } from 'react-redux';
 import ViewLocations from "./components/viewLocations";
 import { BrowserRouter as Router, Route } from "react-router-dom";
 import AllBusinesses from "./components/AllBusinesses";
-import ViewBlocks from "./components/ViewBlocks"
+import ViewBlocks from "./components/ViewBlocks";
+import AllUnitsTypes from "./components/AllUnitsTypes"
 import "./app.css";
 
 ReactDOM.render(
@@ -27,6 +28,7 @@ ReactDOM.render(
                 <Route path='/view_locations' component={ViewLocations} />
                 <Route path="/view_all_businesses" component={AllBusinesses} />
                 < Route path="/view_blocks" component={ViewBlocks} />
+                <Route path="/view_unit_type" component={AllUnitsTypes} />
             </div>
         </Router>
     </Provider >,

@@ -16,7 +16,7 @@ id serial  PRIMARY KEY,
 name VARCHAR(100) NOT NULL,
 locations_id INT REFERENCES locations(id) NOT NULL
 );
-CREATE TABLE IF NOT EXISTS units_types(
+CREATE TABLE IF NOT EXISTS units_type(
 id serial  PRIMARY KEY,
 name VARCHAR(100) NOT NULL,
 length DECIMAL NOT NULL,
@@ -27,7 +27,7 @@ CREATE TABLE IF NOT EXISTS units(
 id serial  PRIMARY KEY,
 name VARCHAR(100) NOT NULL,
 blocks_id INT REFERENCES blocks(id) NOT NULL,
-units_type_id INT REFERENCES units_types(id) NOT NULL
+units_type_id INT REFERENCES units_type(id) NOT NULL
 );
 
 INSERT INTO 
@@ -47,7 +47,7 @@ units(name,blocks_id,units_type_id)
 VALUES
 ('room-2',1,1);
 INSERT INTO 
-units_types(name,length,height,width )
+units_type(name,length,height,width )
 VALUES
 ('garage',10,10,5);
 
@@ -59,17 +59,17 @@ INNER JOIN blocks
 ON locations.id=blocks.locations_id
 INNER JOIN units
 ON blocks.id=units.blocks_id
-INNER JOIN units_types
-ON units.units_type_id=units_types.id;
+INNER JOIN units_type
+ON units.units_type_id=units_type.id;
 SELECT * FROM units
-INNER JOIN units_types
-ON units_types.id=units.units_type_id
-WHERE units_types.name='garage';
+INNER JOIN units_type
+ON units_type.id=units.units_type_id
+WHERE units_type.name='garage';
 SELECT * FROM  locations
 INNER JOIN businesses
 ON businesses.id=locations.businesses_id
 WHERE businesses.id=1;
 SELECT * FROM units
-INNER JOIN units_types
-ON units_types.id=units.units_type_id
-WHERE units_types.width>3;
+INNER JOIN units_type
+ON units_type.id=units.units_type_id
+WHERE units_type.width>3;

@@ -29,7 +29,6 @@ class UnitTypesFrom extends React.Component {
     }
 
     inputName(e) {
-        console.log("haibo", this.props.updateUnitTypesName(e.target.value));
 
         this.props.updateUnitTypesName(e.target.value)
     }
@@ -44,7 +43,7 @@ class UnitTypesFrom extends React.Component {
     }
     renderRedirect = () => {
         if (this.state.redirect) {
-            return <Redirect to='/units' />
+            return <Redirect to='/view_unit_type' />
         }
     }
     render() {

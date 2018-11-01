@@ -4,19 +4,19 @@ import { Redirect } from 'react-router-dom';
 import { connect } from "react-redux";
 import * as action from "../redux/actions";
 
-class AllBusinesses extends Component {
+class AllUnitsTypes extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            business: [],
-            selectedBusiness: this.props.selections,
+            unit: [],
+            selectedUnit: this.props.selections,
             redirect: false,
         }
         this.redirectData = this.redirectData.bind(this)
     }
     componentDidMount() {
-        axios.get("http://localhost:3002/data").then(result => {
-            this.setState({ business: result.data })
+        axios.get("http://localhost:3002/unitsData").then(result => {
+            this.setState({ unit: result.data })
         })
 
     }
@@ -34,17 +34,17 @@ class AllBusinesses extends Component {
     }
     render() {
         if (this.state.redirect) {
-            return <Redirect to='/locations' />
+            return <Redirect to='/units' />
         }
         return (
             <div>
-                <h1>All businesses</h1>
-                <div className="busid">
+                <h1>All units</h1>
+                <div className="unit">
                     <label>
-                        Business:
-                            <select name="selectid" onChange={(e) => this.SelectValue(e)} >
-                            <option value={0}>All businesses</option>
-                            {this.state.business.map(business => <option key={business.id} value={business.id}>{business.name}</option>)}
+                        units:
+                            <select name="units" onChange={(e) => this.SelectValue(e)} >
+                            <option value={0}>All units</option>
+                            {this.state.unit.map(unit => <option key={unit.id} value={unit.id}>{unit.name}</option>)}
                         </select>
                     </label>
                 </div>
@@ -72,4 +72,4 @@ const mapDispatchToProps = (dispatch) => {
 export default connect(
     mapStateToProps,
     mapDispatchToProps
-)(AllBusinesses);
+)(AllUnitsTypes);

@@ -35,7 +35,7 @@ app.get('/blockData', async function (req, res) {
 });
 
 app.get('/unitTypesData', async function (req, res) {
-    var unitTypesData = await client.query('SELECT * FROM units_types ')
+    var unitTypesData = await client.query('SELECT * FROM units_type ')
     res.send(unitTypesData.rows).status(201).end();
 });
 
@@ -72,7 +72,7 @@ app.post('/blockData', function (req, res) {
 
 app.post('/unitTypesData', function (req, res) {
     console.log("this is   my body", req.body);
-    client.query('INSERT INTO units_types(name,length,height,width) VALUES($1,$2,$3,$4)', [req.body.name, req.body.length, req.body.height, req.body.width], (err, res) => {
+    client.query('INSERT INTO units_type(name,length,height,width) VALUES($1,$2,$3,$4)', [req.body.name, req.body.length, req.body.height, req.body.width], (err, res) => {
         console.log(err, res)
     })
     res.status(201).end()
