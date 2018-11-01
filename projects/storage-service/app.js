@@ -6,7 +6,7 @@ var cors = require('cors')
 var bodyParser = require('body-parser');
 const PORT = 3002;
 const { Client } = require('pg');
-const connectionString = 'postgres://postgres:TCGPC1@localhost:5432/units'
+const connectionString = 'postgres://postgres:TCGPC1@localhost:5432/store_products'
 
 app.use(cors());
 app.use(express.static("public"));
@@ -30,7 +30,6 @@ app.get("/locationData", async function (req, res) {
 });
 
 app.get('/blockData', async function (req, res) {
-    console.log("mary are you happy?");
     var blockData = await client.query(`SELECT * FROM blocks`)
     res.send(blockData.rows).status(201).end();
 });
@@ -39,6 +38,12 @@ app.get('/unitTypesData', async function (req, res) {
     var unitTypesData = await client.query('SELECT * FROM units_types ')
     res.send(unitTypesData.rows).status(201).end();
 });
+
+app.get('/unitsData', async function (req, res) {
+    console.log("mary are you happy?");
+    var unitsData = await client.query(`SELECT * FROM units`)
+    res.send(unitsData.rows).status(201).end();
+})
 
 // post
 app.post('/data', function (req, res) {
@@ -68,6 +73,14 @@ app.post('/blockData', function (req, res) {
 app.post('/unitTypesData', function (req, res) {
     console.log("this is   my body", req.body);
     client.query('INSERT INTO units_types(name,length,height,width) VALUES($1,$2,$3,$4)', [req.body.name, req.body.length, req.body.height, req.body.width], (err, res) => {
+        console.log(err, res)
+    })
+    res.status(201).end()
+});
+
+app.post('/unitsData', function (req, res) {
+    console.log("maar why?", req.body);
+    client.query('INSERT INTO  units(name,blocks_id,units_type_id) VALUES($1,$2,$3)', [req.body.name, req.body.blocks_id, req.body.units_type_id], (err, res) => {
         console.log(err, res)
     })
     res.status(201).end()

@@ -29,6 +29,8 @@ class UnitTypesFrom extends React.Component {
     }
 
     inputName(e) {
+        console.log("haibo", this.props.updateUnitTypesName(e.target.value));
+
         this.props.updateUnitTypesName(e.target.value)
     }
     inputLength(e) {
@@ -39,6 +41,11 @@ class UnitTypesFrom extends React.Component {
     }
     inputWidth(e) {
         this.props.updateUnitTypesWidth(e.target.value)
+    }
+    renderRedirect = () => {
+        if (this.state.redirect) {
+            return <Redirect to='/units' />
+        }
     }
     render() {
         return (
@@ -61,7 +68,10 @@ class UnitTypesFrom extends React.Component {
                     <label>Width</label>
                     <input data-toggle="tooltip" data-placement="top" title="Width" type="text" onChange={this.inputWidth} />
                 </div>
-                <input type="button" value="Submit" onClick={() => this.postData()} />
+                <div>
+                    {this.renderRedirect()}
+                    <input type="button" value="Submit" onClick={() => this.postData()} />
+                </div>
             </div>
         )
     }

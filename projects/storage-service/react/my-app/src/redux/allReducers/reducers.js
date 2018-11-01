@@ -66,11 +66,17 @@ export const businessUnitTypes = (state = { name: "", length: "", height: "", wi
     }
     return newState;
 }
-export const businessUnits = (state = { name: "" }, action) => {
+export const businessUnits = (state = { name: "", blocks_id: "", units_type_id: "" }, action) => {
     let newState = state;
     switch (action.type) {
         case "NAME":
             newState = { ...state, name: action.value };
+            break;
+        case "BLOCK_ID":
+            newState = { ...state, blocks_id: action.value };
+            break;
+        case "UNIT_TYPES_ID":
+            newState = { ...state, units_type_id: action.value };
             break;
     }
     return newState;

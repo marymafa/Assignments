@@ -29,8 +29,8 @@ export const saveUnitTypesHeight = (unit_length) => {
 export const saveUnitTypesWidth = (unit_width) => {
     return { type: "WIDTH", value: unit_width };
 };
-export const saveUnits = (unit_name) => {
-    return { type: "NAME", value: unit_name };
+export const saveUnits = (unit) => {
+    return { type: "NAME", value: unit };
 };
 export const countryOfTheBusiness = (country) => {
     return { type: "COUNTRY", value: country }
@@ -47,4 +47,10 @@ export const saveSelect = (data) => {
 };
 export const saveLocations_Id = (locationid) => {
     return { type: "LOCATION_ID", value: locationid }
+};
+export const blockId = (blockid) => {
+    return { type: "BLOCK_ID", value: blockid }
+};
+export const unitTypeId = (unitid) => {
+    return { type: "UNIT_TYPES_ID", value: unitid }
 }
