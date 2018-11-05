@@ -81,7 +81,6 @@ export const businessUnits = (state = { name: "", blocks_id: "", units_type_id: 
     }
     return newState;
 }
-
 export const selectValues = (state = { selections: '' }, action) => {
     let newState = state;
     switch (action.type) {
@@ -91,4 +90,18 @@ export const selectValues = (state = { selections: '' }, action) => {
     }
     return newState;
 
+}
+export const signUpPage = (state = { username: "", email: "", password: "" }, action) => {
+    let newState = state;
+    switch (action.type) {
+        case "ADD_USER_NAME":
+            newState = { ...state, username: action.value };
+            break;
+        case "ADD_EMAIL":
+            newState = { ...state, email: action.value };
+            break;
+        case "ADD_PASSWORD":
+            newState = { ...state, password: action.value };
+            break;
+    }
 }

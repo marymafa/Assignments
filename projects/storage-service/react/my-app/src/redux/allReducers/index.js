@@ -1,4 +1,4 @@
-import { registerBusinesses, businessLocations, businessBlocks, businessUnitTypes, businessUnits, selectValues } from "../allReducers/reducers";
+import { registerBusinesses, businessLocations, businessBlocks, businessUnitTypes, businessUnits, selectValues, signUpPage } from "../allReducers/reducers";
 import { combineReducers, createStore } from "redux";
 
 const rootReducer = combineReducers({
@@ -7,7 +7,7 @@ const rootReducer = combineReducers({
     businessBlocks,
     businessUnitTypes,
     businessUnits,
-    selectValues
-
+    selectValues,
+    //signUpPage
 });
 export default rootReducer;

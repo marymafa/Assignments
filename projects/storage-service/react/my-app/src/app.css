@@ -27,4 +27,31 @@ th, td {
    margin: 1%;
    padding:1%
  }
+ .home{
+   font-size: 230%;
+   margin-left: 40%;
+    margin-block-start: 8%;
+ }
+ /* body {
+  background-image: url("units.jpg");
+  background-color: #cccccc;
+  background-size:100%;
+  background-repeat: no-repeat;
+} */
+.homebutton{
+  margin-left: 43%;
+    display: inline-block;
+    border: 0;
+    text-decoration: none;
+    cursor: pointer;
+    color: black;
+    background: #ddd;
+    font: 12px Verdana;
+    padding: 20px; /* 40px, so you can see that it won't be rendered with width */
+    text-align: center;
+}
 
+label {
+  padding: 12px 12px 12px 0;
+  display: inline-block;
+}

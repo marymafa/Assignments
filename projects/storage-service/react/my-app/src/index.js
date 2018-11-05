@@ -12,6 +12,8 @@ import ViewLocations from "./components/viewLocations";
 import { BrowserRouter as Router, Route } from "react-router-dom";
 import AllBusinesses from "./components/AllBusinesses";
 import ViewBlocks from "./components/ViewBlocks";
+import Home from "./components/Home";
+import SignUp from "./components/SignUp"
 import AllUnitsTypes from "./components/AllUnitsTypes"
 import "./app.css";
 
@@ -19,7 +21,9 @@ ReactDOM.render(
     <Provider store={store}>
         <Router>
             <div>
-                <Route exact path='/' component={BusinessFrom} />
+                <Route exact path='/' component={Home} />
+                <Route path='/signUp' component={SignUp} />
+                <Route path='/business' component={BusinessFrom} />
                 <Route path='/blocks' component={BlockForm} />
                 <Route path='/locations' component={LocationForm} />
                 <Route path='/units' component={UnitsFrom} />

@@ -54,3 +54,12 @@ export const blockId = (blockid) => {
 export const unitTypeId = (unitid) => {
     return { type: "UNIT_TYPES_ID", value: unitid }
 }
+export const saveusername = (username) => {
+    return { type: "ADD_USER_NAME", value: username }
+};
+export const saveEmail = (email) => {
+    return { type: "ADD_EMAIL", value: email }
+};
+export const savePassWord = (password) => {
+    return { type: "ADD_PASSWORD", value: password }
+}
