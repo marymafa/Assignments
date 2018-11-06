@@ -2,9 +2,14 @@ import React from "react";
 import { connect } from "react-redux";
 import * as action from "../redux/actions";
 import axios from 'axios';
+import { Redirect } from 'react-router-dom';
 
 class SignUp extends React.Component {
     constructor(props) {
+        super(props);
+        this.state = {
+            redirect: false
+        }
         super(props);
         this.inputusername = this.inputusername.bind(this);
         this.inputEmail = this.inputEmail.bind(this);
@@ -16,6 +21,9 @@ class SignUp extends React.Component {
             email: this.props.email,
             password: this.props.password
         });
+        this.setState({
+            redirect: true
+        })
     };
     inputusername(e) {
         this.props.updateusername(e.target.value);
@@ -26,6 +34,11 @@ class SignUp extends React.Component {
     inputPassword(e) {
         this.props.updatePassword(e.target.value);
     };
+    renderRedirect = () => {
+        if (this.state.redirect) {
+            return <Redirect to='/units' />
+        }
+    }
     render() {
         return (
             <div>
@@ -50,12 +63,11 @@ class SignUp extends React.Component {
 }
 const mapStateToProps = (state) => {
     return {
-        // username: state.signUpPage.username,
-        // email: state.signUpPage.email,
-        // password: state.signUpPage.password
+        username: state.signUpPage.username,
+        email: state.signUpPage.email,
+        password: state.signUpPage.password
     }
 }
-
 const mapDispatchToProps = (dispatch) => {
     return {
         updateusername: (username) => {

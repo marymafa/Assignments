@@ -55,11 +55,13 @@ export const unitTypeId = (unitid) => {
     return { type: "UNIT_TYPES_ID", value: unitid }
 }
 export const saveusername = (username) => {
+    console.log("user name", username);
     return { type: "ADD_USER_NAME", value: username }
 };
 export const saveEmail = (email) => {
     return { type: "ADD_EMAIL", value: email }
 };
 export const savePassWord = (password) => {
+    console.log("password", password);
     return { type: "ADD_PASSWORD", value: password }
 }

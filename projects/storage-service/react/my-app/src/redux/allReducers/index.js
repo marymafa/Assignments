@@ -8,6 +8,6 @@ const rootReducer = combineReducers({
     businessUnitTypes,
     businessUnits,
     selectValues,
-    //signUpPage
+    signUpPage
 });
 export default rootReducer;

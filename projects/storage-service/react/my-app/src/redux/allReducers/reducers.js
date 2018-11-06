@@ -1,5 +1,4 @@
 
-
 export const registerBusinesses = (state = { name: "", contact_name: "", contact_email: "", contact_number: "" }, action) => {
     let newState = state
     switch (action.type) {
@@ -21,6 +20,7 @@ export const registerBusinesses = (state = { name: "", contact_name: "", contact
     }
     return newState;
 };
+
 export const businessLocations = (state = { address: "", country: "", businesses_id: '' }, action) => {
     let newState = state
     switch (action.type) {
@@ -37,6 +37,7 @@ export const businessLocations = (state = { address: "", country: "", businesses
     }
     return newState;
 };
+
 export const businessBlocks = (state = { name: "", locations_id: '' }, action) => {
     let newState = state;
     switch (action.type) {
@@ -49,6 +50,7 @@ export const businessBlocks = (state = { name: "", locations_id: '' }, action) =
     }
     return newState;
 };
+
 export const businessUnitTypes = (state = { name: "", length: "", height: "", width: "" }, action) => {
     let newState = state;
     switch (action.type) {
@@ -65,7 +67,8 @@ export const businessUnitTypes = (state = { name: "", length: "", height: "", wi
             newState = { ...state, width: action.value };
     }
     return newState;
-}
+};
+
 export const businessUnits = (state = { name: "", blocks_id: "", units_type_id: "" }, action) => {
     let newState = state;
     switch (action.type) {
@@ -80,7 +83,8 @@ export const businessUnits = (state = { name: "", blocks_id: "", units_type_id: 
             break;
     }
     return newState;
-}
+};
+
 export const selectValues = (state = { selections: '' }, action) => {
     let newState = state;
     switch (action.type) {
@@ -90,18 +94,23 @@ export const selectValues = (state = { selections: '' }, action) => {
     }
     return newState;
 
-}
+};
+
 export const signUpPage = (state = { username: "", email: "", password: "" }, action) => {
     let newState = state;
     switch (action.type) {
         case "ADD_USER_NAME":
             newState = { ...state, username: action.value };
+            console.log("name", newState);
             break;
         case "ADD_EMAIL":
             newState = { ...state, email: action.value };
+            console.log("email", newState);
             break;
         case "ADD_PASSWORD":
             newState = { ...state, password: action.value };
+            console.log("password", newState);
             break;
     }
+    return newState;
 }
