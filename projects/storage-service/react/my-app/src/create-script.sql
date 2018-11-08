@@ -31,7 +31,7 @@ CREATE TABLE IF NOT EXISTS units (
         id serial PRIMARY KEY,
         name VARCHAR(100) NOT NULL,
         blocks_id INT REFERENCES blocks (id) NOT NULL,
-        units_type_id INT REFERENCES units_type (id) NOT NULL
+     units_type_id INT REFERENCES units_type (id) NOT NULL
 );
 
 CREATE TABLE IF NOT EXISTS customer (
@@ -100,5 +100,5 @@ FROM
     units
     INNER JOIN units_type ON units_type.id = units.units_type_id
     WHERE
-        units_type.width > 3;
+ units_type.width > 3;
 

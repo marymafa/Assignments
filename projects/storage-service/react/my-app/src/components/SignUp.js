@@ -3,6 +3,7 @@ import { connect } from "react-redux";
 import * as action from "../redux/actions";
 import axios from 'axios';
 import { Redirect } from 'react-router-dom';
+import { Link } from "react-router-dom";
 
 class SignUp extends React.Component {
     constructor(props) {
@@ -36,12 +37,13 @@ class SignUp extends React.Component {
     };
     renderRedirect = () => {
         if (this.state.redirect) {
-            return <Redirect to='/units' />
+            return <Redirect to='/view_units' />
         }
     }
     render() {
         return (
             <div>
+                <h1>Register here</h1>
                 <div>
                     <label>username</label>
                     <input type="text" name="username" onChange={this.inputusername} />
@@ -54,8 +56,12 @@ class SignUp extends React.Component {
                     <label>Password</label>
                     <input type="password" name="password" onChange={this.inputPassword} />
                 </div>
-                <div>
+                <div className="register">
+                    {this.renderRedirect()}
                     <button type="button" value="Submit" onClick={() => this.postData()} >Register</button>
+                </div>
+                <div className="link">
+                    <Link to="/login" ><button type="button">Login</button></Link>
                 </div>
             </div>
         )

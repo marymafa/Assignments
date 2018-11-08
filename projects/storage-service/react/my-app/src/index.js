@@ -13,8 +13,10 @@ import { BrowserRouter as Router, Route } from "react-router-dom";
 import AllBusinesses from "./components/AllBusinesses";
 import ViewBlocks from "./components/ViewBlocks";
 import Home from "./components/Home";
-import SignUp from "./components/SignUp"
-import AllUnitsTypes from "./components/AllUnitsTypes"
+import SignUp from "./components/SignUp";
+import LogIn from "./components/LogIn";
+import UserDetails from "./components/UserDetails"
+import AllUnits from "./components/AllUnits"
 import "./app.css";
 
 ReactDOM.render(
@@ -23,6 +25,7 @@ ReactDOM.render(
             <div>
                 <Route exact path='/' component={Home} />
                 <Route path='/signUp' component={SignUp} />
+                <Route path='/login' component={LogIn} />
                 <Route path='/business' component={BusinessFrom} />
                 <Route path='/blocks' component={BlockForm} />
                 <Route path='/locations' component={LocationForm} />
@@ -32,7 +35,8 @@ ReactDOM.render(
                 <Route path='/view_locations' component={ViewLocations} />
                 <Route path="/view_all_businesses" component={AllBusinesses} />
                 < Route path="/view_blocks" component={ViewBlocks} />
-                <Route path="/view_unit_type" component={AllUnitsTypes} />
+                <Route path="/view_units" component={AllUnits} />
+                <Route path="/view_userdetails" component={UserDetails} />
             </div>
         </Router>
     </Provider >,

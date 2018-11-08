@@ -51,6 +51,15 @@ th, td {
     text-align: center;
 }
 
+.link{
+  margin-left: 6%;
+  padding:-4%;
+ 
+}
+.register{
+  margin-left: 1%;
+  padding:-2%;
+}
 label {
   padding: 12px 12px 12px 0;
   display: inline-block;
