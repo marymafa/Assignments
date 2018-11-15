@@ -2,20 +2,21 @@ import React from "react";
 import { connect } from "react-redux";
 import * as action from "../redux/actions";
 import axios from 'axios';
-import { Redirect } from 'react-router-dom';
-import { Link } from "react-router-dom";
+import { Redirect ,Link} from 'react-router-dom';
 
-class SignUp extends React.Component {
+class LogIn extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            redirect: false
+            redirect: false,
+            userData: []
         }
         super(props);
         this.inputusername = this.inputusername.bind(this);
         this.inputEmail = this.inputEmail.bind(this);
         this.inputPassword = this.inputPassword.bind(this);
     }
+
     async  postData() {
         var postNewData = await axios.post('http://localhost:3002/customerData', {
             username: this.props.username,
@@ -37,17 +38,14 @@ class SignUp extends React.Component {
     };
     renderRedirect = () => {
         if (this.state.redirect) {
-            return <Redirect to='/view_units' />
+            return <Redirect to='/viewAllBusinessLocations' />
         }
     }
     render() {
+        console.log("this is my props", this.props.password, this.props.email);
+
         return (
             <div>
-                <h1>Register here</h1>
-                <div>
-                    <label>username</label>
-                    <input type="text" name="username" onChange={this.inputusername} />
-                </div>
                 <div>
                     <label>Email</label>
                     <input type="email" name="email" onChange={this.inputEmail} />
@@ -56,11 +54,14 @@ class SignUp extends React.Component {
                     <label>Password</label>
                     <input type="password" name="password" onChange={this.inputPassword} />
                 </div>
-                <div className="register">
+                <div>
                     {this.renderRedirect()}
-                    <button type="button" value="Submit" onClick={() => this.postData()} >Register</button>
+                    <button type="button" value="Submit" onClick={() => this.postData()} >Login</button>
                 </div>
-               
+
+                <div className="link">
+                    <Link to="/signUp" ><button type="button">signUp</button></Link>
+                </div>
             </div>
         )
     }
@@ -88,4 +89,4 @@ const mapDispatchToProps = (dispatch) => {
 export default connect(
     mapStateToProps,
     mapDispatchToProps
-)(SignUp);
+)(LogIn);

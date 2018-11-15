@@ -1,7 +1,7 @@
 import React from "react";
 import { connect } from "react-redux";
 import * as action from "../redux/actions";
-import { Redirect } from 'react-router-dom';
+import { Redirect, Link } from 'react-router-dom';
 import axios from 'axios';
 
 class BusinessFrom extends React.Component {
@@ -54,7 +54,7 @@ class BusinessFrom extends React.Component {
         return (
             <div>
                 <h1>Storage Service</h1>
-                <h2>Register your business</h2>
+                <h2>Register your business </h2>
                 <div>
                     <label>Name</label>
                     <input type="text" data-toggle="tooltip" data-placement="top" title="name" business onChange={this.inputBusinessName} />
@@ -71,8 +71,11 @@ class BusinessFrom extends React.Component {
                     <label>Contact Number</label>
                     <input type="tel" data-toggle="tooltip" data-placement="top" title=" contact number" onChange={this.inputContactNumber} />
                 </div>
-                {this.renderRedirect()}
-                <button onClick={() => this.postData()}>Submit</button>
+                <div>
+                    {this.renderRedirect()}
+                    <button onClick={() => this.postData()}>Register</button>
+                   
+                </div>
             </div>
         )
     }

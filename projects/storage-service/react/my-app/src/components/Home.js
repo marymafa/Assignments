@@ -1,5 +1,5 @@
 import React from "react";
-import { Redirect } from 'react-router-dom';
+import { Redirect, Link } from 'react-router-dom';
 
 export default class Home extends React.Component {
     constructor(props) {
@@ -14,13 +14,14 @@ export default class Home extends React.Component {
     }
     render() {
         if (this.state.redirect) {
-            return <Redirect to='/signUp' />
+            return <Redirect to='/business' />
         }
         return (
             <div>
                 <h1 className="home">Storage Service</h1>
                 <div className="app" style={{ background: 'red', color: 'white' }} />
-                <button className="homebutton" onClick={this.redirectData}>Login/Signup</button>
+                <Link  className="homebutton" to="/business" ><button type="button">Register business</button></Link>
+                <Link  className="rentbutton" to="/login" ><button type="button">Rent units</button></Link>
             </div>
         )
     }

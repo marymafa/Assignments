@@ -15,8 +15,11 @@ import ViewBlocks from "./components/ViewBlocks";
 import Home from "./components/Home";
 import SignUp from "./components/SignUp";
 import LogIn from "./components/LogIn";
-import UserDetails from "./components/UserDetails"
-import AllUnits from "./components/AllUnits"
+import UserDetails from "./components/UserDetails";
+import AllUnits from "./components/AllUnits";
+import Allunitstypes from "./components/AllUnitTypes";
+import AllBlocks from "./components/viewAllBlocks";
+import AllLocations from "./components/viewAllLocations";
 import "./app.css";
 
 ReactDOM.render(
@@ -37,6 +40,9 @@ ReactDOM.render(
                 < Route path="/view_blocks" component={ViewBlocks} />
                 <Route path="/view_units" component={AllUnits} />
                 <Route path="/view_userdetails" component={UserDetails} />
+                <Route path="/view_allunitType" component={Allunitstypes} />
+                <Route path="/viewAllBlocks" component={AllBlocks} />
+                <Route  path="/viewAllBusinessLocations" component={AllLocations}/>
             </div>
         </Router>
     </Provider >,

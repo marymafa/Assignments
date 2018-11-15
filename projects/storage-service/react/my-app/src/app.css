@@ -32,14 +32,14 @@ th, td {
    margin-left: 40%;
     margin-block-start: 8%;
  }
- /* body {
+ body {
   background-image: url("units.jpg");
   background-color: #cccccc;
   background-size:100%;
   background-repeat: no-repeat;
-} */
+}
 .homebutton{
-  margin-left: 43%;
+  margin-left: 40%;
     display: inline-block;
     border: 0;
     text-decoration: none;
@@ -47,10 +47,21 @@ th, td {
     color: black;
     background: #ddd;
     font: 12px Verdana;
-    padding: 20px; /* 40px, so you can see that it won't be rendered with width */
+    padding: 20px; 
     text-align: center;
 }
-
+.rentbutton{
+  margin-left: 1%;
+  display: inline-block;
+  border: 0;
+  text-decoration: none;
+  cursor: pointer;
+  color: black;
+  background: #ddd;
+  font: 12px Verdana;
+  padding: 20px; 
+  text-align: center; 
+}
 .link{
   margin-left: 6%;
   padding:-4%;
