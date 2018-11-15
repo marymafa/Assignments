@@ -15,7 +15,6 @@ export default class UserDetails extends Component {
         })
     }
     render() {
-        console.log("state", this.state);
         return (
             <div>
                 <h1>customer Details</h1>

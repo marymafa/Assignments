@@ -19,11 +19,9 @@ class BlockFrom extends React.Component {
             locations_id: this.props.locations_id
         });
         this.setState({ redirect: true })
-        console.log("postNewData", postNewData);
 
     }
     inputBlockName(e) {
-        console.log("test", this.props.updateBlockName(e.target.value));
 
         this.props.updateBlockName(e.target.value)
 
@@ -34,7 +32,6 @@ class BlockFrom extends React.Component {
         }
     }
     render() {
-        console.log("props", this.props.locations_id);
         return (
             <div>
                 <h1>Storage Service</h1>

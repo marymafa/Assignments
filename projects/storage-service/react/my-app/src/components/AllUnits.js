@@ -17,13 +17,10 @@ class AllUnits extends Component {
         axios.get("http://localhost:3002/unitsData").then(result => {
             this.setState({ unit: result.data })
         })
-        console.log("this is reaact state", this.state.unit);
     }
     SelectValue = (e) => {
         const data = e.target.value
         this.props.saveSelectedVAlues(data)
-        console.log("data", data);
-
     }
     render() {
         return (

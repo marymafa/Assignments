@@ -24,7 +24,6 @@ class UnitTypesFrom extends React.Component {
             width: this.props.width
         });
         this.setState({ redirect: true })
-        console.log("postNewData", postNewData);
 
     }
 

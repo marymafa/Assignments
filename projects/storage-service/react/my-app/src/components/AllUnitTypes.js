@@ -18,14 +18,13 @@ class Allunitstypes extends Component {
         axios.get("http://localhost:3002/unitTypesData").then(result => {
             this.setState({ unit: result.data })
         })
-       
+
 
     }
     SelectValue = (e) => {
         let data = {}
         data = e.target.value
         this.props.saveSelectedVAlues(data)
-        console.log("data", data);
 
     }
     redirectData() {
@@ -37,9 +36,10 @@ class Allunitstypes extends Component {
         if (this.state.redirect) {
             return <Redirect to='/view_units' />
         }
+        const filtereData = this.state.unit.filter(item => item.value === this.state.unit)
         return (
             <div>
-                <h1>All units</h1>
+                <h1>All unit type</h1>
                 <div className="unit">
                     <label>
                         units:

@@ -42,8 +42,6 @@ class LogIn extends React.Component {
         }
     }
     render() {
-        console.log("this is my props", this.props.password, this.props.email);
-
         return (
             <div>
                 <div>

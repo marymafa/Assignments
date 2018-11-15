@@ -18,7 +18,6 @@ class BusinessFrom extends React.Component {
     }
 
     async  postData() {
-        console.log("props", this.props);
 
         var postNewData = await axios.post('http://localhost:3002/data', {
             name: this.props.name,
