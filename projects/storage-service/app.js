@@ -5,6 +5,8 @@ var bodyParser = require('body-parser');
 const PORT = 3002;
 const { Client } = require('pg');
 const connectionString = 'postgres://postgres:TCGPC1@localhost:5432/store_products';
+const bcrypt = require('bcrypt');
+var saltRounds = 10;
 
 app.use(cors());
 app.use(express.static("public"));
@@ -16,6 +18,7 @@ const client = new Client({
     connectionString: connectionString,
 })
 client.connect();
+
 //get
 app.get("/data", async function (req, res) {
     var data = await client.query(`SELECT * FROM businesses`)
@@ -43,12 +46,11 @@ app.get('/unitsData', async function (req, res) {
     res.send(unitsData.rows).status(201).end();
 })
 
-app.get('/customerData', async function (req, res) {
+app.get('/signUpData', async function (req, res) {
     console.log("this is my customer's details");
     var unitsData = await client.query(`SELECT * FROM customer`)
     res.send(unitsData.rows).status(201).end();
 });
-
 // post
 app.post('/data', function (req, res) {
     console.log("business details", req.body);
@@ -90,15 +92,22 @@ app.post('/unitsData', function (req, res) {
     res.status(201).end()
 });
 
-app.post('/customerData', function (req, res) {
-    console.log("customer details", req.body);
-    console.log("this is my customer's details", req.body);
-    client.query('INSERT INTO  customer(username,email,password) VALUES($1,$2,$3)', [req.body.username, req.body.email, req.body.password], (err, res) => {
-        console.log(err, res)
+app.post('/signUpData', function (req, res) {
+    const hash = bcrypt.hashSync(req.body.password, saltRounds);
+    console.log("hash", hash);
+    client.query('INSERT INTO  customer(username,email,password) VALUES($1,$2,$3)', [req.body.username, req.body.email, hash], (err, res) => {
     })
     res.status(201).end()
 });
+app.post('/loginData', async function (req, res) {
+    var unitsData = await client.query(`SELECT * FROM customer WHERE id=id`)
+    const hash = bcrypt.hashSync(req.body.password, saltRounds);
+    bcrypt.compare(req.body.password, hash, (err, res) => {
+        // res == true or res == false
+    });
 
+
+});
 app.listen(PORT, () => {
     console.log(`Server is listening on port ${PORT}`);
 });

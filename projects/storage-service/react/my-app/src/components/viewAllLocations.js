@@ -14,13 +14,14 @@ class AllLocations extends Component {
     }
     componentDidMount() {
         axios.get("http://localhost:3002/locationData").then(result => {
+            console.log("data", result.data);
             this.setState({ allLocations: result.data })
         })
     }
     SelectValue = (e) => {
         const data = e.target.value
         this.props.saveSelectedVAlues(data)
-
+        console.log("this is my data", data);
     }
     render() {
         return (
@@ -31,12 +32,15 @@ class AllLocations extends Component {
                         All Locations:
                             <select name="location" onChange={(e) => this.SelectValue(e)} >
                             <option value={0}>select the location </option>
-                            {this.state.allLocations.map(location => <option key={location.id} value={location.id}>{location.name}</option>)}
+                            {this.state.allLocations.map(location =>  <option key={location.id} value={location.id}>{location.address}</option>
+                            )
+                            }
+
                         </select>
                     </label>
                 </div>
                 <div>
-                <Link to="/viewAllBlocks" ><button type="button">Next</button></Link>
+                    <Link to="/viewAllBlocks" ><button type="button">Next</button></Link>
                 </div>
             </div >
         )

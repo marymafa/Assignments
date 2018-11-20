@@ -65,3 +65,11 @@ export const savePassWord = (password) => {
     console.log("password", password);
     return { type: "ADD_PASSWORD", value: password }
 }
+export const comfirmPassword = (password) => {
+    console.log("password", password);
+    return { type: "CONFIRM_PASSWORD", value: password }
+}
+
+export const comfirmEmail = (email) => {
+    return { type: "CONFIRM_EMAIL", value: email }
+}

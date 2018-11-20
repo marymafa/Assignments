@@ -40,11 +40,11 @@ class LocationForm extends React.Component {
                 <h2> Business Locations</h2>
                 <div>
                     <label>Address</label>
-                    <input data-toggle="tooltip" data-placement="top" title=" address" type="text" onChange={this.inputAddress.bind(this)} />
+                    <input data-toggle="tooltip" data-placement="top" title=" address" placeholder="e.g bendor street polokwane" type="text" onChange={this.inputAddress.bind(this)} />
                 </div>
                 <div>
                     <label>County</label>
-                    <input data-toggle="tooltip" data-placement="top" title=" country" type="text" onChange={this.inputBusinessCountry.bind(this)} />
+                    <input data-toggle="tooltip" data-placement="top" title=" country" placeholder="e.g South Africa" type="text" onChange={this.inputBusinessCountry.bind(this)} />
                 </div>
                 {this.renderRedirect()}
                 <div><button onClick={() => this.postData()}>Submit</button></div>

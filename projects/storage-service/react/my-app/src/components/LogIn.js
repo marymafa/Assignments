@@ -2,33 +2,26 @@ import React from "react";
 import { connect } from "react-redux";
 import * as action from "../redux/actions";
 import axios from 'axios';
-import { Redirect ,Link} from 'react-router-dom';
+import { Redirect, Link } from 'react-router-dom';
 
 class LogIn extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
             redirect: false,
-            userData: []
         }
         super(props);
-        this.inputusername = this.inputusername.bind(this);
         this.inputEmail = this.inputEmail.bind(this);
         this.inputPassword = this.inputPassword.bind(this);
     }
-
     async  postData() {
-        var postNewData = await axios.post('http://localhost:3002/customerData', {
-            username: this.props.username,
+        var postNewData = await axios.post('http://localhost:3002/loginData', {
             email: this.props.email,
             password: this.props.password
         });
         this.setState({
             redirect: true
         })
-    };
-    inputusername(e) {
-        this.props.updateusername(e.target.value);
     };
     inputEmail(e) {
         this.props.updateEmail(e.target.value);
@@ -42,8 +35,11 @@ class LogIn extends React.Component {
         }
     }
     render() {
+        console.log("this is my state", this.props);
+
         return (
             <div>
+                <div><h1>Enter your details</h1> </div>
                 <div>
                     <label>Email</label>
                     <input type="email" name="email" onChange={this.inputEmail} />
@@ -66,21 +62,17 @@ class LogIn extends React.Component {
 }
 const mapStateToProps = (state) => {
     return {
-        username: state.signUpPage.username,
-        email: state.signUpPage.email,
-        password: state.signUpPage.password
+        email: state.loginPage.email,
+        password: state.loginPage.password
     }
 }
 const mapDispatchToProps = (dispatch) => {
     return {
-        updateusername: (username) => {
-            dispatch(action.saveusername(username))
-        },
         updateEmail: (email) => {
-            dispatch(action.saveEmail(email))
+            dispatch(action.comfirmEmail(email))
         },
         updatePassword: (password) => {
-            dispatch(action.savePassWord(password))
+            dispatch(action.comfirmPassword(password))
         }
     }
 }

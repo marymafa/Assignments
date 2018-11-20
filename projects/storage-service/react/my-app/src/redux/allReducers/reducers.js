@@ -114,3 +114,18 @@ export const signUpPage = (state = { username: "", email: "", password: "" }, ac
     }
     return newState;
 }
+
+export const loginPage = (state = { email: "", password: "" }, action) => {
+    let newState = state;
+    switch (action.type) {
+        case "CONFIRM_EMAIL":
+            newState = { ...state, email: action.value };
+            console.log("email", newState);
+            break;
+        case "CONFIRM_PASSWORD":
+            newState = { ...state, password: action.value };
+            console.log("password", newState);
+            break;
+    }
+    return newState;
+}

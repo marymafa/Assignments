@@ -17,7 +17,7 @@ class SignUp extends React.Component {
         this.inputPassword = this.inputPassword.bind(this);
     }
     async  postData() {
-        var postNewData = await axios.post('http://localhost:3002/customerData', {
+        var postNewData = await axios.post('http://localhost:3002/signUpData', {
             username: this.props.username,
             email: this.props.email,
             password: this.props.password

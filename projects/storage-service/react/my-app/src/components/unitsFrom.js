@@ -2,11 +2,13 @@ import React from "react";
 import { connect } from "react-redux";
 import * as action from "../redux/actions";
 import axios from 'axios';
+import { Redirect } from 'react-router-dom';
 
 class UnitsFrom extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
+            redirect: false,
         }
         this.inputName = this.inputName.bind(this);
     }
@@ -17,13 +19,22 @@ class UnitsFrom extends React.Component {
             units_type_id: this.props.units_type_id
 
         });
-     
 
+        this.setState({
+            redirect: true,
+        })
     }
     inputName(e) {
         this.props.updateBlockName(e.target.value)
     }
+    renderRedirect = () => {
+        if (this.state.redirect) {
+            return <Redirect to='/unit_types' />
+        }
+    }
     render() {
+        console.log("props",this.props);
+        
         return (
             <div>
                 <h1>Storage Service</h1>
@@ -32,6 +43,7 @@ class UnitsFrom extends React.Component {
                     <label>Units</label>
                     <input data-toggle="tooltip" data-placement="top" title="units" type="text" onChange={this.inputName} />
                 </div>
+                {this.renderRedirect()}
                 <input type="button" value="Submit" onClick={() => this.postData()} />
             </div>
         )

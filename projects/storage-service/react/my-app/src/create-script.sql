@@ -37,7 +37,7 @@ CREATE TABLE IF NOT EXISTS units (
 CREATE TABLE IF NOT EXISTS customer (
         id serial PRIMARY KEY,
         username VARCHAR(100) NOT NULL,
-        email VARCHAR(100) NOT NULL,
+        email VARCHAR(100) NOT NULL UNIQUE,
         PASSWORD VARCHAR(100) NOT NULL
 );
 
