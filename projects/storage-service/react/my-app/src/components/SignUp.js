@@ -4,6 +4,7 @@ import * as action from "../redux/actions";
 import axios from 'axios';
 import { Redirect } from 'react-router-dom';
 import { Link } from "react-router-dom";
+import passport from "passport";
 
 class SignUp extends React.Component {
     constructor(props) {
@@ -20,7 +21,8 @@ class SignUp extends React.Component {
         var postNewData = await axios.post('http://localhost:3002/signUpData', {
             username: this.props.username,
             email: this.props.email,
-            password: this.props.password
+            password: this.props.password,
+        
         });
         this.setState({
             redirect: true
@@ -60,7 +62,7 @@ class SignUp extends React.Component {
                     {this.renderRedirect()}
                     <button type="button" value="Submit" onClick={() => this.postData()} >Register</button>
                 </div>
-               
+
             </div>
         )
     }

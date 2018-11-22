@@ -7,6 +7,7 @@ const { Client } = require('pg');
 const connectionString = 'postgres://postgres:TCGPC1@localhost:5432/store_products';
 const bcrypt = require('bcrypt');
 var saltRounds = 10;
+const passport = require('passport');
 
 app.use(cors());
 app.use(express.static("public"));
@@ -18,6 +19,11 @@ const client = new Client({
     connectionString: connectionString,
 })
 client.connect();
+
+require('./react/my-app/src/ passport')(app)
+require('./react/my-app/routes/findUsers')(app);
+require('./react/my-app/routes/loginUser')(app);
+require('./react/my-app/routes/registerUser')(app);
 
 //get
 app.get("/data", async function (req, res) {
@@ -52,6 +58,7 @@ app.get('/signUpData', async function (req, res) {
     res.send(unitsData.rows).status(201).end();
 });
 // post
+
 app.post('/data', function (req, res) {
     console.log("business details", req.body);
     client.query('INSERT INTO businesses(name,contact_name,contact_email,contact_number) VALUES($1,$2,$3,$4)', [req.body.name, req.body.contact_name, req.body.contact_email, req.body.contact_number], (err, res) => {
@@ -100,13 +107,27 @@ app.post('/signUpData', function (req, res) {
     res.status(201).end()
 });
 app.post('/loginData', async function (req, res) {
-    var unitsData = await client.query(`SELECT * FROM customer WHERE id=id`)
     const hash = bcrypt.hashSync(req.body.password, saltRounds);
-    bcrypt.compare(req.body.password, hash, (err, res) => {
-        // res == true or res == false
+    client.query('SELECT * FROM customer WHERE id=id ', (err, result) => {
+        var username = req.body.username;
+        var password = req.body.password;
+
+        usersDB.getUserByUsername(username)
+            .then(function (user) {
+                return bcrypt.compare(password, user.password);
+            })
+            .then(function (samePassword) {
+                if (!samePassword) {
+                    res.status(403).send();
+                }
+                res.send();
+            })
+            .catch(function (error) {
+                console.log("Error authenticating user: ");
+                console.log(error);
+                next();
+            });
     });
-
-
 });
 app.listen(PORT, () => {
     console.log(`Server is listening on port ${PORT}`);
