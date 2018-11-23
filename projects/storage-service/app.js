@@ -6,8 +6,10 @@ const PORT = 3002;
 const { Client } = require('pg');
 const connectionString = 'postgres://postgres:TCGPC1@localhost:5432/store_products';
 const bcrypt = require('bcrypt');
-var saltRounds = 10;
+const salt = 10;
 const passport = require('passport');
+
+
 
 app.use(cors());
 app.use(express.static("public"));
@@ -15,15 +17,18 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({
     extended: false
 }));
+app.use(passport.initialize());
+app.use(passport.session());
 const client = new Client({
     connectionString: connectionString,
 })
 client.connect();
 
-require('./react/my-app/src/ passport')(app)
+require('./react/my-app/routes/ passport')(app);
 require('./react/my-app/routes/findUsers')(app);
 require('./react/my-app/routes/loginUser')(app);
 require('./react/my-app/routes/registerUser')(app);
+require('./react/my-app/routes/jwtConfig')(app);
 
 //get
 app.get("/data", async function (req, res) {
@@ -100,33 +105,20 @@ app.post('/unitsData', function (req, res) {
 });
 
 app.post('/signUpData', function (req, res) {
-    const hash = bcrypt.hashSync(req.body.password, saltRounds);
+    const hash = bcrypt.genSalt(req.body.password, salt);
     console.log("hash", hash);
+    //change password to hashpassword
+    //change sallorrounds to salt.
     client.query('INSERT INTO  customer(username,email,password) VALUES($1,$2,$3)', [req.body.username, req.body.email, hash], (err, res) => {
     })
     res.status(201).end()
 });
 app.post('/loginData', async function (req, res) {
-    const hash = bcrypt.hashSync(req.body.password, saltRounds);
+    console.log("this is my login data", req.body)
     client.query('SELECT * FROM customer WHERE id=id ', (err, result) => {
         var username = req.body.username;
         var password = req.body.password;
-
-        usersDB.getUserByUsername(username)
-            .then(function (user) {
-                return bcrypt.compare(password, user.password);
-            })
-            .then(function (samePassword) {
-                if (!samePassword) {
-                    res.status(403).send();
-                }
-                res.send();
-            })
-            .catch(function (error) {
-                console.log("Error authenticating user: ");
-                console.log(error);
-                next();
-            });
+        const hash = bcrypt.genSalt(req.body.password, salt);
     });
 });
 app.listen(PORT, () => {

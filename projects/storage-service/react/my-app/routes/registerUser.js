@@ -1,6 +1,4 @@
-import userDetails from "../components/UserDetails";
-import passport from 'passport';
-
+const passport = require('passport');
 module.export = app => {
     app.post('/signUpData', (reg, res, next) => {
         passport.authenticated('register', (err, user, info) => {

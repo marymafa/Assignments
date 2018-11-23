@@ -1,10 +1,10 @@
-import userDetails from '../components/UserDetails';
-import jwtSecrete from '../jwtConfig';
-import jwt from 'jsonwebtoken';
-import passport from 'passport';
+const passport = require('passport');
+const jwt = require('jsonwebtoken');
+const jwtSecrete = require('./routes/jwtConfig');
 
 module.export = app => {
-    app.get('/view_userdetails', (req, res, next) => {
+    app.get('/loginData', (req, res, next) => {
+        console.log("testing", req.body);
         passport.authenticate('login', (err, user, info) => {
             if (err) {
                 console.log(ErrorEvent)
@@ -16,10 +16,10 @@ module.export = app => {
                 req.logIn(user, err => {
                     userDetails.findOne({
                         where: {
-                            username: user.username
+                            email: user.email
                         }
                     }).then(user => {
-                        const token = jwt.sign({ id: user.username }, jwtSecrete.secret);
+                        const token = jwt.sign({ id: user.email }, jwtSecrete.secret);
                         res.status(200).send({
                             auth: true,
                             token: token,
