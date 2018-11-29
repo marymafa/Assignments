@@ -1,6 +1,6 @@
 const passport = require('passport');
 const jwt = require('jsonwebtoken');
-const jwtSecrete = require('./routes/jwtConfig');
+const jwtSecrete = require('./jwtConfig');
 
 module.export = app => {
     app.get('/loginData', (req, res, next) => {
@@ -20,7 +20,7 @@ module.export = app => {
                         }
                     }).then(user => {
                         const token = jwt.sign({ id: user.email }, jwtSecrete.secret);
-                        res.status(200).send({
+                        res.status(201).send({
                             auth: true,
                             token: token,
                             message: 'user found & logged in'

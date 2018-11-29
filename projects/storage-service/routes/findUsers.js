@@ -11,7 +11,7 @@ module.export = app => {
                 res.send(info.message);
             } else {
                 console.log('user found in db from route');
-                res.status(200).send({
+                res.status(201).send({
                     auth: true,
                     email: user.email,
                     password: user.password,

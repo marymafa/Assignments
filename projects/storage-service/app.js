@@ -24,47 +24,52 @@ const client = new Client({
 })
 client.connect();
 
-require('./react/my-app/routes/ passport')(app);
-require('./react/my-app/routes/findUsers')(app);
-require('./react/my-app/routes/loginUser')(app);
-require('./react/my-app/routes/registerUser')(app);
-require('./react/my-app/routes/jwtConfig')(app);
+
+const passportRoutes = require('./routes/ passport')
+const findUsersRoutes = require('./routes/findUsers');
+const loginUserRoutes = require('./routes/loginUser');
+const registerUserRoutes = require('./routes/registerUser');
+const jwtConfigRoutes = require('./routes/jwtConfig');
+
+passportRoutes(app);
+findUsersRoutes(app);
+loginUserRoutes(app);
+registerUserRoutes(app);
+jwtConfigRoutes(app); const passportRoutes = require('./routes/ passport')
+
+
+
 
 //get
-app.get("/data", async function (req, res) {
+app.get("/data", async (req, res) => {
     var data = await client.query(`SELECT * FROM businesses`)
     res.send(data.rows).status(201).end();
 });
 
-app.get("/locationData", async function (req, res) {
+app.get("/locationData", async (req, res) => {
     var locationData = await client.query('SELECT * FROM locations ')
     res.send(locationData.rows).status(201).end();
 });
 
-app.get('/blockData', async function (req, res) {
+app.get('/blockData', async (req, res) => {
     var blockData = await client.query(`SELECT * FROM blocks`)
     res.send(blockData.rows).status(201).end();
 });
 
-app.get('/unitTypesData', async function (req, res) {
+app.get('/unitTypesData', async (req, res) => {
     var unitTypesData = await client.query('SELECT * FROM units_type ')
     res.send(unitTypesData.rows).status(201).end();
 });
 
-app.get('/unitsData', async function (req, res) {
+app.get('/unitsData', async (req, res) => {
     console.log("mary are you happy?");
     var unitsData = await client.query(`SELECT * FROM units`)
     res.send(unitsData.rows).status(201).end();
 })
 
-app.get('/signUpData', async function (req, res) {
-    console.log("this is my customer's details");
-    var unitsData = await client.query(`SELECT * FROM customer`)
-    res.send(unitsData.rows).status(201).end();
-});
 // post
 
-app.post('/data', function (req, res) {
+app.post('/data', (req, res) => {
     console.log("business details", req.body);
     client.query('INSERT INTO businesses(name,contact_name,contact_email,contact_number) VALUES($1,$2,$3,$4)', [req.body.name, req.body.contact_name, req.body.contact_email, req.body.contact_number], (err, res) => {
         console.log(err, res)
@@ -104,23 +109,8 @@ app.post('/unitsData', function (req, res) {
     res.status(201).end()
 });
 
-app.post('/signUpData', function (req, res) {
-    const hash = bcrypt.genSalt(req.body.password, salt);
-    console.log("hash", hash);
-    //change password to hashpassword
-    //change sallorrounds to salt.
-    client.query('INSERT INTO  customer(username,email,password) VALUES($1,$2,$3)', [req.body.username, req.body.email, hash], (err, res) => {
-    })
-    res.status(201).end()
-});
-app.post('/loginData', async function (req, res) {
-    console.log("this is my login data", req.body)
-    client.query('SELECT * FROM customer WHERE id=id ', (err, result) => {
-        var username = req.body.username;
-        var password = req.body.password;
-        const hash = bcrypt.genSalt(req.body.password, salt);
-    });
-});
+app.post('/loginData', passport.authenticate('local'), users.login)
+
 app.listen(PORT, () => {
     console.log(`Server is listening on port ${PORT}`);
 });

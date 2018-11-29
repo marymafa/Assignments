@@ -9,7 +9,7 @@ module.export = app => {
                 console.log(info.message);
                 res.send(info.message);
             } else {
-                req.logIn(user, err => {
+                req.login(user, err => {
                     const data = {
                         username: req.body.username,
                         email: req.body.email,
@@ -26,7 +26,7 @@ module.export = app => {
                         })
                             .then(() => {
                                 console.log('user created in bd');
-                                res.status(200).send({ message: "user created" })
+                                res.status(201).send({ message: "user created" })
                             })
                     })
                 })
