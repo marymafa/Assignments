@@ -15,12 +15,18 @@ class LogIn extends React.Component {
         this.inputPassword = this.inputPassword.bind(this);
     }
     async  postData() {
-        var postNewData = await axios.post('http://localhost:3002/loginData', {
+        var res = await axios.post('http://localhost:3002/loginData', {
             email: this.props.email,
             password: this.props.password
         });
+        var gameJSON = JSON.stringify(res.token);
+        localStorage.setItem("game", gameJSON);
+        var gameJSON = localStorage.getItem(res.token);
+        var tkn= JSON.parse(gameJSON);
+        console.log(tkn);
         this.setState({
-            redirect: true
+            redirect: true,
+            token: res.token
         })
     };
     inputEmail(e) {

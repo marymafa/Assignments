@@ -1,36 +1,39 @@
 const passport = require('passport');
-module.export = app => {
-    app.post('/signUpData', (reg, res, next) => {
-        passport.authenticated('register', (err, user, info) => {
-            if (err) {
-                console.log(err);
-            }
-            if (info !== undefined) {
-                console.log(info.message);
-                res.send(info.message);
-            } else {
-                req.login(user, err => {
-                    const data = {
-                        username: req.body.username,
-                        email: req.body.email,
-                        password: req.body.password,
-                    };
-                    User.findOne({
-                        where: {
-                            username: data.username
-                        },
-                    }).then(user => {
-                        user.update({
-                            email: data.email,
-                            password: data.password
-                        })
-                            .then(() => {
-                                console.log('user created in bd');
-                                res.status(201).send({ message: "user created" })
-                            })
-                    })
-                })
-            } (req, res, next)
-        })
+var express = require('express');
+var app = express();
+var salt = 10;
+const jwt = require("jwt-simple");
+
+const bcrypt = require('bcrypt');
+const connectionString = 'postgres://postgres:TCGPC1@localhost:5432/store_products';
+const { Client } = require('pg');
+const client = new Client({
+    connectionString: connectionString,
+})
+client.connect();
+module.exports = app => {
+
+
+    app.post('/signUpData', (req, res) => {
+        console.log("res", req.body);
+        const hashedPassword = bcrypt.hashSync(req.body.password, salt);
+        console.log("hashedPassword", hashedPassword)
+        client.query('INSERT INTO  customer(username,email,password) VALUES($1,$2,$3)',
+            [req.body.username, req.body.email, hashedPassword], (err, res) => {
+                if (err) return err;
+                const customer = client.query('SELECT *  FROM customer');
+                console.log(customer);
+
+                const token = jwt.encode(customer.id, 'jwt-secret');
+                console.log(token);
+                res.json({ token: token });
+            })
+
     })
+
+
 }
+
+
+
+

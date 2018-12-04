@@ -9,14 +9,13 @@ const bcrypt = require('bcrypt');
 const salt = 10;
 const passport = require('passport');
 
-
-
 app.use(cors());
 app.use(express.static("public"));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({
     extended: false
 }));
+
 app.use(passport.initialize());
 app.use(passport.session());
 const client = new Client({
@@ -24,23 +23,11 @@ const client = new Client({
 })
 client.connect();
 
+require('./routes/ passport')(passport);
+require('./routes/findUsers')(app);
+require('./routes/loginUser')(app);
+require('./routes/registerUser')(app);
 
-const passportRoutes = require('./routes/ passport')
-const findUsersRoutes = require('./routes/findUsers');
-const loginUserRoutes = require('./routes/loginUser');
-const registerUserRoutes = require('./routes/registerUser');
-const jwtConfigRoutes = require('./routes/jwtConfig');
-
-passportRoutes(app);
-findUsersRoutes(app);
-loginUserRoutes(app);
-registerUserRoutes(app);
-jwtConfigRoutes(app); const passportRoutes = require('./routes/ passport')
-
-
-
-
-//get
 app.get("/data", async (req, res) => {
     var data = await client.query(`SELECT * FROM businesses`)
     res.send(data.rows).status(201).end();
@@ -108,8 +95,6 @@ app.post('/unitsData', function (req, res) {
     })
     res.status(201).end()
 });
-
-app.post('/loginData', passport.authenticate('local'), users.login)
 
 app.listen(PORT, () => {
     console.log(`Server is listening on port ${PORT}`);

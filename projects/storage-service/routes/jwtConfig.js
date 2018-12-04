@@ -1,3 +1,5 @@
-module.exports = {
-    secret: 'jwt secret'
+
+
+module.exports = app => {
+    secret: 'jwt-secret'
 }

@@ -1,47 +1,20 @@
 const salt = 10;
-const bcrypt = require('bcrypt');
+
 const user = require('./findUsers')
-const jwtSecrete = require('./jwtConfig')
-const passport = require('passport');
-const JwtStrategy = require('passport-jwt').Strategy;
-
-ExtractJWT = require('passport-jwt').ExtractJwt;
+var express = require('express');
+var app = express();
+const passportJWT = require("passport-jwt");
+const JwtStrategy = passportJWT.Strategy;
+const ExtractJwt = passportJWT.ExtractJwt;
+const bcrypt = require('bcrypt');
 localStrategy = require('passport-local').Strategy;
-
-module.export = function (app, passport) {
-    //register strategy
-    passport.use('register', new localStrategy(
-        {
-            usernameField: "username",
-            emailField: "email",
-            passwordField: "password",
-            session: false
-        },
-        (username, password, cb) => {
-            const hash = bcrypt.genSalt(req.body.password, salt);
-            console.log("hash", hash);
-            try {
-                user.findOne({
-                    where: {
-                        username: username,
-                    },
-                }).then(user => {
-                    if (username != null) {
-                        console.log('username already taken');
-                        return cb(null, false, { message: `user already taken` })
-                    } else {
-                        client.query('INSERT INTO  customer(username,email,password) VALUES($1,$2,$3)', [req.body.username, req.body.email, hash], (err, result) => {
-                        });
-                    }
-                })
-            } catch (error) {
-                done(error)
-            }
-
-        }));
-
-
-    // login strategy
+const connectionString = 'postgres://postgres:TCGPC1@localhost:5432/store_products';
+const { Client } = require('pg');
+const client = new Client({
+    connectionString: connectionString,
+})
+client.connect();
+module.exports = function (passport) {
     passport.use('login', new localStrategy(
         {
             usernameField: 'email',
@@ -51,86 +24,54 @@ module.export = function (app, passport) {
         (username, password, cb) => {
 
             client.query('SELECT * FROM customer WHERE id=id', (err, result) => {
-
+                let user = result.rows[0].email;
+                var password = result.rows[0].password
+                console.log("user", user);
                 try {
-                    user.findOne({
-                        where: {
-                            email: email
-                        }
-                    }).then(user => {
-                        if (user === null) {
-                            return done(null, false, { message: 'bad username' });
 
-                        } if (result.rows.length > 0) {
-                            const first = result.rows[0]
-                            bcrypt.compare(password, first.password, function (err, res) {
-                                if (res) {
-                                    cb(null, { id: first.id, email: first.email, password: first.password })
-                                } else {
-                                    cb(null, false)
-                                } if (err) {
-                                    console.log('Error when selecting user on login', err)
-                                    return cb(err)
-                                }
-                            })
-                        }
+                    if (!user) {
+                        return cb(null, false, { message: 'Incorrect email or password.' });
+                    }
+                    bcrypt.compare(user, function (user, err) {
+                        return cb(null, user, {
+                            message: 'Logged In Successfully'
+                        });
                     })
-                } catch (error) {
-                    done(error)
-                }
 
+                } catch (err) {
+                    cb(err)
+                }
             })
         }));
 
-        //options
-    const options = {
-        jwtFromRequest: ExtractJWT.JwtFromRequestFunction('jwt'),
-        secretOrKey: jwtSecrete.secret,
-    }
 
-    //jwt
-    passport.use(
-        'jwt',
-        new JwtStrategy(options, (jwt_payload, cb) => {
-            console.log('jwt_payload', jwt_payload);
-            try {
-                user.findOne({
-                    where: {
-                        username: jwt_payload.id
-                    },
-                }).then(user => {
-                    if (user) {
-                        console.log("user found in db in passport");
-                        done(null, false);
-                    } else {
-                        console.log('user not found in db');
-                        done(null, false);
-                    }
+    passport.serializeUser(function (user, done) {
+        done(null, user);
+    });
+
+    passport.deserializeUser(function (user, done) {
+        done(null, user);
+    });
+
+
+    passport.use(new JwtStrategy({
+        jwtFromRequest: ExtractJwt.fromAuthHeaderAsBearerToken(),
+        secretOrKey: 'jwt-secret'
+    },
+        function (jwtPayload, cb) {
+            //find the user in db if needed. This functionality may be omitted if you store everything you'll need in JWT payload.
+            return user.findOneById(jwtPayload.id)
+                .then(user => {
+                    return cb(null, user);
                 })
-            } catch (error) {
-                cb(err)
+                .catch(err => {
+                    return cb(err);
+                });
+        }
+    ));
 
-            }
-        })
-    );
-
-    //arrange something in series
-    passport.serializeUser((user, cb) => {
-        cb(null, user.id)
-    })
-    
-    //
-    passport.deserializeUser((id, cb) => {
-        client.query('SELECT FROM customer WHERE id = $1', [parseInt(id, 10)], (err, results) => {
-            if (err) {
-                console.log('Error when selecting user on session deserialize', err)
-                return cb(err)
-            }
-
-            cb(null, results.rows[0])
-        })
-    })
 }
+
 
 
 
