@@ -1,3 +1,4 @@
+import loginUser from ''
 
 export const registerBusinesses = (state = { name: "", contact_name: "", contact_email: "", contact_number: "" }, action) => {
     let newState = state
@@ -128,4 +129,22 @@ export const loginPage = (state = { email: "", password: "" }, action) => {
             break;
     }
     return newState;
+}
+const defaultState = {
+    authenticated: false
+};
+export const logoutUser = (state = defaultState, action) => {
+    let newState=state;
+    switch (action.type) {
+        case "LOGIN":
+            return {
+                authenticated: true
+            }
+
+        case "LOGOUT":
+            return {
+                authenticated: false
+            }
+        default: return state
+    }
 }

@@ -19,14 +19,14 @@ class LogIn extends React.Component {
             email: this.props.email,
             password: this.props.password
         });
-        var gameJSON = JSON.stringify(res.token);
-        localStorage.setItem("game", gameJSON);
-        var gameJSON = localStorage.getItem(res.token);
-        var tkn = JSON.parse(gameJSON);
-        console.log(tkn);
+        var obj = JSON.stringify(res.data);
+        console.log("this is my res", res)
+        sessionStorage.setItem("json object", obj);
+        sessionStorage.getItem('myData', obj);
+        console.log("obj", obj);
+
         this.setState({
             redirect: true,
-            token: res.token
         })
     };
     inputEmail(e) {

@@ -73,3 +73,12 @@ export const comfirmPassword = (password) => {
 export const comfirmEmail = (email) => {
     return { type: "CONFIRM_EMAIL", value: email }
 }
+export const loginUser = () => {
+    return { type: 'LOGIN' }
+};
+
+export const logoutUser = () => {
+    return {
+        type: 'LOGOUT'
+    }
+};
