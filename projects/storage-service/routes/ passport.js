@@ -26,17 +26,18 @@ module.exports = function (passport) {
             client.query('SELECT * FROM customer WHERE id=id', (err, result) => {
                 let user = result.rows[0].email;
                 var password = result.rows[0].password
-                console.log("user", user);
+                console.log("user", user, password);
                 try {
 
                     if (!user) {
                         return cb(null, false, { message: 'Incorrect email or password.' });
+                    } else {
+                        bcrypt.compare(user, function (user, err) {
+                            return cb(null, user, {
+                                message: 'Logged In Successfully'
+                            });
+                        })
                     }
-                    bcrypt.compare(user, function (user, err) {
-                        return cb(null, user, {
-                            message: 'Logged In Successfully'
-                        });
-                    })
 
                 } catch (err) {
                     cb(err)

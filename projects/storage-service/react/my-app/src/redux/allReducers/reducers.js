@@ -120,7 +120,7 @@ export const loginPage = (state = { email: "", password: "" }, action) => {
     switch (action.type) {
         case "CONFIRM_EMAIL":
             newState = { ...state, email: action.value };
-            console.log("email", newState);
+            console.log(" login email", newState);
             break;
         case "CONFIRM_PASSWORD":
             newState = { ...state, password: action.value };

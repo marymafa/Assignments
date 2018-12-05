@@ -22,7 +22,7 @@ class LogIn extends React.Component {
         var gameJSON = JSON.stringify(res.token);
         localStorage.setItem("game", gameJSON);
         var gameJSON = localStorage.getItem(res.token);
-        var tkn= JSON.parse(gameJSON);
+        var tkn = JSON.parse(gameJSON);
         console.log(tkn);
         this.setState({
             redirect: true,

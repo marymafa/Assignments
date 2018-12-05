@@ -1,8 +1,8 @@
 const passport = require('passport');
-const jwt = require('jsonwebtoken');
 const jwtSecrete = require('./jwtConfig');
 var express = require('express');
 var app = express();
+const jwt = require("jwt-simple");
 const connectionString = 'postgres://postgres:TCGPC1@localhost:5432/store_products';
 const { Client } = require('pg');
 const client = new Client({
@@ -11,17 +11,14 @@ const client = new Client({
 client.connect();
 
 module.exports = app => {
-    app.post('/loginData', passport.authenticate("login"), function (req, res, next) {
+    app.post('/loginData', passport.authenticate("login"), async function (req, res, next) {
         console.log("body", req.body);
-        const customer = client.query('SELECT *  FROM customer WHERE id=id');
-        console.log("customer", customer);
-
-        const token = jwt.encode(customer.id, 'jwt-secret');
-        console.log(token);
+        const customer = await client.query('SELECT *  FROM customer WHERE id=id').then(users => {
+            return users.rows[0].password;
+            console.log("this is my users", users.rows[0].password)
+        })
+        const token = jwt.encode(customer, 'jwt-secret');
+        console.log("this is the token", token);
         res.json({ token: token });
-
-
     });
 }
-
-
