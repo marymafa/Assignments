@@ -2,6 +2,7 @@ import React from "react";
 import { connect } from "react-redux";
 import * as action from "../redux/actions";
 import axios from 'axios';
+import history from '../history';
 import { Redirect, Link } from 'react-router-dom';
 
 class LogIn extends React.Component {
@@ -13,6 +14,7 @@ class LogIn extends React.Component {
         super(props);
         this.inputEmail = this.inputEmail.bind(this);
         this.inputPassword = this.inputPassword.bind(this);
+        this.logout = this.logout.bind(this)
     }
     async  postData() {
         var res = await axios.post('http://localhost:3002/loginData', {
@@ -21,7 +23,7 @@ class LogIn extends React.Component {
         });
         var obj = JSON.stringify(res.data);
         console.log("this is my res", res)
-        sessionStorage.setItem("json object", obj);
+        sessionStorage.setItem("jwt-secret", obj);
         sessionStorage.getItem('myData', obj);
         console.log("obj", obj);
 
@@ -39,6 +41,10 @@ class LogIn extends React.Component {
         if (this.state.redirect) {
             return <Redirect to='/viewAllBusinessLocations' />
         }
+    }
+    logout() {
+        sessionStorage.removeItem("jwt-secret");
+        history.replace('/');
     }
     render() {
         console.log("this is my state", this.props);
@@ -60,7 +66,10 @@ class LogIn extends React.Component {
                 </div>
 
                 <div className="link">
-                    <Link to="/signUp" ><button type="button">signUp</button></Link>
+                    <Link to="/signUp" onClick={this.logout}><button type="button">signUp</button></Link>
+                </div>
+                <div className="link">
+                    <Link to="/" ><button type="button">logout</button></Link>
                 </div>
             </div>
         )

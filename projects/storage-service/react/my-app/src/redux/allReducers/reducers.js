@@ -1,4 +1,4 @@
-import loginUser from ''
+import app from '.'
 
 export const registerBusinesses = (state = { name: "", contact_name: "", contact_email: "", contact_number: "" }, action) => {
     let newState = state
@@ -10,14 +10,6 @@ export const registerBusinesses = (state = { name: "", contact_name: "", contact
             newState = { ...state, contact_name: action.value };
             break;
         case "CONTACT_EMAIL":
-            newState = { ...state, contact_email: action.value };
-            break;
-        case "CONTACT_NUMBER":
-            newState = { ...state, contact_number: action.value };
-            break;
-        case "SUBMIT_VALUES":
-            newState = { ...state, name: action.value, contact_name: action.value, contact_email: action.value, contact_number: action.value }
-            break;
     }
     return newState;
 };
@@ -130,20 +122,19 @@ export const loginPage = (state = { email: "", password: "" }, action) => {
     }
     return newState;
 }
-const defaultState = {
-    authenticated: false
+const initialState = {
+    auth: { loggedIn: false }
 };
-export const logoutUser = (state = defaultState, action) => {
-    let newState=state;
+export const logoutUser = (state = initialState, action) => {
+    let newState = state;
     switch (action.type) {
         case "LOGIN":
             return {
-                authenticated: true
+        ...state, auth:{loggedIn:true}
             }
-
         case "LOGOUT":
             return {
-                authenticated: false
+                ...state, auth:{loggedIn:true}
             }
         default: return state
     }

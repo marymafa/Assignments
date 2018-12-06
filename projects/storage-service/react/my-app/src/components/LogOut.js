@@ -1,14 +1,19 @@
 import React from "react";
-class LogOut extends React.Component {
+export default class LogOut extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-
         }
+        this.logOut = this.logOut.bind(this);
+    }
+    logOut() {
+        sessionStorage.removeItem('jwt-secret');
     }
     render() {
         return (
-            <div></div>
+            <div>
+                {this.logOut}
+            </div>
         )
     }
 }

@@ -22,7 +22,7 @@ class SignUp extends React.Component {
             username: this.props.username,
             email: this.props.email,
             password: this.props.password,
-        
+
         });
         this.setState({
             redirect: true
@@ -62,7 +62,9 @@ class SignUp extends React.Component {
                     {this.renderRedirect()}
                     <button type="button" value="Submit" onClick={() => this.postData()} >Register</button>
                 </div>
-
+                <div className="logout">
+                    <Link to="/" ><button type="button">logout</button></Link>
+                </div>
             </div>
         )
     }

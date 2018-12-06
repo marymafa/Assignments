@@ -10,7 +10,7 @@ const client = new Client({
 })
 client.connect();
 
-module.exports = app => {
+module.exports = auth => {
     app.post('/loginData', passport.authenticate("login"), async function (req, res, next) {
         console.log("body", req.body);
         const customer = await client.query('SELECT *  FROM customer WHERE id=id').then(users => {
@@ -19,6 +19,6 @@ module.exports = app => {
         })
         const token = jwt.encode(customer, 'jwt-secret');
         console.log("this is the token", token);
-        res.json({ token: token });
+        res.json({ 'jwt-secret': token });
     });
 }
