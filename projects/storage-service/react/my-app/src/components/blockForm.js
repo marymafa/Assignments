@@ -40,10 +40,9 @@ class BlockFrom extends React.Component {
                     <label>Block</label>
                     <input data-toggle="tooltip" data-placement="top" title=" block_name" type="text" onChange={this.inputBlockName} />
                 </div>
-                <div>
-                    {this.renderRedirect()}
-                    <input type="button" value="Submit" onClick={() => this.postData()} />
-                </div>
+
+            {this.renderRedirect()}
+                <div><button onClick={() => this.postData()}>Submit</button></div>
             </div>
         )
     }

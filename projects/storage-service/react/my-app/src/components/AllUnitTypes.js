@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import axios from 'axios';
-import { Redirect } from 'react-router-dom';
+import { Redirect, Link } from 'react-router-dom';
 import { connect } from "react-redux";
 import * as action from "../redux/actions";
 
@@ -39,6 +39,10 @@ class Allunitstypes extends Component {
         const filtereData = this.state.unit.filter(item => item.value === this.state.unit)
         return (
             <div>
+                <div>
+                    <Link to="/" >Logout</Link> |   
+                    <Link to="/signUp" >signUp</Link>
+                </div>
                 <h1>All unit type</h1>
                 <div className="unit">
                     <label>

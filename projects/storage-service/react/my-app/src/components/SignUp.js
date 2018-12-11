@@ -24,6 +24,12 @@ class SignUp extends React.Component {
             password: this.props.password,
 
         });
+        var obj = JSON.stringify(postNewData.data);
+        console.log("this is my res", this.postData)
+        sessionStorage.setItem("jwt-secret", obj);
+        sessionStorage.getItem('myData', obj);
+        console.log("obj", obj);
+
         this.setState({
             redirect: true
         })
@@ -39,12 +45,16 @@ class SignUp extends React.Component {
     };
     renderRedirect = () => {
         if (this.state.redirect) {
-            return <Redirect to='/view_units' />
+            return <Redirect to='/viewAllBusinessLocations' />
         }
     }
     render() {
         return (
             <div>
+                 <div>
+                    <Link to="/" >Logout</Link> |   
+                    <Link to="/login" >login</Link>
+                </div>
                 <h1>Register here</h1>
                 <div>
                     <label>username</label>
@@ -62,9 +72,7 @@ class SignUp extends React.Component {
                     {this.renderRedirect()}
                     <button type="button" value="Submit" onClick={() => this.postData()} >Register</button>
                 </div>
-                <div className="logout">
-                    <Link to="/" ><button type="button">logout</button></Link>
-                </div>
+                
             </div>
         )
     }

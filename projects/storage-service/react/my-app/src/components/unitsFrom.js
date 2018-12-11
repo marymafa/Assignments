@@ -44,7 +44,7 @@ class UnitsFrom extends React.Component {
                     <input data-toggle="tooltip" data-placement="top" title="units" type="text" onChange={this.inputName} />
                 </div>
                 {this.renderRedirect()}
-                <input type="button" value="Submit" onClick={() => this.postData()} />
+                <div><button onClick={() => this.postData()}>Submit</button></div>
             </div>
         )
     }

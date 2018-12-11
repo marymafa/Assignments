@@ -41,6 +41,7 @@ CREATE TABLE IF NOT EXISTS customer (
         PASSWORD VARCHAR(100) NOT NULL
 );
 
+
 INSERT INTO businesses (name, contact_name, contact_number, contact_email)
     VALUES ('gwfm', 'mary', '0616118909', 'mafay@gmail.com');
 
@@ -101,4 +102,9 @@ FROM
     INNER JOIN units_type ON units_type.id = units.units_type_id
     WHERE
  units_type.width > 3;
+
+SELECT 
+* FROM 
+customer 
+INNER JOIN units ON  customer.id = units.id ;
 

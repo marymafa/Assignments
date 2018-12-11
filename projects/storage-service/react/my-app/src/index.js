@@ -21,6 +21,7 @@ import Allunitstypes from "./components/AllUnitTypes";
 import AllBlocks from "./components/viewAllBlocks";
 import AllLocations from "./components/viewAllLocations";
 import LogOut from "./components/LogOut";
+
 import "./app.css";
 
 ReactDOM.render(
@@ -30,7 +31,7 @@ ReactDOM.render(
                 <Route exact path='/' component={Home} />
                 <Route path='/signUp' component={SignUp} />
                 <Route path='/login' component={LogIn} />
-                <Route path="/logout" component={LogOut} />
+                <Route path='logout' component={LogOut} />
                 <Route path='/business' component={BusinessFrom} />
                 <Route path='/blocks' component={BlockForm} />
                 <Route path='/locations' component={LocationForm} />

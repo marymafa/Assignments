@@ -6,7 +6,7 @@ const { Client } = require('pg');
 module.exports = app => {
     app.get('/signUpData', async (req, res, next) => {
         var unitsData = await client.query(`SELECT * FROM cunstomer`)
-        res.send(unitsData.rows).status(201).end();
+        res.send(unitsData.rows[0]).status(201).end();
         passport.authenticate('jwt', { session: false }, (err, user, info) => {
             if (err) {
                 console.log(err);

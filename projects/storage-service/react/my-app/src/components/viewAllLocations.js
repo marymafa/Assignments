@@ -26,13 +26,17 @@ class AllLocations extends Component {
     render() {
         return (
             < div >
+               <div>
+                    <Link to="/" >Logout</Link> |   
+                    <Link to="/login" >login</Link>
+                </div>
                 <h1>All Locations</h1>
                 <div className="locations">
                     <label>
                         All Locations:
                             <select name="location" onChange={(e) => this.SelectValue(e)} >
                             <option value={0}>select the location </option>
-                            {this.state.allLocations.map(location =>  <option key={location.id} value={location.id}>{location.address}</option>
+                            {this.state.allLocations.map(location => <option key={location.id} value={location.id}>{location.address}</option>
                             )
                             }
 
@@ -40,7 +44,7 @@ class AllLocations extends Component {
                     </label>
                 </div>
                 <div>
-                    <Link to="/viewAllBlocks" ><button type="button">Next</button></Link>
+                    <Link to="/view_units" ><button type="button">Next</button></Link>
                 </div>
             </div >
         )

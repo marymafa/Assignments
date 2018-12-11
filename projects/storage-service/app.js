@@ -23,10 +23,10 @@ const client = new Client({
 })
 client.connect();
 
-require('../storage-service/react/my-app/routes/ passport')(passport);
-require('../storage-service/react/my-app/routes/findUsers')(app);
-require('../storage-service/react/my-app/routes/loginUser')(app);
-require('../storage-service/react/my-app/routes/registerUser')(app);
+require('./routes/ passport')(passport);
+require('./routes/findUsers')(app);
+require('./routes/loginUser')(app);
+require('./routes/registerUser')(app);
 
 app.get("/data", async (req, res) => {
     var data = await client.query(`SELECT * FROM businesses`)

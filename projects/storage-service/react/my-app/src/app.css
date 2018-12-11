@@ -1,13 +1,24 @@
-input[type=text] {
-    width: 20%;
-  font-family: sanFranciscoBold;
+input{
+    width: 30%;
+  font-family: Arial, Helvetica, sans-serif;
+  background-color: green;
   color: #015665;
-  padding: 3px;
+  padding: 6px;
   border-bottom: 1px solid #74b9f5;
   border-top: none;
   border-right: none;
   border-left: none;
+    border-radius: 5px;
+    background-color: #f2f2f2;
+    padding: 20px;
   outline: none;
+  padding: 12px; /* Some padding */  
+  border: 1px solid #ccc; /* Gray border */
+  border-radius: 4px; /* Rounded borders */
+  box-sizing: border-box; /* Make sure that padding and width stays in place */
+  margin-top: 6px; /* Add a top margin */
+  margin-bottom: 16px; /* Bottom margin */
+  resize: vertical /* Allow the user to vertically resize the textarea (not horizontally) */
 }
 .button{
      font-size: 1em;
@@ -16,7 +27,8 @@ input[type=text] {
 }
 body{
     background: #F0F8FF;
-    color:black;
+    color:darkcyan;
+    font-size: 30px;
 }
 th, td {
   border: 1px solid #bbb;

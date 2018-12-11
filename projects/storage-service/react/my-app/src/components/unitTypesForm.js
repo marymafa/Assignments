@@ -42,7 +42,7 @@ class UnitTypesFrom extends React.Component {
     }
     renderRedirect = () => {
         if (this.state.redirect) {
-            return <Redirect to='/view_unit_type' />
+            return <Redirect to='/' />
         }
     }
     render() {
@@ -66,10 +66,10 @@ class UnitTypesFrom extends React.Component {
                     <label>Width</label>
                     <input data-toggle="tooltip" data-placement="top" title="Width" type="text" onChange={this.inputWidth} />
                 </div>
-                <div>
-                    {this.renderRedirect()}
-                    <input type="button" value="Submit" onClick={() => this.postData()} />
-                </div>
+
+                {this.renderRedirect()}
+                <div><button onClick={() => this.postData()}>Submit</button></div>
+
             </div>
         )
     }

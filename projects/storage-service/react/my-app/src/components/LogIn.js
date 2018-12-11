@@ -2,7 +2,7 @@ import React from "react";
 import { connect } from "react-redux";
 import * as action from "../redux/actions";
 import axios from 'axios';
-import history from '../history';
+import history from '../history'
 import { Redirect, Link } from 'react-router-dom';
 
 class LogIn extends React.Component {
@@ -14,7 +14,12 @@ class LogIn extends React.Component {
         super(props);
         this.inputEmail = this.inputEmail.bind(this);
         this.inputPassword = this.inputPassword.bind(this);
-        this.logout = this.logout.bind(this)
+
+    }
+    componentDidMount() {
+        sessionStorage.removeItem("jwt-secret");
+        history.replace('/')
+        console.log("removed", sessionStorage.removeItem('jwt-secret'))
     }
     async  postData() {
         var res = await axios.post('http://localhost:3002/loginData', {
@@ -42,15 +47,15 @@ class LogIn extends React.Component {
             return <Redirect to='/viewAllBusinessLocations' />
         }
     }
-    logout() {
-        sessionStorage.removeItem("jwt-secret");
-        history.replace('/');
-    }
     render() {
         console.log("this is my state", this.props);
 
         return (
             <div>
+                <div>
+                    <Link to="/" >Logout</Link>|
+                    <Link to="/signUp" >signup</Link>
+                </div>
                 <div><h1>Enter your details</h1> </div>
                 <div>
                     <label>Email</label>
@@ -65,12 +70,6 @@ class LogIn extends React.Component {
                     <button type="button" value="Submit" onClick={() => this.postData()} >Login</button>
                 </div>
 
-                <div className="link">
-                    <Link to="/signUp" onClick={this.logout}><button type="button">signUp</button></Link>
-                </div>
-                <div className="link">
-                    <Link to="/" ><button type="button">logout</button></Link>
-                </div>
             </div>
         )
     }

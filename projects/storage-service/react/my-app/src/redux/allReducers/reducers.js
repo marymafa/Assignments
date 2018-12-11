@@ -1,4 +1,3 @@
-import app from '.'
 
 export const registerBusinesses = (state = { name: "", contact_name: "", contact_email: "", contact_number: "" }, action) => {
     let newState = state
@@ -125,17 +124,17 @@ export const loginPage = (state = { email: "", password: "" }, action) => {
 const initialState = {
     auth: { loggedIn: false }
 };
-export const logoutUser = (state = initialState, action) => {
-    let newState = state;
-    switch (action.type) {
-        case "LOGIN":
-            return {
-        ...state, auth:{loggedIn:true}
-            }
-        case "LOGOUT":
-            return {
-                ...state, auth:{loggedIn:true}
-            }
-        default: return state
-    }
-}
+// export const logoutUser = (state = initialState, action) => {
+//     let newState = state;
+//     switch (action.type) {
+//         case "LOGIN":
+//             return {
+//         ...state, auth:{loggedIn:true}
+//             }
+//         case "LOGOUT":
+//             return {
+//                 ...state, auth:{loggedIn:true}
+//             }
+//         default: return state
+//     }
+// }

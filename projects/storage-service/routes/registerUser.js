@@ -22,7 +22,7 @@ module.exports = app => {
         })
         const token = jwt.encode(customer, 'jwt-secret');
         console.log('this is the token', token);
-        res.json({ token: token });
+        res.json(token);
     })
 }
 

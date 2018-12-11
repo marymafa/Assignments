@@ -26,6 +26,7 @@ class AllUnits extends Component {
         return (
             <div>
                 <h1>All units</h1>
+                <div></div>
                 <div className="unit">
                     <label>
                         units:
