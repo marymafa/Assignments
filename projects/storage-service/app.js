@@ -25,8 +25,9 @@ client.connect();
 
 require('./routes/ passport')(passport);
 require('./routes/findUsers')(app);
-require('./routes/loginUser')(app);
+ require('./routes/loginUser')(app);
 require('./routes/registerUser')(app);
+
 
 app.get("/data", async (req, res) => {
     var data = await client.query(`SELECT * FROM businesses`)

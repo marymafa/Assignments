@@ -29,8 +29,8 @@ ReactDOM.render(
         <Router>
             <div>
                 <Route exact path='/' component={Home} />
+                <Route path='/logIn' component={LogIn} />
                 <Route path='/signUp' component={SignUp} />
-                <Route path='/login' component={LogIn} />
                 <Route path='logout' component={LogOut} />
                 <Route path='/business' component={BusinessFrom} />
                 <Route path='/blocks' component={BlockForm} />

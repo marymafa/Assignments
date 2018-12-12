@@ -26,15 +26,20 @@ class LogIn extends React.Component {
             email: this.props.email,
             password: this.props.password
         });
-        var obj = JSON.stringify(res.data);
-        console.log("this is my res", res)
-        sessionStorage.setItem("jwt-secret", obj);
-        sessionStorage.getItem('myData', obj);
-        console.log("obj", obj);
+        console.log("res", res.status);
 
-        this.setState({
-            redirect: true,
-        })
+        if (res.status === 200) {
+            var obj = JSON.stringify(res.data);
+            sessionStorage.setItem("jwt-secret", obj);
+            sessionStorage.getItem('myData', obj);
+            this.setState({
+                redirect: true,
+            })
+        } else {
+            this.setState({ redirect: false })
+        }
+
+
     };
     inputEmail(e) {
         this.props.updateEmail(e.target.value);
