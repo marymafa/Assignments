@@ -19,10 +19,10 @@ class Allunitstypes extends Component {
             this.setState({ unit: result.data })
             const checkUnits = result.data;
             console.log("units", checkUnits);
-          
+            const checkFilter = (valueItem) => (el) => el.id <= valueItem;
+            let res = checkUnits.filter(checkFilter('2'));
+            console.log("checkFilter", res);
         })
-
-
     }
     SelectValue = (e) => {
         let data = {}
