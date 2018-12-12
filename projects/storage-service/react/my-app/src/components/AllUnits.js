@@ -11,7 +11,7 @@ class AllUnits extends Component {
             unit: [],
             selectedUnit: this.props.selections,
         }
-      
+
     }
     componentDidMount() {
         axios.get("http://localhost:3002/unitsData").then(result => {
@@ -37,7 +37,7 @@ class AllUnits extends Component {
                     </label>
                 </div>
                 <div>
-                <Link to="/view_allunitType" ><button type="button">Next</button></Link>
+                    <Link to="/" ><button type="button">Next</button></Link>
                 </div>
             </div>
         )

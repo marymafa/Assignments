@@ -17,6 +17,9 @@ class Allunitstypes extends Component {
     componentDidMount() {
         axios.get("http://localhost:3002/unitTypesData").then(result => {
             this.setState({ unit: result.data })
+            const checkUnits = result.data;
+            console.log("units", checkUnits);
+          
         })
 
 
@@ -34,13 +37,13 @@ class Allunitstypes extends Component {
     }
     render() {
         if (this.state.redirect) {
-            return <Redirect to='/view_units' />
+            return <Redirect to='/' />
         }
         const filtereData = this.state.unit.filter(item => item.value === this.state.unit)
         return (
             <div>
                 <div>
-                    <Link to="/" >Logout</Link> |   
+                    <Link to="/" >Logout</Link> |
                     <Link to="/signUp" >signUp</Link>
                 </div>
                 <h1>All unit type</h1>

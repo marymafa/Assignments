@@ -21,26 +21,23 @@ module.exports = app => {
 
         const userFound = await client.query(statement, [email]);
         if (userFound.rows[0] == undefined) {
-            return res.status(404).json({ errors: "user not found" });
+            return res.status(404).json({ message: "user not found" });
         }
 
         console.log("userFound");
         try {
             const user = await bcrypt.compare(password, userFound.rows[0].password);
             if (!user) {
-                return res.status(404).json({ errors: "password is incorrect" });
+                return res.status(404).json({ message: "password is incorrect" });
             }
-
-            return res.json("password correct");
+            const token = jwt.encode(user, 'jwt-secret');
+            return res.json({ user, token });
 
         } catch (e) {
             console.log(e);
         }
 
 
-
-        const token = jwt.encode(user, 'jwt-secret');
-        return res.json({ user, token });
     })
 
 }

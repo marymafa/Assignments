@@ -26,8 +26,8 @@ class AllLocations extends Component {
     render() {
         return (
             < div >
-               <div>
-                    <Link to="/" >Logout</Link> |   
+                <div>
+                    <Link to="/" >Logout</Link> |
                     <Link to="/login" >login</Link>
                 </div>
                 <h1>All Locations</h1>
@@ -44,7 +44,7 @@ class AllLocations extends Component {
                     </label>
                 </div>
                 <div>
-                    <Link to="/view_units" ><button type="button">Next</button></Link>
+                    <Link to="/view_allunitType" ><button type="button">Next</button></Link>
                 </div>
             </div >
         )
