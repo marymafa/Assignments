@@ -25,7 +25,7 @@ client.connect();
 
 require('./routes/ passport')(passport);
 require('./routes/findUsers')(app);
- require('./routes/loginUser')(app);
+require('./routes/loginUser')(app);
 require('./routes/registerUser')(app);
 
 
@@ -35,9 +35,23 @@ app.get("/data", async (req, res) => {
 });
 
 app.get("/locationData", async (req, res) => {
-    var locationData = await client.query('SELECT * FROM locations ')
+    console.log('req.params :', req.params);
+    var locationData = await client.query('SELECT *   FROM locations');
+    console.log("location", locationData)
     res.send(locationData.rows).status(201).end();
 });
+
+app.get("/locationData/:selectedValue", async (req, res) => {
+    console.log('req.params :', req.params);
+    var locationData = await client.query('SELECT *  FROM units INNER JOIN blocks ON units.blocks_id = blocks.id INNER JOIN locations ON blocks.locations_id = locations.id  WHERE locations.address = $1', [req.params.selectedValue])
+    console.log("location", locationData)
+    res.send(locationData.rows).status(201).end();
+});
+
+app.get('/loginData', async (req, res, next) => {
+    var unitsData = await client.query(`SELECT * FROM cunstomer`)
+    res.send(unitsData.rows[0]).status(201).end();
+})
 
 app.get('/blockData', async (req, res) => {
     var blockData = await client.query(`SELECT * FROM blocks`)
@@ -49,9 +63,14 @@ app.get('/unitTypesData', async (req, res) => {
     res.send(unitTypesData.rows).status(201).end();
 });
 
+app.get('/unitsData/:selectedValue', async (req, res) => {
+    var unitsData = await client.query('SELECT * FROM units   INNER JOIN units_type ON units_type.id = units.units_type_id')
+    res.send(unitsData.rows).status(201).end();
+});
+
 app.get('/unitsData', async (req, res) => {
     console.log("mary are you happy?");
-    var unitsData = await client.query(`SELECT * FROM units`)
+    var unitsData = await client.query('SELECT * FROM units')
     res.send(unitsData.rows).status(201).end();
 })
 

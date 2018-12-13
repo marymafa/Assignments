@@ -5,14 +5,13 @@ export default class ViewLocations extends Component {
         super(props);
         this.state = {
             location: [],
-           
+
         }
     }
     componentWillMount() {
         axios.get("http://localhost:3002/locationData").then(result => {
             this.setState({ location: result.data })
-            console.log("result", result.data);
-
+        
         })
 
     }

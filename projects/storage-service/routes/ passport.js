@@ -23,7 +23,7 @@ module.exports = function (req, res, next) {
         (email, password, cb) => {
             client.query('SELECT id, username, email, password FROM customer WHERE email =$1', [email], (err, results) => {
                 var user = results.rowCount[0];
-               
+
                 try {
                     if (err) {
                         console.log("error", err);

@@ -13,7 +13,7 @@ class UnitsFrom extends React.Component {
         this.inputName = this.inputName.bind(this);
     }
     async  postData() {
-        var postNewData = await axios.post('http://localhost:3002/unitsData', {
+        var postNewData = await axios.post('http://localhost:3002/unitsData' + this.props.name, {
             name: this.props.name,
             blocks_id: this.props.blocks_id,
             units_type_id: this.props.units_type_id
@@ -33,8 +33,8 @@ class UnitsFrom extends React.Component {
         }
     }
     render() {
-        console.log("props",this.props);
-        
+        console.log("props", this.props);
+
         return (
             <div>
                 <h1>Storage Service</h1>

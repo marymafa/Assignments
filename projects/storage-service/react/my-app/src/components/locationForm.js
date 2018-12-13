@@ -13,11 +13,12 @@ class LocationForm extends React.Component {
         }
     }
     async  postData() {
-        var postNewData = await axios.post('http://localhost:3002/locationData', {
+        var postNewData = await axios.post('http://localhost:3002/locationData' + this.props.address, {
             address: this.props.address,
             country: this.props.country,
-            businesses_id: this.props.businesses_id
+            businesses_id: this.props.businesses_id,
         });
+        console.log("tess", this.props.address)
         this.setState({
             redirect: true
         })

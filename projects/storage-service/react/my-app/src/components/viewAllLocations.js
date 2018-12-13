@@ -9,15 +9,26 @@ class AllLocations extends Component {
         super(props);
         this.state = {
             allLocations: [],
+            selectedLocations: [],
             selectedUnit: this.props.selections,
         }
     }
     componentDidMount() {
         axios.get("http://localhost:3002/locationData").then(result => {
-            console.log("data", result.data);
             this.setState({ allLocations: result.data })
+            console.log("selected", result.data);
+        })
+
+    }
+
+
+    async storeSelectedValue() {
+        axios.get("http://localhost:3002/locationData", +"selectedValue").then(result => {
+            this.setState({ selectedLocations: result.data })
+            console.log("selectdVale", result.data)
         })
     }
+
     SelectValue = (e) => {
         const data = e.target.value
         this.props.saveSelectedVAlues(data)
@@ -44,7 +55,7 @@ class AllLocations extends Component {
                     </label>
                 </div>
                 <div>
-                    <Link to="/view_allunitType" ><button type="button">Next</button></Link>
+                    <Link to="/view_units" ><button type="button">Next</button></Link>
                 </div>
             </div >
         )

@@ -21,6 +21,7 @@ class Allunitstypes extends Component {
             console.log("units", checkUnits);
             const checkFilter = (valueItem) => (el) => el.id <= valueItem;
             let res = checkUnits.filter(checkFilter('2'));
+            const filtereData = this.state.unit.filter(item => item.value === this.state.unit)
             console.log("checkFilter", res);
         })
     }
