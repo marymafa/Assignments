@@ -21,6 +21,7 @@ import Allunitstypes from "./components/AllUnitTypes";
 import AllBlocks from "./components/viewAllBlocks";
 import AllLocations from "./components/viewAllLocations";
 import LogOut from "./components/LogOut";
+import ViewCustomerDetails from './components/ViewCustomerDetails';
 
 import "./app.css";
 
@@ -46,6 +47,7 @@ ReactDOM.render(
                 <Route path="/view_allunitType" component={Allunitstypes} />
                 <Route path="/viewAllBlocks" component={AllBlocks} />
                 <Route path="/viewAllBusinessLocations" component={AllLocations} />
+                <Route path="/viewUserData" component={ViewCustomerDetails} />
             </div>
         </Router>
     </Provider >,

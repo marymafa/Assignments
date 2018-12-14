@@ -43,14 +43,15 @@ app.get("/locationData", async (req, res) => {
 
 app.get("/locationData/:selectedValue", async (req, res) => {
     console.log('req.params :', req.params);
-    var locationData = await client.query('SELECT *  FROM units INNER JOIN blocks ON units.blocks_id = blocks.id INNER JOIN locations ON blocks.locations_id = locations.id  WHERE locations.address = $1', [req.params.selectedValue])
+    var locationData = await client.query('SELECT * FROM locations INNER JOIN blocks ON locations.id = blocks.locations_id  INNER JOIN units ON blocks.id = units.blocks_id INNER JOIN units_type ON units.units_type_id = units_type.id where locations.address =$1', [req.params.selectedValue])
     console.log("location", locationData)
     res.send(locationData.rows).status(201).end();
 });
 
 app.get('/loginData', async (req, res, next) => {
-    var unitsData = await client.query(`SELECT * FROM cunstomer`)
-    res.send(unitsData.rows[0]).status(201).end();
+    var unitsData = await client.query('SELECT * FROM customer INNER JOIN units ON  customer.id = units.id  INNER JOIN units_type ON units_type.id = units.units_type_id')
+    console.log("unitsData", unitsData);
+    res.send(unitsData.rows).status(201).end();
 })
 
 app.get('/blockData', async (req, res) => {
@@ -64,7 +65,7 @@ app.get('/unitTypesData', async (req, res) => {
 });
 
 app.get('/unitsData/:selectedValue', async (req, res) => {
-    var unitsData = await client.query('SELECT * FROM units   INNER JOIN units_type ON units_type.id = units.units_type_id')
+    var unitsData = await client.query('SELECT * FROM units INNER JOIN units_type ON units_type.id = units.units_type_id WHERE  units_type.name = $1', [req.params.selectedValue])
     res.send(unitsData.rows).status(201).end();
 });
 
