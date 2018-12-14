@@ -9,12 +9,18 @@ class AllUnits extends Component {
         super(props);
         this.state = {
             unit: [],
+            selectedUnits: [],
             selectedUnit: this.props.selections,
         }
 
     }
     componentDidMount() {
         axios.get("http://localhost:3002/unitsData").then(result => {
+            this.setState({ unit: result.data })
+        })
+    }
+    async viewUnits() {
+        axios.get("http://localhost:3002/unitsData"+ "selectedValue").then(result => {
             this.setState({ unit: result.data })
         })
     }

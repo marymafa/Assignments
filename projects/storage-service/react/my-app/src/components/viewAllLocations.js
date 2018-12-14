@@ -21,7 +21,6 @@ class AllLocations extends Component {
 
     }
 
-
     async storeSelectedValue() {
         axios.get("http://localhost:3002/locationData", +"selectedValue").then(result => {
             this.setState({ selectedLocations: result.data })
