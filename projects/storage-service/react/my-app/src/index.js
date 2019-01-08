@@ -47,7 +47,7 @@ ReactDOM.render(
                 <Route path="/view_allunitType" component={Allunitstypes} />
                 <Route path="/viewAllBlocks" component={AllBlocks} />
                 <Route path="/viewAllBusinessLocations" component={AllLocations} />
-                <Route path="/viewUserData" component={ViewCustomerDetails} />
+                <Route path="/viewCustomerDetails" component={ViewCustomerDetails} />
             </div>
         </Router>
     </Provider >,

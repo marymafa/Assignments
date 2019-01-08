@@ -34,18 +34,16 @@ app.get("/data", async (req, res) => {
     res.send(data.rows).status(201).end();
 });
 
-app.get("/locationData", async (req, res) => {
-    console.log('req.params :', req.params);
-    var locationData = await client.query('SELECT *   FROM locations');
-    console.log("location", locationData)
-    res.send(locationData.rows).status(201).end();
-});
-
 app.get("/locationData/:selectedValue", async (req, res) => {
     console.log('req.params :', req.params);
     var locationData = await client.query('SELECT * FROM locations INNER JOIN blocks ON locations.id = blocks.locations_id  INNER JOIN units ON blocks.id = units.blocks_id INNER JOIN units_type ON units.units_type_id = units_type.id where locations.address =$1', [req.params.selectedValue])
     console.log("location", locationData)
     res.send(locationData.rows).status(201).end();
+});
+
+app.get("/locationData", async (req, res) => {
+    var data = await client.query('SELECT * FROM locations INNER JOIN blocks ON locations.id = blocks.locations_id  INNER JOIN units ON blocks.id = units.blocks_id INNER JOIN units_type ON units.units_type_id = units_type.id ')
+    res.send(data.rows).status(201).end();
 });
 
 app.get('/loginData', async (req, res, next) => {
@@ -65,8 +63,27 @@ app.get('/unitTypesData', async (req, res) => {
 });
 
 app.get('/unitsData/:selectedValue', async (req, res) => {
+    var selectedUnitTypes = req.params.selectedValue.split(" ")
     var unitsData = await client.query('SELECT * FROM units INNER JOIN units_type ON units_type.id = units.units_type_id WHERE  units_type.name = $1', [req.params.selectedValue])
-    res.send(unitsData.rows).status(201).end();
+    var results = unitsData.find(item => {
+        var object = item.name === selectedValue[0] && item.length === selectedValue[1] && item.width === selectedValue[2] && item.height === selectedValue[3]
+        return object
+    })
+    var AvailableUnits = units.filter(unit => {
+        var foundId = unit.unit_type_id
+        if (foundId === results.id) {
+            return unit.name
+        }
+    }).map(units => {
+        return units.name
+    })
+    try {
+        res.send(allAvailableUnits).status(201).end()
+
+    } catch (error) {
+        res.status(500).end()
+    }
+    //res.send(unitsData.rows).status(201).end();
 });
 
 app.get('/unitsData', async (req, res) => {
@@ -86,7 +103,7 @@ app.post('/data', (req, res) => {
 });
 
 app.post('/locationData', function (req, res) {
-    console.log("location details", req.body);
+    console.log(" business loctions", req.body);
     client.query('INSERT INTO locations(address,country,businesses_id) VALUES($1,$2,$3)', [req.body.address, req.body.country, req.body.businesses_id], (err, res) => {
         console.log(err, res)
     })

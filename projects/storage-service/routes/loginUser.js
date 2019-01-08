@@ -15,16 +15,13 @@ client.connect();
 module.exports = app => {
     app.post('/loginData', async (req, res, next) => {
         const { password, email } = req.body;
-        console.log(password, email)
-
+        console.log("errrt",password, email)
         const statement = `select * from customer where email = $1`;
-
         const userFound = await client.query(statement, [email]);
         if (userFound.rows[0] == undefined) {
             return res.status(404).json({ message: "user not found" });
         }
-
-        console.log("userFound");
+        console.log("userFound",userFound);
         try {
             const user = await bcrypt.compare(password, userFound.rows[0].password);
             if (!user) {

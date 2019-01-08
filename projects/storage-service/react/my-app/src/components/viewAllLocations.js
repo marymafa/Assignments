@@ -21,12 +21,12 @@ class AllLocations extends Component {
 
     }
 
-    async storeSelectedValue() {
-        axios.get("http://localhost:3002/locationData", +"selectedValue").then(result => {
-            this.setState({ selectedLocations: result.data })
-            console.log("selectdVale", result.data)
-        })
-    }
+    // async storeSelectedValue() {
+    //     axios.get("http://localhost:3002/locationData", +"selectedValue").then(result => {
+    //         this.setState({ selectedLocations: result.data })
+    //         console.log("selectdVale", result.data)
+    //     })
+    // }
 
     SelectValue = (e) => {
         const data = e.target.value
