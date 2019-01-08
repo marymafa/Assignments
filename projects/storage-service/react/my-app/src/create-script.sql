@@ -40,6 +40,11 @@ CREATE TABLE IF NOT EXISTS customer (
         email VARCHAR(100) NOT NULL UNIQUE,
         PASSWORD VARCHAR(100) NOT NULL
 );
+CREATE TABLE IF NOT EXISTS customer_units (
+        id serial PRIMARY KEY,
+        customer_id INT REFERENCES customer(id) NOT NULL,
+        unit_id INT REFERENCES  units(id) NOT NULL
+);
 
 
 INSERT INTO businesses (name, contact_name, contact_number, contact_email)
@@ -59,6 +64,14 @@ INSERT INTO units_type (name, length, height, width)
 
 INSERT INTO customer (username, email, PASSWORD)
     VALUES ('princesmary', 'princessmary@gmail.com', 'hdfuhfr');
+
+  INSERT INTO customer_units (customer_id, unit_id)
+    VALUES (1,1);  
+
+SELECT 
+* 
+FROM
+ customer_units;
 
 SELECT
     *
