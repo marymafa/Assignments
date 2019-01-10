@@ -12,9 +12,7 @@ export default class ViewLocations extends Component {
         axios.get("http://localhost:3002/locationData").then(result => {
             console.log("result", result);
             this.setState({ location: result.data })
-
         })
-
     }
     render() {
         return (
@@ -31,7 +29,6 @@ export default class ViewLocations extends Component {
                     </thead>
                     <tbody>
                         {this.state.location.map(user => {
-
                             return <tr name={`row-${user.id} ${user.businesses_id}`} key={this.state.location.indexOf(user)}>
                                 <td>{user.id === "undefined" ? "" : user.id}</td>
                                 <td>{user.address}</td>

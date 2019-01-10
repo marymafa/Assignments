@@ -4,6 +4,7 @@ CREATE TABLE IF NOT EXISTS businesses (
         contact_name VARCHAR(100) NOT NULL,
         contact_number VARCHAR(100) NOT NULL,
         contact_email VARCHAR(100) NOT NULL
+        
 );
 
 CREATE TABLE IF NOT EXISTS locations (
@@ -33,7 +34,6 @@ CREATE TABLE IF NOT EXISTS units (
         blocks_id INT REFERENCES blocks (id) NOT NULL,
      units_type_id INT REFERENCES units_type (id) NOT NULL
 );
-
 CREATE TABLE IF NOT EXISTS customer (
         id serial PRIMARY KEY,
         username VARCHAR(100) NOT NULL,
@@ -45,8 +45,6 @@ CREATE TABLE IF NOT EXISTS customer_units (
         customer_id INT REFERENCES customer(id) NOT NULL,
         unit_id INT REFERENCES  units(id) NOT NULL
 );
-
-
 INSERT INTO businesses (name, contact_name, contact_number, contact_email)
     VALUES ('gwfm', 'mary', '0616118909', 'mafay@gmail.com');
 
@@ -66,12 +64,17 @@ INSERT INTO customer (username, email, PASSWORD)
     VALUES ('princesmary', 'princessmary@gmail.com', 'hdfuhfr');
 
   INSERT INTO customer_units (customer_id, unit_id)
-    VALUES (1,1);  
-
+    VALUES (1,2);  
 SELECT 
 * 
 FROM
- customer_units;
+ customer_units
+ ;
+SELECT 
+* 
+FROM 
+customer 
+INNER JOIN customer_units ON  customer.id = customer_units.customer_id INNER JOIN units ON customer_units.unit_id = units.id INNER JOIN  units_type ON units. units_type_id = units_type.id ;;
 
 SELECT
     *
@@ -116,8 +119,5 @@ FROM
     WHERE
  units_type.width > 3;
 
-SELECT 
-* FROM 
-customer 
-INNER JOIN units ON  customer.id = units.id ;
+
 

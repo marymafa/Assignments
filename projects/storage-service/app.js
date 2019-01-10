@@ -42,12 +42,12 @@ app.get("/locationData/:selectedValue", async (req, res) => {
 });
 
 app.get("/locationData", async (req, res) => {
-    var data = await client.query('SELECT * FROM locations INNER JOIN blocks ON locations.id = blocks.locations_id  INNER JOIN units ON blocks.id = units.blocks_id INNER JOIN units_type ON units.units_type_id = units_type.id ')
+    var data = await client.query('SELECT * FROM locations')
     res.send(data.rows).status(201).end();
 });
 
 app.get('/loginData', async (req, res, next) => {
-    var unitsData = await client.query('SELECT * FROM customer INNER JOIN units ON  customer.id = units.id  INNER JOIN units_type ON units_type.id = units.units_type_id')
+    var unitsData = await client.query('SELECT * FROM customer INNER JOIN customer_units ON  customer.id = customer_units.customer_id INNER JOIN units ON customer_units.unit_id = units.id INNER JOIN  units_type ON units. units_type_id = units_type.id')
     console.log("unitsData", unitsData);
     res.send(unitsData.rows).status(201).end();
 })
@@ -58,13 +58,13 @@ app.get('/blockData', async (req, res) => {
 });
 
 app.get('/unitTypesData', async (req, res) => {
-    var unitTypesData = await client.query('SELECT * FROM units_type ')
+     var unitTypesData = await client.query('SELECT id, name, length, height, width FROM units_type')
     res.send(unitTypesData.rows).status(201).end();
 });
 
 app.get('/unitsData/:selectedValue', async (req, res) => {
     var selectedUnitTypes = req.params.selectedValue.split(" ")
-    var unitsData = await client.query('SELECT * FROM units INNER JOIN units_type ON units_type.id = units.units_type_id WHERE  units_type.name = $1', [req.params.selectedValue])
+    var unitsData = await client.query('SELECT * FROM units INNER JOIN units_type ON units_type.id = units.units_type_id WHERE  units.name = $1', [req.params.selectedValue])
     var results = unitsData.find(item => {
         var object = item.name === selectedValue[0] && item.length === selectedValue[1] && item.width === selectedValue[2] && item.height === selectedValue[3]
         return object
@@ -83,11 +83,10 @@ app.get('/unitsData/:selectedValue', async (req, res) => {
     } catch (error) {
         res.status(500).end()
     }
-    //res.send(unitsData.rows).status(201).end();
+
 });
 
 app.get('/unitsData', async (req, res) => {
-    console.log("mary are you happy?");
     var unitsData = await client.query('SELECT * FROM units')
     res.send(unitsData.rows).status(201).end();
 })
