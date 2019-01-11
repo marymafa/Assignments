@@ -31,9 +31,11 @@ CREATE TABLE IF NOT EXISTS units_type (
 CREATE TABLE IF NOT EXISTS units (
         id serial PRIMARY KEY,
         name VARCHAR(100) NOT NULL,
-        blocks_id INT REFERENCES blocks (id) NOT NULL,
-     units_type_id INT REFERENCES units_type (id) NOT NULL
+        blocks_id INT REFERENCES blocks(id) NOT NULL,
+     units_type_id INT REFERENCES units_type(id) NOT NULL
 );
+
+
 CREATE TABLE IF NOT EXISTS customer (
         id serial PRIMARY KEY,
         username VARCHAR(100) NOT NULL,

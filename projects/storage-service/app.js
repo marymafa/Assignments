@@ -28,18 +28,17 @@ require('./routes/findUsers')(app);
 require('./routes/loginUser')(app);
 require('./routes/registerUser')(app);
 
-
 app.get("/data", async (req, res) => {
     var data = await client.query(`SELECT * FROM businesses`)
     res.send(data.rows).status(201).end();
 });
 
-app.get("/locationData/:selectedValue", async (req, res) => {
-    console.log('req.params :', req.params);
-    var locationData = await client.query('SELECT * FROM locations INNER JOIN blocks ON locations.id = blocks.locations_id  INNER JOIN units ON blocks.id = units.blocks_id INNER JOIN units_type ON units.units_type_id = units_type.id where locations.address =$1', [req.params.selectedValue])
-    console.log("location", locationData)
-    res.send(locationData.rows).status(201).end();
-});
+// app.get("/locationData/:selectedValue", async (req, res) => {
+//     console.log('req.params :', req.params);
+//     var locationData = await client.query('SELECT * FROM locations INNER JOIN blocks ON locations.id = blocks.locations_id  INNER JOIN units ON blocks.id = units.blocks_id INNER JOIN units_type ON units.units_type_id = units_type.id where locations.address =$1', [req.params.selectedValue])
+//     console.log("location", locationData)
+//     res.send(locationData.rows).status(201).end();
+// });
 
 app.get("/locationData", async (req, res) => {
     var data = await client.query('SELECT * FROM locations')
@@ -58,35 +57,12 @@ app.get('/blockData', async (req, res) => {
 });
 
 app.get('/unitTypesData', async (req, res) => {
-     var unitTypesData = await client.query('SELECT id, name, length, height, width FROM units_type')
+    var unitTypesData = await client.query('SELECT id, type_of_unit, length, height, width FROM units_type')
     res.send(unitTypesData.rows).status(201).end();
 });
 
-app.get('/unitsData/:selectedValue', async (req, res) => {
-    var selectedUnitTypes = req.params.selectedValue.split(" ")
-    var unitsData = await client.query('SELECT * FROM units INNER JOIN units_type ON units_type.id = units.units_type_id WHERE  units.name = $1', [req.params.selectedValue])
-    var results = unitsData.find(item => {
-        var object = item.name === selectedValue[0] && item.length === selectedValue[1] && item.width === selectedValue[2] && item.height === selectedValue[3]
-        return object
-    })
-    var AvailableUnits = units.filter(unit => {
-        var foundId = unit.unit_type_id
-        if (foundId === results.id) {
-            return unit.name
-        }
-    }).map(units => {
-        return units.name
-    })
-    try {
-        res.send(allAvailableUnits).status(201).end()
-
-    } catch (error) {
-        res.status(500).end()
-    }
-
-});
-
 app.get('/unitsData', async (req, res) => {
+    console.log('this are the units', req.body);
     var unitsData = await client.query('SELECT * FROM units')
     res.send(unitsData.rows).status(201).end();
 })
@@ -110,7 +86,7 @@ app.post('/locationData', function (req, res) {
 });
 
 app.post('/blockData', function (req, res) {
-    console.log("block details", req.body);
+    console.log("block details", req.body.locations_id);
     client.query('INSERT INTO blocks(name,locations_id) VALUES($1,$2)', [req.body.name, req.body.locations_id], (err, res) => {
         console.log(err, res)
     })
@@ -119,7 +95,7 @@ app.post('/blockData', function (req, res) {
 
 app.post('/unitTypesData', function (req, res) {
     console.log("unit type details", req.body);
-    client.query('INSERT INTO units_type(name,length,height,width) VALUES($1,$2,$3,$4)', [req.body.name, req.body.length, req.body.height, req.body.width], (err, res) => {
+    client.query('INSERT INTO units_type(type_of_unit,length,height,width) VALUES($1,$2,$3,$4)', [req.body.type_of_unit, req.body.length, req.body.height, req.body.width], (err, res) => {
         console.log(err, res)
     })
     res.status(201).end()
@@ -127,10 +103,17 @@ app.post('/unitTypesData', function (req, res) {
 
 app.post('/unitsData', function (req, res) {
     console.log("unit details", req.body);
-    client.query('INSERT INTO  units(name,blocks_id,units_type_id) VALUES($1,$2,$3)', [req.body.name, req.body.blocks_id, req.body.units_type_id], (err, res) => {
-        console.log(err, res)
+    client.query('INSERT INTO  units(name,blocks_id,units_type_id) VALUES($1,$2,$3)', [req.body.name, Number(req.body.blocks_id), Number(req.body.units_type_id)], (err, res) => {
+        console.log("res", res,err);
+        if (err) {
+            console.log(err);
+            return  res.status(500).end()
+        } else {
+            console.log(res);
+            return  res.status(201).end()
+        }
     })
-    res.status(201).end()
+   
 });
 
 app.listen(PORT, () => {

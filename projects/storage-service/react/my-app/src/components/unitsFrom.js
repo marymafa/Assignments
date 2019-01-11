@@ -13,12 +13,13 @@ class UnitsFrom extends React.Component {
         this.inputName = this.inputName.bind(this);
     }
     async  postData() {
+        console.log('this.props before sending to the api :', this.props);
         var postNewData = await axios.post('http://localhost:3002/unitsData', {
             name: this.props.name,
             blocks_id: this.props.blocks_id,
-            units_type_id: this.props.units_type_id
-
+            units_type_id:this.props.units_type_id,
         });
+        console.log("TESTING PROPS", this.props.units_type_id)
 
         this.setState({
             redirect: true,
@@ -33,7 +34,7 @@ class UnitsFrom extends React.Component {
         }
     }
     render() {
-        console.log("props", this.props);
+        console.log("units props", this.props.units_type_id);
 
         return (
             <div>
@@ -63,7 +64,9 @@ const mapDispatchToProps = (dispatch) => {
         updateBlockName: (name) => {
             dispatch(action.saveUnits(name))
         },
+        
     }
+
 }
 export default connect(
     mapStateToProps,

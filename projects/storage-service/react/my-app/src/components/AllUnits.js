@@ -20,7 +20,7 @@ class AllUnits extends Component {
         })
     }
     async viewUnits() {
-        axios.get("http://localhost:3002/unitsData"+ "selectedValue").then(result => {
+        axios.get("http://localhost:3002/unitsData" + "selectedValue").then(result => {
             this.setState({ unit: result.data })
         })
     }
@@ -51,7 +51,7 @@ class AllUnits extends Component {
 }
 const mapStateToProps = (state) => {
     return {
-        store: state.selectValues,
+        name: state.selectValues.name,
         selections: state.selectValues.selections,
     }
 }

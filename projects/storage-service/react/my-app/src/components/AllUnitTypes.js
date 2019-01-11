@@ -19,10 +19,10 @@ class Allunitstypes extends Component {
             this.setState({ unit: result.data })
             const checkUnits = result.data;
             console.log("units", checkUnits);
-            const checkFilter = (valueItem) => (el) => el.id <= valueItem;
-            let res = checkUnits.filter(checkFilter('2'));
-            const filtereData = this.state.unit.filter(item => item.value === this.state.unit)
-            console.log("checkFilter", res);
+            // const checkFilter = (valueItem) => (el) => el.id <= valueItem;
+            // let res = checkUnits.filter(checkFilter('2'));
+            // const filtereData = this.state.unit.filter(item => item.value === this.state.unit)
+            // console.log("checkFilter", res);
         })
     }
     SelectValue = (e) => {
@@ -53,7 +53,7 @@ class Allunitstypes extends Component {
                         units:
                             <select name="units" onChange={(e) => this.SelectValue(e)} >
                             <option value={0}>All units</option>
-                            {this.state.unit.map(unit => <option key={unit.id} value={unit.id}>{unit.name}</option>)}
+                            {this.state.unit.map(unit => <option key={unit.id} value={unit.id}>{unit.type_of_unit}</option>)}
                         </select>
                     </label>
                 </div>

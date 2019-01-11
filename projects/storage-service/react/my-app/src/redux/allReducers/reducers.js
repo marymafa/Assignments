@@ -35,19 +35,21 @@ export const businessBlocks = (state = { name: "", locations_id: '' }, action) =
     switch (action.type) {
         case "BLOCK_NAME":
             newState = { ...state, name: action.value };
+            console.log("this is the unit", newState)
             break;
         case "LOCATION_ID":
             newState = { ...state, locations_id: action.value };
+            console.log("this is the unit", newState)
             break;
     }
     return newState;
 };
 
-export const businessUnitTypes = (state = { name: "", length: "", height: "", width: "" }, action) => {
+export const businessUnitTypes = (state = { type_of_unit: "", length: "", height: "", width: "" }, action) => {
     let newState = state;
     switch (action.type) {
         case "NAME":
-            newState = { ...state, name: action.value };
+            newState = { ...state, type_of_unit: action.value };
             break;
         case "LENGTH":
             newState = { ...state, length: action.value };
@@ -124,17 +126,4 @@ export const loginPage = (state = { email: "", password: "" }, action) => {
 const initialState = {
     auth: { loggedIn: false }
 };
-// export const logoutUser = (state = initialState, action) => {
-//     let newState = state;
-//     switch (action.type) {
-//         case "LOGIN":
-//             return {
-//         ...state, auth:{loggedIn:true}
-//             }
-//         case "LOGOUT":
-//             return {
-//                 ...state, auth:{loggedIn:true}
-//             }
-//         default: return state
-//     }
-// }
+

@@ -17,7 +17,7 @@ export default class ViewCustomerDetails extends Component {
         console.log("this is the users", this.state.users)
         return (
             <div>
-                <h1>user Details</h1>
+                <h1>customer Details</h1>
                 <div>
                     <thead>
                         <tr>

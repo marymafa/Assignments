@@ -18,7 +18,7 @@ class UnitTypesFrom extends React.Component {
 
     async  postData() {
         var postNewData = await axios.post('http://localhost:3002/unitTypesData', {
-            name: this.props.name,
+            type_of_unit: this.props.type_of_unit,
             length: this.props.length,
             height: this.props.height,
             width: this.props.width
@@ -77,7 +77,7 @@ class UnitTypesFrom extends React.Component {
 
 const mapStateToProps = (state) => {
     return {
-        name: state.businessUnitTypes.name,
+        type_of_unit: state.businessUnitTypes.type_of_unit,
         length: state.businessUnitTypes.length,
         height: state.businessUnitTypes.height,
         width: state.businessUnitTypes.width
