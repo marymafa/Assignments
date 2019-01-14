@@ -50,11 +50,11 @@ export default class ViewCustomerDetails extends Component {
                                 <td>{element.customer_id}</td>
                                 <td>{element.unit_id}</td>
                                 <td>{element.unit_id}</td>
-                                <td>{element.name}</td>
+                                <td>{element.unit_name}</td>
                                 <td>{element.blocks_id === "undefined" ? "" : element.blocks_id}</td>
                                 <td>{element.units_type_id === "undefined" ? "" : element.units_type_id}</td>
                                 <td>{element.id}</td>
-                                <td>{element.type_of_unit}</td>
+                                <td>{element.name}</td>
                                 <td>{element.length}</td>
                                 <td>{element.height}</td>
                                 <td>{element.width}</td>

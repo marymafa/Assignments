@@ -30,7 +30,7 @@ CREATE TABLE IF NOT EXISTS units_type (
 
 CREATE TABLE IF NOT EXISTS units (
         id serial PRIMARY KEY,
-        name VARCHAR(100) NOT NULL,
+        unit_name VARCHAR(100) NOT NULL,
         blocks_id INT REFERENCES blocks(id) NOT NULL,
      units_type_id INT REFERENCES units_type(id) NOT NULL
 );
@@ -47,26 +47,7 @@ CREATE TABLE IF NOT EXISTS customer_units (
         customer_id INT REFERENCES customer(id) NOT NULL,
         unit_id INT REFERENCES  units(id) NOT NULL
 );
-INSERT INTO businesses (name, contact_name, contact_number, contact_email)
-    VALUES ('gwfm', 'mary', '0616118909', 'mafay@gmail.com');
-
-INSERT INTO locations (address, country, businesses_id)
-    VALUES ('riverside', 'South-Africa', 1);
-
-INSERT INTO blocks (name, locations_id)
-    VALUES ('blocks-3', 1);
-
-INSERT INTO units (name, blocks_id, units_type_id)
-    VALUES ('room-2', 1, 1);
-
-INSERT INTO units_type (name, length, height, width)
-    VALUES ('garage', 10, 10, 5);
-
-INSERT INTO customer (username, email, PASSWORD)
-    VALUES ('princesmary', 'princessmary@gmail.com', 'hdfuhfr');
-
-  INSERT INTO customer_units (customer_id, unit_id)
-    VALUES (1,2);  
+ 
 SELECT 
 * 
 FROM

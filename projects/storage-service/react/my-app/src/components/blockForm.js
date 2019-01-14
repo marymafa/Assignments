@@ -28,7 +28,7 @@ class BlockFrom extends React.Component {
     }
     renderRedirect = () => {
         if (this.state.redirect) {
-            return <Redirect to='/units' />
+            return <Redirect to='/unit_types' />
         }
     }
     render() {

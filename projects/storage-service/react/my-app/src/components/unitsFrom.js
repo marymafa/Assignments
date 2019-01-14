@@ -15,7 +15,7 @@ class UnitsFrom extends React.Component {
     async  postData() {
         console.log('this.props before sending to the api :', this.props);
         var postNewData = await axios.post('http://localhost:3002/unitsData', {
-            name: this.props.name,
+            unit_name: this.props.unit_name,
             blocks_id: this.props.blocks_id,
             units_type_id:this.props.units_type_id,
         });
@@ -30,7 +30,7 @@ class UnitsFrom extends React.Component {
     }
     renderRedirect = () => {
         if (this.state.redirect) {
-            return <Redirect to='/unit_types' />
+            return <Redirect to='/' />
         }
     }
     render() {
@@ -53,7 +53,7 @@ class UnitsFrom extends React.Component {
 
 const mapStateToProps = (state) => {
     return {
-        name: state.businessUnits.name,
+        unit_name: state.businessUnits.unit_name,
         blocks_id: state.selectValues.selections,
         units_type_id: state.selectValues.selections,
     }

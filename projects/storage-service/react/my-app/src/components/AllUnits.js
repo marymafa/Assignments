@@ -38,7 +38,7 @@ class AllUnits extends Component {
                         units:
                             <select name="units" onChange={(e) => this.SelectValue(e)} >
                             <option value={0}>All units</option>
-                            {this.state.unit.map(unit => <option key={unit.id} value={unit.id}>{unit.name}</option>)}
+                            {this.state.unit.map(unit => <option key={unit.id} value={unit.id}>{unit.unit_name}</option>)}
                         </select>
                     </label>
                 </div>

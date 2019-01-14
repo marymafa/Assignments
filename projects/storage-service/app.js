@@ -56,8 +56,9 @@ app.get('/blockData', async (req, res) => {
     res.send(blockData.rows).status(201).end();
 });
 
+
 app.get('/unitTypesData', async (req, res) => {
-    var unitTypesData = await client.query('SELECT id, type_of_unit, length, height, width FROM units_type')
+    var unitTypesData = await client.query('SELECT * FROM units_type')
     res.send(unitTypesData.rows).status(201).end();
 });
 
@@ -95,7 +96,7 @@ app.post('/blockData', function (req, res) {
 
 app.post('/unitTypesData', function (req, res) {
     console.log("unit type details", req.body);
-    client.query('INSERT INTO units_type(type_of_unit,length,height,width) VALUES($1,$2,$3,$4)', [req.body.type_of_unit, req.body.length, req.body.height, req.body.width], (err, res) => {
+    client.query('INSERT INTO units_type(name,length,height,width) VALUES($1,$2,$3,$4)', [req.body.name, req.body.length, req.body.height, req.body.width], (err, res) => {
         console.log(err, res)
     })
     res.status(201).end()
@@ -103,17 +104,17 @@ app.post('/unitTypesData', function (req, res) {
 
 app.post('/unitsData', function (req, res) {
     console.log("unit details", req.body);
-    client.query('INSERT INTO  units(name,blocks_id,units_type_id) VALUES($1,$2,$3)', [req.body.name, Number(req.body.blocks_id), Number(req.body.units_type_id)], (err, res) => {
-        console.log("res", res,err);
-        if (err) {
-            console.log(err);
-            return  res.status(500).end()
-        } else {
-            console.log(res);
-            return  res.status(201).end()
-        }
+    client.query('INSERT INTO  units(unit_name,blocks_id,units_type_id) VALUES($1,$2,$3)', [req.body.unit_name, Number(req.body.blocks_id), Number(req.body.units_type_id)], (err, res) => {
+        console.log("res", res, err);
+        // if (err) {
+        //     console.log(err);
+        //     return  res.status(500).end()
+        // } else {
+        //     console.log(res);
+        // }
     })
-   
+    return res.status(201).end()
+
 });
 
 app.listen(PORT, () => {

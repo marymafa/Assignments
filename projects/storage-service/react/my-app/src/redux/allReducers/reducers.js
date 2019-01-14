@@ -45,11 +45,11 @@ export const businessBlocks = (state = { name: "", locations_id: '' }, action) =
     return newState;
 };
 
-export const businessUnitTypes = (state = { type_of_unit: "", length: "", height: "", width: "" }, action) => {
+export const businessUnitTypes = (state = { name: "", length: "", height: "", width: "" }, action) => {
     let newState = state;
     switch (action.type) {
         case "NAME":
-            newState = { ...state, type_of_unit: action.value };
+            newState = { ...state, name: action.value };
             break;
         case "LENGTH":
             newState = { ...state, length: action.value };
@@ -63,11 +63,11 @@ export const businessUnitTypes = (state = { type_of_unit: "", length: "", height
     return newState;
 };
 
-export const businessUnits = (state = { name: "", blocks_id: "", units_type_id: "" }, action) => {
+export const businessUnits = (state = { unit_name: "", blocks_id: "", units_type_id: "" }, action) => {
     let newState = state;
     switch (action.type) {
         case "NAME":
-            newState = { ...state, name: action.value };
+            newState = { ...state, unit_name: action.value };
             break;
         case "BLOCK_ID":
             newState = { ...state, blocks_id: action.value };

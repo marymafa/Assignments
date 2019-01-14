@@ -18,7 +18,7 @@ class UnitTypesFrom extends React.Component {
 
     async  postData() {
         var postNewData = await axios.post('http://localhost:3002/unitTypesData', {
-            type_of_unit: this.props.type_of_unit,
+          name: this.props.name,
             length: this.props.length,
             height: this.props.height,
             width: this.props.width
@@ -42,10 +42,11 @@ class UnitTypesFrom extends React.Component {
     }
     renderRedirect = () => {
         if (this.state.redirect) {
-            return <Redirect to='/' />
+            return <Redirect to='/units' />
         }
     }
     render() {
+        console.log("props", this.props)
         return (
             <div>
                 <h1>Storage Service</h1>
@@ -77,7 +78,7 @@ class UnitTypesFrom extends React.Component {
 
 const mapStateToProps = (state) => {
     return {
-        type_of_unit: state.businessUnitTypes.type_of_unit,
+        name: state.businessUnitTypes.name,
         length: state.businessUnitTypes.length,
         height: state.businessUnitTypes.height,
         width: state.businessUnitTypes.width
