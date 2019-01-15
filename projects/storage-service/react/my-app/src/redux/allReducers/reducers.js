@@ -114,7 +114,7 @@ export const loginPage = (state = { email: "", password: "" }, action) => {
     switch (action.type) {
         case "CONFIRM_EMAIL":
             newState = { ...state, email: action.value };
-            console.log(" login email", newState);
+
             break;
         case "CONFIRM_PASSWORD":
             newState = { ...state, password: action.value };
@@ -123,7 +123,18 @@ export const loginPage = (state = { email: "", password: "" }, action) => {
     }
     return newState;
 }
-const initialState = {
-    auth: { loggedIn: false }
-};
 
+export const customerUnits = (state = { customer_id: "", unit_id: "" }, action) => {
+    let newState = state;
+    switch (action.type) {
+        case "CUSTOMER_ID":
+            newState = { ...state, customer_id: action.value };
+            console.log(" customer id", newState);
+            break;
+        case "UNIT_ID":
+            newState = { ...state, unit_id: action.value };
+            console.log("unit id", newState);
+            break;
+
+    }
+}

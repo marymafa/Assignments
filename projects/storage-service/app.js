@@ -67,7 +67,11 @@ app.get('/unitsData', async (req, res) => {
     var unitsData = await client.query('SELECT * FROM units')
     res.send(unitsData.rows).status(201).end();
 })
-
+app.get('/RentAUnit', async (req, res) => {
+    console.log('this are the units', req.body);
+    var customerUnits = await client.query('SELECT * FROM customer_units')
+    res.send(customerUnits.rows).status(201).end();
+})
 // post
 
 app.post('/data', (req, res) => {
@@ -101,6 +105,13 @@ app.post('/unitTypesData', function (req, res) {
     })
     res.status(201).end()
 });
+
+app.post('/RentAUnit', function (req, res) {
+    client.query('INSERT INTO customer_units( ustomer_id, unit_id) VALUES ($1,$2)', [req.body.customer_id], [req.body.unit_id], (err, res) => {
+        console.log("err,res")
+    });
+    res.status(201).end()
+})
 
 app.post('/unitsData', function (req, res) {
     console.log("unit details", req.body);

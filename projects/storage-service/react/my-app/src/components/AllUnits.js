@@ -19,15 +19,18 @@ class AllUnits extends Component {
             this.setState({ unit: result.data })
         })
     }
-    async viewUnits() {
-        axios.get("http://localhost:3002/unitsData" + "selectedValue").then(result => {
-            this.setState({ unit: result.data })
-        })
-    }
     SelectValue = (e) => {
         const data = e.target.value
         this.props.saveSelectedVAlues(data)
     }
+    async  RentAUnit() {
+        var postNewData = await axios.post('http://localhost:3002/RentAUnit', {
+            customer_id: this.props.customer_id,
+            unit_id: this.props.unit_id
+        });
+        console.log("postNewData", postNewData)
+    }
+
     render() {
         return (
             <div>
@@ -43,7 +46,7 @@ class AllUnits extends Component {
                     </label>
                 </div>
                 <div>
-                    <Link to="/" ><button type="button">Next</button></Link>
+                    <Link to="/" ><button type="button" onClick={() => this.RentAUnit()}>Rent</button></Link>
                 </div>
             </div>
         )
@@ -53,6 +56,8 @@ const mapStateToProps = (state) => {
     return {
         name: state.selectValues.name,
         selections: state.selectValues.selections,
+        customer_id: state.selectValues.selections,
+        unit_id: state.selectValues.selections,
     }
 }
 

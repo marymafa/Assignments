@@ -82,3 +82,9 @@ export const logoutUser = () => {
         type: 'LOGOUT'
     }
 };
+export const customerId = (custid) => {
+    return { type: "CUSTOMER_ID", value: custid }
+};
+export const unitId = (uniId) => {
+    return { type: "UNIT_ID", value: uniId }
+}
