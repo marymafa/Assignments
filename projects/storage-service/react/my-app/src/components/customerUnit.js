@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import axios from 'axios';
+import jwt from 'jsonwebtoken';
 
 export default class CustomerDetails extends Component {
     constructor(props) {
@@ -9,12 +10,16 @@ export default class CustomerDetails extends Component {
             redirect: false,
         }
     }
-   
+
 
     componentDidMount() {
-        axios.get("http://localhost:3002/locationData").then(result => {
-            this.setState({ customerDetails: result.data })
-        })
+        var getToken = sessionStorage.getItem('jwt-secret');
+        var decodetoken = jwt.decode(JSON.parse(getToken))
+        console.log('getToken :', getToken);
+        console.log("gettoken", decodetoken)
+        var results = axios.get("http://localhost:3002/RentAUnit/" + decodetoken)
+        this.setState({ customerDetails: results.data })
+        console.log("results", results)
     }
     render() {
         console.log("state", this.state);

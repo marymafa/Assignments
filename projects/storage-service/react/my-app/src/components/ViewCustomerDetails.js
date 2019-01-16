@@ -1,5 +1,8 @@
 import React, { Component } from 'react';
 import axios from 'axios';
+
+
+
 export default class ViewCustomerDetails extends Component {
     constructor(props) {
         super(props);
@@ -9,6 +12,7 @@ export default class ViewCustomerDetails extends Component {
         }
     }
     componentDidMount() {
+    
         axios.get("http://localhost:3002/loginData").then(result => {
             this.setState({ users: result.data })
         })
@@ -21,7 +25,7 @@ export default class ViewCustomerDetails extends Component {
                 <div>
                     <thead>
                         <tr>
-                        <th>Reference Number</th>
+                            <th>Reference Number</th>
                             <th>location</th>
                             <th>unit</th>
                             <th>unit type</th>
@@ -30,7 +34,7 @@ export default class ViewCustomerDetails extends Component {
                     <tbody>
                         {this.state.users.map(element => {
                             return <tr name={`row-${element.id}${element.blocks_id}${element.units_type_id} ${element.customer_id} $`} key={this.state.users.indexOf(element)}>
-                            <td>{element.id === "undefined" ? "" : element.id}</td>
+                                <td>{element.id === "undefined" ? "" : element.id}</td>
                                 <td>{element.address}</td>
                                 <td>{element.unit_name}</td>
                                 <td>{element.name}</td>

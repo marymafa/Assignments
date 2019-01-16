@@ -39,9 +39,10 @@ app.get("/data", async (req, res) => {
 //     console.log("location", locationData)
 //     res.send(locationData.rows).status(201).end();
 // });
-
+// /:decodetoken
 app.get("/locationData", async (req, res) => {
-    var data = await client.query('SELECT * FROM locations INNER JOIN blocks ON locations.id = blocks.locations_id INNER JOIN units ON blocks.id = units.blocks_id INNER JOIN units_type ON units.id = units_type_id INNER JOIN customer ON customer.id = units.id')
+
+    var data = await client.query('SELECT * FROM locations')
     res.send(data.rows).status(201).end();
 });
 
@@ -67,9 +68,9 @@ app.get('/unitsData', async (req, res) => {
     var unitsData = await client.query('SELECT * FROM units')
     res.send(unitsData.rows).status(201).end();
 })
-app.get('/RentAUnit', async (req, res) => {
-    console.log('this are the units', req.body);
-    var customerUnits = await client.query('SELECT * FROM customer_units')
+app.get('/RentAUnit/:decodetoken', async (req, res) => {
+    console.log(req.params).rows
+    var customerUnits = await client.query('SELECT * FROM customer INNER JOIN customer_units ON  customer.id = customer_units.customer_id INNER JOIN units ON customer_units.unit_id = units.id INNER JOIN  units_type ON units. units_type_id = units_type.id')
     res.send(customerUnits.rows).status(201).end();
 })
 // post
