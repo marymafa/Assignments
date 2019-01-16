@@ -41,7 +41,7 @@ app.get("/data", async (req, res) => {
 // });
 
 app.get("/locationData", async (req, res) => {
-    var data = await client.query('SELECT * FROM locations')
+    var data = await client.query('SELECT * FROM locations INNER JOIN blocks ON locations.id = blocks.locations_id INNER JOIN units ON blocks.id = units.blocks_id INNER JOIN units_type ON units.id = units_type_id INNER JOIN customer ON customer.id = units.id')
     res.send(data.rows).status(201).end();
 });
 

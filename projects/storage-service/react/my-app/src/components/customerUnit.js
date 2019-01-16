@@ -1,36 +1,42 @@
 import React, { Component } from 'react';
 import axios from 'axios';
-export default class ViewCustomerDetails extends Component {
+
+export default class CustomerDetails extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            users: [],
+            customerDetails: [],
             redirect: false,
         }
     }
+   
+
     componentDidMount() {
-        axios.get("http://localhost:3002/loginData").then(result => {
-            this.setState({ users: result.data })
+        axios.get("http://localhost:3002/locationData").then(result => {
+            this.setState({ customerDetails: result.data })
         })
     }
     render() {
-        console.log("this is the users", this.state.users)
+        console.log("state", this.state);
         return (
             <div>
-                <h1>customer Details</h1>
+                <h1>you have rented</h1>
                 <div>
                     <thead>
                         <tr>
-                        <th>Reference Number</th>
+                            <th>Reference Number</th>
+                            <th>User name</th>
                             <th>location</th>
                             <th>unit</th>
                             <th>unit type</th>
                         </tr>
                     </thead>
                     <tbody>
-                        {this.state.users.map(element => {
-                            return <tr name={`row-${element.id}${element.blocks_id}${element.units_type_id} ${element.customer_id} $`} key={this.state.users.indexOf(element)}>
-                            <td>{element.id === "undefined" ? "" : element.id}</td>
+                        {this.state.customerDetails.map(element => {
+                            console.log("element", element)
+                            return <tr name={`row-${element.id}`} key={this.state.customerDetails.indexOf(element)}>
+                                <td>{element.id === "undefined" ? "" : element.id}</td>
+                                <td>{element.username}</td>
                                 <td>{element.address}</td>
                                 <td>{element.unit_name}</td>
                                 <td>{element.name}</td>

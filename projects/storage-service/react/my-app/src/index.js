@@ -22,6 +22,7 @@ import AllBlocks from "./components/viewAllBlocks";
 import AllLocations from "./components/viewAllLocations";
 import LogOut from "./components/LogOut";
 import ViewCustomerDetails from './components/ViewCustomerDetails';
+import CustomerDetails from './components/customerUnit'
 
 import "./app.css";
 
@@ -30,7 +31,7 @@ ReactDOM.render(
         <Router>
             <div>
                 <Route exact path='/' component={Home} />
-                <Route path='/logIn' component={LogIn} />
+                <Route path='/login' component={LogIn} />
                 <Route path='/signUp' component={SignUp} />
                 <Route path='logout' component={LogOut} />
                 <Route path='/business' component={BusinessFrom} />
@@ -48,6 +49,7 @@ ReactDOM.render(
                 <Route path="/viewAllBlocks" component={AllBlocks} />
                 <Route path="/viewAllBusinessLocations" component={AllLocations} />
                 <Route path="/viewCustomerDetails" component={ViewCustomerDetails} />
+                <Route path="/userdetails" component={CustomerDetails} />
             </div>
         </Router>
     </Provider >,

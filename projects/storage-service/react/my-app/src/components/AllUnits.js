@@ -46,7 +46,7 @@ class AllUnits extends Component {
                     </label>
                 </div>
                 <div>
-                    <Link to="/" ><button type="button" onClick={() => this.RentAUnit()}>Rent</button></Link>
+                    <Link to="/userdetails" ><button type="button" onClick={() => this.RentAUnit()}>Rent</button></Link>
                 </div>
             </div>
         )
