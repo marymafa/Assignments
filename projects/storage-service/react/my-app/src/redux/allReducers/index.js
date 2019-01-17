@@ -10,6 +10,7 @@ const rootReducer = combineReducers({
     selectValues,
     signUpPage,
     loginPage,
+    
    
 });
 export default rootReducer;

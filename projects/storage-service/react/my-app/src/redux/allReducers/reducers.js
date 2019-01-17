@@ -131,7 +131,7 @@ export const customerUnits = (state = { customer_id: "", unit_id: "" }, action) 
             newState = { ...state, customer_id: action.value };
             console.log(" customer id", newState);
             break;
-        case "UNIT_ID":
+        case "":
             newState = { ...state, unit_id: action.value };
             console.log("unit id", newState);
             break;

@@ -3,7 +3,8 @@ import axios from 'axios';
 import { Redirect, Link } from 'react-router-dom';
 import { connect } from "react-redux";
 import * as action from "../redux/actions";
-
+import jwt_decode from 'jwt-decode'
+import { decode } from 'punycode';
 class AllUnits extends Component {
     constructor(props) {
         super(props);
@@ -12,10 +13,10 @@ class AllUnits extends Component {
             selectedUnits: [],
             selectedUnit: this.props.selections,
         }
-
+        this.RentAUnit = this.RentAUnit.bind(this);
     }
     componentDidMount() {
-        axios.get("http://localhost:3002/unitsData").then(result => {
+        axios.get("http://localhost:3002/unitsData/" + this.props.unit).then(result => {
             this.setState({ unit: result.data })
         })
     }
@@ -24,11 +25,13 @@ class AllUnits extends Component {
         this.props.saveSelectedVAlues(data)
     }
     async  RentAUnit() {
+        var token = sessionStorage.getItem('jwt-secret');
+        var decoded = jwt_decode(JSON.parse(token).token);
+        console.log("token :", decoded);
         var postNewData = await axios.post('http://localhost:3002/RentAUnit', {
-            customer_id: this.props.customer_id,
+            customerEmail: decoded.email,
             unit_id: this.props.unit_id
         });
-        console.log("postNewData", postNewData)
     }
 
     render() {
@@ -46,7 +49,7 @@ class AllUnits extends Component {
                     </label>
                 </div>
                 <div>
-                    <Link to="/userdetails" ><button type="button" onClick={() => this.RentAUnit()}>Rent</button></Link>
+                    <Link to="/userdetails" ><button type="button" onClick={this.RentAUnit}>Rent</button></Link>
                 </div>
             </div>
         )
@@ -58,7 +61,9 @@ const mapStateToProps = (state) => {
         selections: state.selectValues.selections,
         customer_id: state.selectValues.selections,
         unit_id: state.selectValues.selections,
+        state: state
     }
+
 }
 
 const mapDispatchToProps = (dispatch) => {

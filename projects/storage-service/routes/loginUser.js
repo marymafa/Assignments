@@ -26,8 +26,6 @@ module.exports = app => {
             if (!user) {
                 return res.status(404).json({ message: "password is incorrect" });
             }
-            console.log("user", userFound.rows[0]);
-            // return user
             const token = jwt.encode(userFound.rows[0], 'jwt-secret');
             return res.json({ user, token });
 

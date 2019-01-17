@@ -11,24 +11,18 @@ export default class CustomerDetails extends Component {
         }
     }
 
-
     componentDidMount() {
         var getToken = sessionStorage.getItem('jwt-secret');
-        console.log("getToken", getToken)
-
-        var decodetoken = jwt.decode(JSON.parse(getToken))
-
+        let token = JSON.parse(getToken).token
+        var decodetoken = jwt.decode(token)
         var results = axios.get("http://localhost:3002/RentAUnit/" + decodetoken.email)
             .then(reponse => this.setState({ customerDetails: reponse.data }))
             .catch(e => console.log(e));
 
     }
 
-
-
-
     render() {
-        console.log("customerDetails" , this.state.customerDetails)
+        console.log("customerDetails", this.state.customerDetails)
         return (
             <div>
                 <h1>you have rented</h1>
@@ -37,17 +31,16 @@ export default class CustomerDetails extends Component {
                         <tr>
                             <th>Reference Number</th>
                             <th>User name</th>
-                            <th>location</th>
                             <th>unit</th>
                             <th>unit type</th>
                         </tr>
                     </thead>
                     <tbody>
                         {this.state.customerDetails.map(element => {
+                            console.log("element", this.state.customerDetails)
                             return <tr name={`row-${element.id}`} key={this.state.customerDetails.indexOf(element)}>
                                 <td>{element.id === "undefined" ? "" : element.id}</td>
                                 <td>{element.username}</td>
-                                <td>{element.address}</td>
                                 <td>{element.unit_name}</td>
                                 <td>{element.name}</td>
                             </tr>

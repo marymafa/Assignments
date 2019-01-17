@@ -15,7 +15,7 @@ class Allunitstypes extends Component {
         this.redirectData = this.redirectData.bind(this)
     }
     componentDidMount() {
-        axios.get("http://localhost:3002/unitTypesData").then(result => {
+        axios.get("http://localhost:3002/unitTypesData/" + this.props.unit).then(result => {
             this.setState({ unit: result.data })
             const checkUnits = result.data;
             console.log("units", checkUnits);

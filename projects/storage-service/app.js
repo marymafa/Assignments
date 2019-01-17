@@ -33,15 +33,7 @@ app.get("/data", async (req, res) => {
     res.send(data.rows).status(201).end();
 });
 
-// app.get("/locationData/:selectedValue", async (req, res) => {
-//     console.log('req.params :', req.params);
-//     var locationData = await client.query('SELECT * FROM locations INNER JOIN blocks ON locations.id = blocks.locations_id  INNER JOIN units ON blocks.id = units.blocks_id INNER JOIN units_type ON units.units_type_id = units_type.id where locations.address =$1', [req.params.selectedValue])
-//     console.log("location", locationData)
-//     res.send(locationData.rows).status(201).end();
-// });
-// /:decodetoken
 app.get("/locationData", async (req, res) => {
-
     var data = await client.query('SELECT * FROM locations')
     res.send(data.rows).status(201).end();
 });
@@ -58,24 +50,45 @@ app.get('/blockData', async (req, res) => {
 });
 
 
-app.get('/unitTypesData', async (req, res) => {
-    var unitTypesData = await client.query('SELECT * FROM units_type')
-    res.send(unitTypesData.rows).status(201).end();
+app.get('/unitTypesData/:unitType', async (req, res) => {
+
+    var selectedUnitTypes = req.params.unitType.split(" ")
+    var unitsDetails = await client.query('SELECT * FROM units')
+    console.log('what is unitsD', unitsDetails)
+    var unitTypeDetails = await client.query('SELECT * FROM units_type')
+    var unitType = unitTypeDetails.rows
+    var units = unitsDetails.rows;
+    var results = unitType.find(item => {
+        var returningObjects = item.name === selectedUnitTypes[0] && item.length === selectedUnitTypes[1] && item.width === selectedUnitTypes[2] && item.height === selectedUnitTypes[3]
+        return returningObjects
+    })
+    var allAvailableUnits = units.filter(unit => {
+        var foundId = unit.unit_type_id
+        if (foundId === results.id) {
+            return unit.name
+        }
+    }).map(units => {
+        return units.name
+    })
+    try {
+        res.send(allAvailableUnits).status(201).end()
+
+    } catch (error) {
+        res.status(500).end()
+    }
 });
 
-app.get('/unitsData', async (req, res) => {
-    console.log('this are the units', req.body);
+app.get('/unitsData/:unit', async (req, res) => {
     var unitsData = await client.query('SELECT * FROM units')
     res.send(unitsData.rows).status(201).end();
 })
 app.get('/RentAUnit/:email', async (req, res) => {
-    console.log(req.params)
+    console.log("params", req.params.email)
     var customerUnits = await client.query(`SELECT * FROM customer 
     INNER JOIN customer_units ON  customer.id = customer_units.customer_id INNER JOIN 
     units ON customer_units.unit_id = units.id INNER JOIN  units_type ON units. 
     units_type_id = units_type.id WHERE customer.email = $1` , [req.params.email])
-
-    console.log(customerUnits.rows)
+    console.log("customer", customerUnits)
     res.send(customerUnits.rows).status(201).end();
 })
 // post
@@ -113,8 +126,14 @@ app.post('/unitTypesData', function (req, res) {
 });
 
 app.post('/RentAUnit', function (req, res) {
-    client.query('INSERT INTO customer_units( ustomer_id, unit_id) VALUES ($1,$2)', [req.body.customer_id], [req.body.unit_id], (err, res) => {
-        console.log("err,res")
+    var userEmailId = 0;
+    client.query('SELECT id FROM customer WHERE email = $1', [req.body.customerEmail], (err, res) => {
+        if (err) return err;
+        userEmailId = res.rows[0].id
+    });
+    client.query('INSERT INTO customer_units(customer_id, unit_id) VALUES ($1,$2)', [userEmailId, +req.body.unit_id], (err, res) => {
+        if (err) return err;
+        console.log(res);
     });
     res.status(201).end()
 })
@@ -123,12 +142,6 @@ app.post('/unitsData', function (req, res) {
     console.log("unit details", req.body);
     client.query('INSERT INTO  units(unit_name,blocks_id,units_type_id) VALUES($1,$2,$3)', [req.body.unit_name, Number(req.body.blocks_id), Number(req.body.units_type_id)], (err, res) => {
         console.log("res", res, err);
-        // if (err) {
-        //     console.log(err);
-        //     return  res.status(500).end()
-        // } else {
-        //     console.log(res);
-        // }
     })
     return res.status(201).end()
 
