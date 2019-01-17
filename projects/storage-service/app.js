@@ -68,9 +68,14 @@ app.get('/unitsData', async (req, res) => {
     var unitsData = await client.query('SELECT * FROM units')
     res.send(unitsData.rows).status(201).end();
 })
-app.get('/RentAUnit/:decodetoken', async (req, res) => {
-    console.log(req.params).rows
-    var customerUnits = await client.query('SELECT * FROM customer INNER JOIN customer_units ON  customer.id = customer_units.customer_id INNER JOIN units ON customer_units.unit_id = units.id INNER JOIN  units_type ON units. units_type_id = units_type.id')
+app.get('/RentAUnit/:email', async (req, res) => {
+    console.log(req.params)
+    var customerUnits = await client.query(`SELECT * FROM customer 
+    INNER JOIN customer_units ON  customer.id = customer_units.customer_id INNER JOIN 
+    units ON customer_units.unit_id = units.id INNER JOIN  units_type ON units. 
+    units_type_id = units_type.id WHERE customer.email = $1` , [req.params.email])
+
+    console.log(customerUnits.rows)
     res.send(customerUnits.rows).status(201).end();
 })
 // post
