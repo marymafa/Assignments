@@ -29,6 +29,7 @@ export default class ViewCustomerDetails extends Component {
                     <thead>
                         <tr>
                             <th>Reference Number</th>
+                            <th>name</th>
                             <th>location</th>
                             <th>unit</th>
                             <th>unit type</th>
@@ -36,8 +37,10 @@ export default class ViewCustomerDetails extends Component {
                     </thead>
                     <tbody>
                         {this.state.users.map(element => {
+                            console.log("element", element)
                             return <tr name={`row-${element.id}${element.blocks_id}${element.units_type_id} ${element.customer_id} $`} key={this.state.users.indexOf(element)}>
                                 <td>{element.id === "undefined" ? "" : element.id}</td>
+                                <td>{element.username}</td>
                                 <td>{element.address}</td>
                                 <td>{element.unit_name}</td>
                                 <td>{element.name}</td>

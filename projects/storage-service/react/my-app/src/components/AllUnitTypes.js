@@ -15,15 +15,12 @@ class Allunitstypes extends Component {
         this.redirectData = this.redirectData.bind(this)
     }
     componentDidMount() {
-        axios.get("http://localhost:3002/unitTypesData/" + this.props.unit).then(result => {
+        axios.get("http://localhost:3002/unitTypesData").then(result => {
             this.setState({ unit: result.data })
             const checkUnits = result.data;
             console.log("units", checkUnits);
-            // const checkFilter = (valueItem) => (el) => el.id <= valueItem;
-            // let res = checkUnits.filter(checkFilter('2'));
-            // const filtereData = this.state.unit.filter(item => item.value === this.state.unit)
-            // console.log("checkFilter", res);
         })
+        
     }
     SelectValue = (e) => {
         let data = {}

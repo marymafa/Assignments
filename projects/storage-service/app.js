@@ -39,7 +39,11 @@ app.get("/locationData", async (req, res) => {
 });
 
 app.get('/loginData', async (req, res, next) => {
-    var unitsData = await client.query('SELECT * FROM customer INNER JOIN customer_units ON  customer.id = customer_units.customer_id INNER JOIN units ON customer_units.unit_id = units.id INNER JOIN  units_type ON units. units_type_id = units_type.id')
+    var unitsData = await client.query(`SELECT * FROM customer 
+    INNER JOIN customer_units ON  customer.id = customer_units.customer_id 
+    INNER JOIN units ON customer_units.unit_id = units.id 
+    INNER JOIN  units_type ON units. units_type_id = units_type.id
+    INNER JOIN locations ON locations.id = units.id `)
     console.log("unitsData", unitsData);
     res.send(unitsData.rows).status(201).end();
 })
@@ -50,36 +54,14 @@ app.get('/blockData', async (req, res) => {
 });
 
 
-app.get('/unitTypesData/:unitType', async (req, res) => {
-
-    var selectedUnitTypes = req.params.unitType.split(" ")
-    var unitsDetails = await client.query('SELECT * FROM units')
-    console.log('what is unitsD', unitsDetails)
-    var unitTypeDetails = await client.query('SELECT * FROM units_type')
-    var unitType = unitTypeDetails.rows
-    var units = unitsDetails.rows;
-    var results = unitType.find(item => {
-        var returningObjects = item.name === selectedUnitTypes[0] && item.length === selectedUnitTypes[1] && item.width === selectedUnitTypes[2] && item.height === selectedUnitTypes[3]
-        return returningObjects
-    })
-    var allAvailableUnits = units.filter(unit => {
-        var foundId = unit.unit_type_id
-        if (foundId === results.id) {
-            return unit.name
-        }
-    }).map(units => {
-        return units.name
-    })
-    try {
-        res.send(allAvailableUnits).status(201).end()
-
-    } catch (error) {
-        res.status(500).end()
-    }
+app.get('/unitTypesData', async (req, res) => {
+    var data = await client.query('SELECT * FROM units_type')
+    res.send(data.rows).status(201).end();
 });
 
+
 app.get('/unitsData/:unit', async (req, res) => {
-    var unitsData = await client.query('SELECT * FROM units')
+    var unitsData = await client.query('select  * from units where units.id NOT IN(select customer_units.unit_id from customer_units inner join units on units.id=customer_units.unit_id)')
     res.send(unitsData.rows).status(201).end();
 })
 app.get('/RentAUnit/:email', async (req, res) => {
@@ -126,17 +108,9 @@ app.post('/unitTypesData', function (req, res) {
     res.status(201).end()
 });
 
-app.post('/RentAUnit', function (req, res) {
-    var userEmailId = 0;
-    console.log("useremail", userEmailId)
-    client.query('SELECT id FROM customer WHERE email = $1', [req.body.customerEmail], (err, res) => {
-        if (err) return err;
-        userEmailId = res.rows[0].id
-    });
-    client.query('INSERT INTO customer_units(customer_id, unit_id) VALUES ($1,$2)', [userEmailId, +req.body.unit_id], (err, res) => {
-        if (err) return err;
-        console.log(res);
-    });
+app.post('/RentAUnit', async function (req, res) {
+    var userEmailId = await client.query('SELECT id FROM customer WHERE email = $1', [req.body.customerEmail]);
+    await client.query('INSERT INTO customer_units(customer_id, unit_id) VALUES ($1,$2)', [userEmailId.rows[0].id, +req.body.unit_id]);
     res.status(201).end()
 })
 

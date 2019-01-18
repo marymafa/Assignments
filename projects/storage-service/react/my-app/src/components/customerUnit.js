@@ -16,6 +16,7 @@ export default class CustomerDetails extends Component {
         var getToken = sessionStorage.getItem('jwt-secret');
         let token = JSON.parse(getToken).token
         var decodetoken = jwt.decode(token)
+        console.log("decodetoken", decodetoken);
         var results = axios.get("http://localhost:3002/RentAUnit/" + decodetoken.email)
             .then(reponse => this.setState({ customerDetails: reponse.data }))
             .catch(e => console.log(e));

@@ -55,7 +55,7 @@ class BusinessFrom extends React.Component {
                 <Link to="/businessOwnerLogin" >login</Link>|
                 <Link to="/" >Logout</Link>
                 <h1>Storage Service</h1>
-                <h2>Register your business </h2>
+                <h2>Login if you have registered your business Or Register your business below </h2>
                 <div>
                     <label>Name</label>
                     <input type="text" data-toggle="tooltip" data-placement="top" title="name" business onChange={this.inputBusinessName} />
