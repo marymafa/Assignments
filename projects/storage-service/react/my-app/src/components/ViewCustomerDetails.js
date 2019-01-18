@@ -23,7 +23,8 @@ export default class ViewCustomerDetails extends Component {
         return (
             <div>
                 <Link to="/" >Logout</Link>|
-                <Link to="/business">register another business</Link>
+                <Link to="/business">register another business</Link>|
+                <Link to="/availableunits">remaining units</Link>
                 <h1>customer Details</h1>
                 <div>
                     <thead>

@@ -24,8 +24,8 @@ import LogOut from "./components/LogOut";
 import ViewCustomerDetails from './components/ViewCustomerDetails';
 import CustomerDetails from './components/customerUnit';
 import BusinessOwnerLogin from './components/BusinessOwnerLogin';
-import BusinessOwnerSignUp from './components/BusinessOwnerSignUp'
-
+import BusinessOwnerSignUp from './components/BusinessOwnerSignUp';
+import AvailableUnits from './components/AvailableUnits'
 import "./app.css";
 
 ReactDOM.render(
@@ -54,6 +54,7 @@ ReactDOM.render(
                 <Route path="/viewAllBusinessLocations" component={AllLocations} />
                 <Route path="/viewCustomerDetails" component={ViewCustomerDetails} />
                 <Route path="/userdetails" component={CustomerDetails} />
+                <Route path="/availableunits" component={AvailableUnits} />
             </div>
         </Router>
     </Provider >,

@@ -60,7 +60,7 @@ app.get('/unitTypesData', async (req, res) => {
 });
 
 
-app.get('/unitsData/:unit', async (req, res) => {
+app.get('/unitsData', async (req, res) => {
     var unitsData = await client.query('select  * from units where units.id NOT IN(select customer_units.unit_id from customer_units inner join units on units.id=customer_units.unit_id)')
     res.send(unitsData.rows).status(201).end();
 })

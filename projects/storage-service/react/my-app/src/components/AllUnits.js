@@ -16,7 +16,7 @@ class AllUnits extends Component {
         this.RentAUnit = this.RentAUnit.bind(this);
     }
     componentDidMount() {
-        axios.get("http://localhost:3002/unitsData/" + this.props.unit).then(result => {
+        axios.get("http://localhost:3002/unitsData").then(result => {
             this.setState({ unit: result.data })
         })
     }
