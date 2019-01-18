@@ -48,11 +48,14 @@ class BusinessOwnerSignUp extends React.Component {
             return <Redirect to='/viewCustomerDetails' />
         }
     }
+    removeIten() {
+        sessionStorage.removeItem('jwt-secret');
+    }
     render() {
         return (
             <div>
                 <div>
-                    <Link to="/" >Logout</Link> |
+                    <button type="button" value="Submit" onClick={() => this.removeIten()}><Link to="/" >Logout</Link></button>|
                     <Link to="/businessOwnerLogin">login</Link>
                 </div>
                 <h1>Register here</h1>

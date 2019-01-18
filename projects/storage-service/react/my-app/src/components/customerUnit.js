@@ -22,12 +22,14 @@ export default class CustomerDetails extends Component {
             .catch(e => console.log(e));
 
     }
-
+    removeIten() {
+        sessionStorage.removeItem('jwt-secret');
+    }
     render() {
         console.log("customerDetails", this.state.customerDetails)
         return (
             <div>
-                <Link to="/" >Logout</Link>|
+                <button type="button" value="Submit" onClick={() => this.removeIten()} ><Link to="/" >Logout</Link></button>|
                 <Link to="/view_units">Rent another unit</Link>
                 <h1>you have rented</h1>
                 <div>

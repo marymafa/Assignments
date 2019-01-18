@@ -52,14 +52,15 @@ class LogIn extends React.Component {
             return <Redirect to='/viewAllBusinessLocations' />
         }
     }
+   
     render() {
         console.log("this is my state", this.props);
 
         return (
             <div>
                 <div>
-                    <Link to="/" >Logout</Link>|
                     <Link to="/signUp" >signup</Link>
+                    <Link to="/" >Logout</Link>
                 </div>
                 <div><h1>Enter your details</h1> </div>
                 <div>

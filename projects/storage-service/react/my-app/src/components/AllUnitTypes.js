@@ -18,7 +18,6 @@ class Allunitstypes extends Component {
         axios.get("http://localhost:3002/unitTypesData").then(result => {
             this.setState({ unit: result.data })
             const checkUnits = result.data;
-            console.log("units", checkUnits);
         })
         
     }

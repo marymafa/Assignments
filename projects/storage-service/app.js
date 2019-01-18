@@ -55,7 +55,7 @@ app.get('/blockData', async (req, res) => {
 
 
 app.get('/unitTypesData', async (req, res) => {
-    var data = await client.query('SELECT * FROM units_type')
+    var data = await client.query('SELECT * from units_type where units_type.id not in (select customer_units.unit_id from customer_units inner join units on units.id=customer_units.unit_id )')
     res.send(data.rows).status(201).end();
 });
 

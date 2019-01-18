@@ -45,14 +45,18 @@ class SignUp extends React.Component {
     };
     renderRedirect = () => {
         if (this.state.redirect) {
-            return <Redirect to='/viewAllBusinessLocations' />
+            return <Redirect to='/login' />
         }
+    }
+
+    removeIten() {
+        sessionStorage.removeItem('jwt-secret');
     }
     render() {
         return (
             <div>
-                 <div>
-                    <Link to="/" >Logout</Link> |   
+                <div>
+                    <button type="button" value="Submit" onClick={() => this.removeIten()}><Link to="/" >Logout</Link></button>|
                     <Link to="/login" >login</Link>
                 </div>
                 <h1>Register here</h1>
@@ -72,7 +76,7 @@ class SignUp extends React.Component {
                     {this.renderRedirect()}
                     <button type="button" value="Submit" onClick={() => this.postData()} >Register</button>
                 </div>
-                
+
             </div>
         )
     }

@@ -22,7 +22,7 @@ export default class ViewCustomerDetails extends Component {
         console.log("this is the users", this.state.users)
         return (
             <div>
-                <Link to="/" >Logout</Link>|
+                <button type="button" value="Submit" onClick={() => this.removeIten()}><Link to="/" >Logout</Link></button>|
                 <Link to="/business">register another business</Link>|
                 <Link to="/availableunits">remaining units</Link>
                 <h1>customer Details</h1>
