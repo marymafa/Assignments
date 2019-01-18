@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import axios from 'axios';
+import { Redirect, Link } from 'react-router-dom';
 
 
 
@@ -12,7 +13,7 @@ export default class ViewCustomerDetails extends Component {
         }
     }
     componentDidMount() {
-    
+
         axios.get("http://localhost:3002/loginData").then(result => {
             this.setState({ users: result.data })
         })
@@ -21,6 +22,8 @@ export default class ViewCustomerDetails extends Component {
         console.log("this is the users", this.state.users)
         return (
             <div>
+                <Link to="/" >Logout</Link>|
+                <Link to="/business">register another business</Link>
                 <h1>customer Details</h1>
                 <div>
                     <thead>

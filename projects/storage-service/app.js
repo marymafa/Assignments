@@ -85,9 +85,10 @@ app.get('/unitsData/:unit', async (req, res) => {
 app.get('/RentAUnit/:email', async (req, res) => {
     console.log("params", req.params.email)
     var customerUnits = await client.query(`SELECT * FROM customer 
-    INNER JOIN customer_units ON  customer.id = customer_units.customer_id INNER JOIN 
-    units ON customer_units.unit_id = units.id INNER JOIN  units_type ON units. 
-    units_type_id = units_type.id WHERE customer.email = $1` , [req.params.email])
+    INNER JOIN customer_units ON  customer.id = customer_units.customer_id 
+    INNER JOIN units ON customer_units.unit_id = units.id 
+    INNER JOIN  units_type ON units. units_type_id = units_type.id 
+    INNER JOIN locations ON locations.id = units.id WHERE customer.email = $1` , [req.params.email])
     console.log("customer", customerUnits)
     res.send(customerUnits.rows).status(201).end();
 })
@@ -127,6 +128,7 @@ app.post('/unitTypesData', function (req, res) {
 
 app.post('/RentAUnit', function (req, res) {
     var userEmailId = 0;
+    console.log("useremail", userEmailId)
     client.query('SELECT id FROM customer WHERE email = $1', [req.body.customerEmail], (err, res) => {
         if (err) return err;
         userEmailId = res.rows[0].id

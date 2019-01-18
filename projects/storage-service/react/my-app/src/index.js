@@ -22,7 +22,9 @@ import AllBlocks from "./components/viewAllBlocks";
 import AllLocations from "./components/viewAllLocations";
 import LogOut from "./components/LogOut";
 import ViewCustomerDetails from './components/ViewCustomerDetails';
-import CustomerDetails from './components/customerUnit'
+import CustomerDetails from './components/customerUnit';
+import BusinessOwnerLogin from './components/BusinessOwnerLogin';
+import BusinessOwnerSignUp from './components/BusinessOwnerSignUp'
 
 import "./app.css";
 
@@ -31,6 +33,8 @@ ReactDOM.render(
         <Router>
             <div>
                 <Route exact path='/' component={Home} />
+                <Route path='/businessOwnerLogin' component={BusinessOwnerLogin} />
+                <Route path='/businessOwnerSignup' component={BusinessOwnerSignUp} />
                 <Route path='/login' component={LogIn} />
                 <Route path='/signUp' component={SignUp} />
                 <Route path='logout' component={LogOut} />

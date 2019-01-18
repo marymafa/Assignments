@@ -32,11 +32,14 @@ class AllUnits extends Component {
             customerEmail: decoded.email,
             unit_id: this.props.unit_id
         });
+        this.setState({ unit: postNewData })
     }
 
     render() {
+        console.log("props", this.props)
         return (
             <div>
+                 <Link to="/" >Logout</Link>
                 <h1>All units</h1>
                 <div></div>
                 <div className="unit">

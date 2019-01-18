@@ -41,7 +41,7 @@ class BlockFrom extends React.Component {
                     <input data-toggle="tooltip" data-placement="top" title=" block_name" type="text" onChange={this.inputBlockName} />
                 </div>
 
-            {this.renderRedirect()}
+                {this.renderRedirect()}
                 <div><button onClick={() => this.postData()}>Submit</button></div>
             </div>
         )

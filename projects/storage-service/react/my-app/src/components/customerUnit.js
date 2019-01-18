@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import axios from 'axios';
 import jwt from 'jsonwebtoken';
+import { Redirect, Link } from 'react-router-dom';
 
 export default class CustomerDetails extends Component {
     constructor(props) {
@@ -25,22 +26,26 @@ export default class CustomerDetails extends Component {
         console.log("customerDetails", this.state.customerDetails)
         return (
             <div>
+                <Link to="/" >Logout</Link>|
+                <Link to="/view_units">Rent another unit</Link>
                 <h1>you have rented</h1>
                 <div>
                     <thead>
                         <tr>
                             <th>Reference Number</th>
                             <th>User name</th>
+                            <th>Address</th>
                             <th>unit</th>
                             <th>unit type</th>
                         </tr>
                     </thead>
                     <tbody>
                         {this.state.customerDetails.map(element => {
-                            console.log("element", this.state.customerDetails)
+                            console.log("elementttt", this.state.customerDetails)
                             return <tr name={`row-${element.id}`} key={this.state.customerDetails.indexOf(element)}>
                                 <td>{element.id === "undefined" ? "" : element.id}</td>
                                 <td>{element.username}</td>
+                                <td>{element.address}</td>
                                 <td>{element.unit_name}</td>
                                 <td>{element.name}</td>
                             </tr>

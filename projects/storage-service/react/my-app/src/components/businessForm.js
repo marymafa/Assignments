@@ -52,6 +52,8 @@ class BusinessFrom extends React.Component {
     render() {
         return (
             <div>
+                <Link to="/businessOwnerLogin" >login</Link>|
+                <Link to="/" >Logout</Link>
                 <h1>Storage Service</h1>
                 <h2>Register your business </h2>
                 <div>
@@ -73,7 +75,7 @@ class BusinessFrom extends React.Component {
                 <div>
                     {this.renderRedirect()}
                     <button onClick={() => this.postData()}>Register</button>
-                   
+
                 </div>
             </div>
         )
