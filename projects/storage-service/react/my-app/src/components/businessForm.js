@@ -11,10 +11,10 @@ class BusinessFrom extends React.Component {
             redirect: false,
         }
         this.inputBusinessName = this.inputBusinessName.bind(this);
-        this.handleSubmit = this.handleSubmit.bind(this);
         this.inputContactName = this.inputContactName.bind(this);
         this.inputContactEmail = this.inputContactEmail.bind(this);
         this.inputContactNumber = this.inputContactNumber.bind(this);
+        this.validFields = this.validFields.bind(this)
     }
 
     async  postData() {
@@ -41,9 +41,41 @@ class BusinessFrom extends React.Component {
     inputContactNumber(e) {
         this.props.updateContactNumber(e.target.value)
     }
-    handleSubmit(val) {
-        this.props.submitNewData(this.props.name, this.props.contact_name, this.props.contact_email, this.props.contact_number)
+
+    validFields() {
+
+        var valid = true;
+        let validEmail = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
+        let testingEmail = validEmail.test(this.refs.email.value);
+        var message = "";
+        let validContactNumber = /[-]?[0-9]+[,.]?[0-9]*([\/][0-9]+[,.]?[0-9]*)*/;
+        let testContactNumber = validContactNumber.test(this.refs.contact_number.value)
+
+        if (testingEmail) {
+            return valid
+            message += "you have entered the wrong email('exmple@gmail.com')"
+            this.props.updateContactEmail({ email: valid })
+            console.log("email valid", this.props.email)
+
+        }
+
+        if (this.refs.name.value > 0) {
+            this.props.updateName({ name: valid })
+            console.log("name", this.props.updateName({ name: valid }))
+
+        }
+        if (this.refs.contact_name.value > 0) {
+            this.props.updateContactName({ contact_name: valid })
+            console.log("cname", this.props.updateContactName({ contact_name: valid }))
+
+        }
+        if (testContactNumber) {
+            return valid
+            this.props.updateContactNumber({ contact_number: valid })
+            console.log("contact_number", this.props.updateContactNumber({ contact_number: valid }))
+        }
     }
+
     renderRedirect = () => {
         if (this.state.redirect) {
             return <Redirect to='/view_all_businesses' />
@@ -55,22 +87,57 @@ class BusinessFrom extends React.Component {
                 <Link to="/businessOwnerLogin" >login</Link>|
                 <Link to="/" >Logout</Link>
                 <h1>Storage Service</h1>
-                <h2>Login if you have registered your business Or Register your business below </h2>
+                <h2>Please login if you have registered your business Or   register your business, to get started </h2>
                 <div>
                     <label>Name</label>
-                    <input type="text" data-toggle="tooltip" data-placement="top" title="name" business onChange={this.inputBusinessName} />
+                    <input
+                        ref="name"
+                        value={this.props.name}
+                        type="text"
+                        data-toggle="tooltip"
+                        data-placement="top"
+                        title="name"
+                        onChange={(e) => { this.inputBusinessName(e); this.validFields() }}
+
+                    />
                 </div>
                 <div>
                     <label>Contact Name</label>
-                    <input type="text" data-toggle="tooltip" data-placement="top" title=" contact name" onChange={this.inputContactName} />
+                    <input
+                        ref="contact_name"
+                        type="text"
+                        value={this.props.contact_name}
+                        data-toggle="tooltip"
+                        data-placement="top"
+                        title=" contact name"
+                        onChange={(e) => { this.inputContactName(e); this.validFields() }}
+                    />
+
                 </div>
                 <div>
                     <label>Contact Email</label>
-                    <input type="text" data-toggle="tooltip" data-placement="top" title=" contact email" onChange={this.inputContactEmail} />
+                    <input
+                        ref="email"
+                        type="text"
+                        value={this.props.email}
+                        data-toggle="tooltip"
+                        data-placement="top"
+                        title=" contact email"
+                        onChange={(e) => { this.inputContactEmail(e); this.validFields() }}
+                    />
                 </div>
                 <div>
                     <label>Contact Number</label>
-                    <input type="tel" data-toggle="tooltip" data-placement="top" title=" contact number" onChange={this.inputContactNumber} />
+                    <input
+                        ref="contact_number"
+                        type="tel"
+                        data-toggle="tooltip"
+                        value={this.props.contact_number}
+                        data-placement="top"
+                        title=" contact number"
+                        onChange={(e) => { this.inputContactNumber(e); this.validFields() }}
+
+                    />
                 </div>
                 <div>
                     {this.renderRedirect()}

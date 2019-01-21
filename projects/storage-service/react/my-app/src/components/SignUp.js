@@ -10,7 +10,9 @@ class SignUp extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            redirect: false
+            redirect: false,
+            fields: {},
+            errors: {}
         }
         super(props);
         this.inputusername = this.inputusername.bind(this);
@@ -29,7 +31,6 @@ class SignUp extends React.Component {
         sessionStorage.setItem("jwt-secret", obj);
         sessionStorage.getItem('myData', obj);
         console.log("obj", obj);
-
         this.setState({
             redirect: true
         })
@@ -48,7 +49,6 @@ class SignUp extends React.Component {
             return <Redirect to='/login' />
         }
     }
-
     removeIten() {
         sessionStorage.removeItem('jwt-secret');
     }
@@ -66,7 +66,7 @@ class SignUp extends React.Component {
                 </div>
                 <div>
                     <label>Email</label>
-                    <input type="email" name="email" onChange={this.inputEmail} />
+                    <input refs="email" type="email" name="email" onChange={this.inputEmail} />
                 </div>
                 <div>
                     <label>Password</label>
@@ -76,7 +76,6 @@ class SignUp extends React.Component {
                     {this.renderRedirect()}
                     <button type="button" value="Submit" onClick={() => this.postData()} >Register</button>
                 </div>
-
             </div>
         )
     }

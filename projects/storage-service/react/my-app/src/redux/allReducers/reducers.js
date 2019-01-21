@@ -4,11 +4,21 @@ export const registerBusinesses = (state = { name: "", contact_name: "", contact
     switch (action.type) {
         case "NAME":
             newState = { ...state, name: action.value };
+            console.log("name", newState)
             break;
         case "CONTACT_NAME":
             newState = { ...state, contact_name: action.value };
+            console.log("contactNam", newState)
             break;
         case "CONTACT_EMAIL":
+            newState = { ...state, contact_email: action.value };
+            console.log("email", newState)
+            break;
+        case "CONTACT_NUMBER":
+            newState = { ...state, contact_number: action.value };
+            console.log("contactNum", newState)
+            break;
+
     }
     return newState;
 };

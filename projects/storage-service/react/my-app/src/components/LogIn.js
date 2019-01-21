@@ -53,6 +53,11 @@ class LogIn extends React.Component {
         }
     }
    
+    handleKeyPress = (e) => {
+        if (e.key === 'Enter') {
+          return this.postData();
+        }
+      }
     render() {
         console.log("this is my state", this.props);
 

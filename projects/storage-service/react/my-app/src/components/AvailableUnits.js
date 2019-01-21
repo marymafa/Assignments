@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
 import axios from 'axios';
+import { Link } from "react-router-dom";
+
 export default class AvailableUnits extends Component {
     constructor(props) {
         super(props);
@@ -14,10 +16,17 @@ export default class AvailableUnits extends Component {
             this.setState({ availableUnits: result.data })
         })
     }
+
+    removeIten() {
+        sessionStorage.removeItem('jwt-secret');
+    }
     render() {
-        console.log("state");
         return (
             <div>
+                <div>
+                    <button type="button" value="Submit" onClick={() => this.removeIten()}><Link to="/" >Logout</Link></button>|
+                    <Link to="/login" >login</Link>
+                </div>
                 <h1>Available units</h1>
                 <div>
                     <thead>

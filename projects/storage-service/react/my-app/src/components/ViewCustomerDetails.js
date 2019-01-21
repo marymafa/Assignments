@@ -18,6 +18,10 @@ export default class ViewCustomerDetails extends Component {
             this.setState({ users: result.data })
         })
     }
+    
+    removeIten() {
+        sessionStorage.removeItem('jwt-secret');
+    }
     render() {
         console.log("this is the users", this.state.users)
         return (
