@@ -34,26 +34,27 @@ class LogIn extends React.Component {
             this.props.showErros(errors)
             console.log(errors);
         }
-        var res = await axios.post('http://localhost:3002/loginData', formInput);
+        // var res = await axios.post('http://localhost:3002/loginData', formInput);
         if (this.isEmpty(errors)) {
             var res = await axios.post('http://localhost:3002/loginData', formInput);
             this.setState({
                 redirect: true,
             })
+            if (res.status === 200) {
+                var obj = JSON.stringify(res.data);
+                 sessionStorage.setItem("jwt-secret", obj);
+                 sessionStorage.getItem('myData', obj);
+                 this.setState({
+                     redirect: true,
+                 })
+             } else {
+                 this.setState({ redirect: false })
+             } 
 
         }
 
 
-        if (res.status === 200) {
-            var obj = JSON.stringify(res.data);
-            sessionStorage.setItem("jwt-secret", obj);
-            sessionStorage.getItem('myData', obj);
-            this.setState({
-                redirect: true,
-            })
-        } else {
-            this.setState({ redirect: false })
-        }
+      
 
 
     };
