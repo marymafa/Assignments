@@ -13,18 +13,44 @@ class UnitsFrom extends React.Component {
         this.inputName = this.inputName.bind(this);
     }
     async  postData() {
-        console.log('this.props before sending to the api :', this.props);
-        var postNewData = await axios.post('http://localhost:3002/unitsData', {
+
+        let formInput = {
             unit_name: this.props.unit_name,
             blocks_id: this.props.blocks_id,
-            units_type_id:this.props.units_type_id,
-        });
-        console.log("TESTING PROPS", this.props.units_type_id)
+            units_type_id: this.props.units_type_id,
+        }
 
-        this.setState({
-            redirect: true,
-        })
+        let errors = this.validFormFields(formInput);
+        if (errors) {
+            this.props.showErros(errors)
+            console.log(errors);
+        }
+
+        if (this.isEmpty(errors)) {
+            var postNewData = await axios.post('http://localhost:3002/unitsData', formInput);
+            this.setState({
+                redirect: true,
+            })
+
+        }
+
     }
+    validFormFields(data) {
+        let errors = {};
+        if (data.unit_name == "") {
+            errors.unit_name = "unit_name is required";
+        }
+
+        this.props.showErros(errors)
+        return errors;
+    };
+    isEmpty(obj) {
+        for (var key in obj) {
+            if (obj.hasOwnProperty(key))
+                return false;
+        }
+        return true;
+    };
     inputName(e) {
         this.props.updateBlockName(e.target.value)
     }
@@ -43,6 +69,7 @@ class UnitsFrom extends React.Component {
                 <div>
                     <label>Units</label>
                     <input data-toggle="tooltip" data-placement="top" title="units" type="text" onChange={this.inputName} />
+                    <h4 style={{ color: "red" }}> {this.props.erros.unit_name}</h4>
                 </div>
                 {this.renderRedirect()}
                 <div><button onClick={() => this.postData()}>Submit</button></div>
@@ -56,6 +83,7 @@ const mapStateToProps = (state) => {
         unit_name: state.businessUnits.unit_name,
         blocks_id: state.selectValues.selections,
         units_type_id: state.selectValues.selections,
+        erros: state.registerBusinesses.errors
     }
 }
 
@@ -64,7 +92,9 @@ const mapDispatchToProps = (dispatch) => {
         updateBlockName: (name) => {
             dispatch(action.saveUnits(name))
         },
-        
+        showErros: (err) => {
+            dispatch(action.FieldsErros(err))
+        },
     }
 
 }

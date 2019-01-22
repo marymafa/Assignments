@@ -14,13 +14,44 @@ class BlockFrom extends React.Component {
     }
     async  postData() {
 
-        var postNewData = await axios.post('http://localhost:3002/blockData', {
+        let formInput = {
             name: this.props.name,
             locations_id: this.props.locations_id
-        });
-        this.setState({ redirect: true })
+        }
+
+        let errors = this.validFormFields(formInput);
+        if (errors) {
+            this.props.showErros(errors)
+            console.log(errors);
+        }
+
+        if (this.isEmpty(errors)) {
+            var postNewData = await axios.post('http://localhost:3002/blockData', formInput);
+            this.setState({
+                redirect: true,
+            })
+
+        }
 
     }
+
+    validFormFields(data) {
+        let errors = {};
+        if (data.name == "") {
+            errors.address = "block name is required";
+        }
+
+        this.props.showErros(errors)
+        return errors;
+    };
+    isEmpty(obj) {
+        for (var key in obj) {
+            if (obj.hasOwnProperty(key))
+                return false;
+        }
+        return true;
+    };
+
     inputBlockName(e) {
 
         this.props.updateBlockName(e.target.value)
@@ -38,9 +69,14 @@ class BlockFrom extends React.Component {
                 <h2>Enter  block name for the business</h2>
                 <div>
                     <label>Block</label>
-                    <input data-toggle="tooltip" data-placement="top" title=" block_name" type="text" onChange={this.inputBlockName} />
+                    <input
+                        data-toggle="tooltip"
+                        data-placement="top" title=" block_name"
+                        type="text"
+                        onChange={this.inputBlockName}
+                    />
+                    <h4 style={{ color: "red" }}> {this.props.erros.country}</h4>
                 </div>
-
                 {this.renderRedirect()}
                 <div><button onClick={() => this.postData()}>Submit</button></div>
             </div>
@@ -52,6 +88,7 @@ const mapStateToProps = (state) => {
     return {
         name: state.businessBlocks.name,
         locations_id: state.selectValues.selections,
+        erros: state.registerBusinesses.errors
     }
 }
 
@@ -62,7 +99,13 @@ const mapDispatchToProps = (dispatch) => {
         },
         updateLocationId: (locationid) => {
             dispatch(action.saveLocations_Id(locationid))
-        }
+        },
+        showErros: (err) => {
+            dispatch(action.FieldsErros(err))
+        },
+        showErros: (err) => {
+            dispatch(action.FieldsErros(err))
+        },
     }
 }
 export default connect(

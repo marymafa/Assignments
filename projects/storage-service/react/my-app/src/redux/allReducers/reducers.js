@@ -33,7 +33,6 @@ export const businessLocations = (state = { address: "", country: "", businesses
             break;
         case "BUSINESS_ID":
             newState = { ...state, businesses_id: action.value };
-            console.log("business id");
             break;
         case "ERROS":
             newState = { ...state, errors: action.value };
@@ -42,22 +41,23 @@ export const businessLocations = (state = { address: "", country: "", businesses
     return newState;
 };
 
-export const businessBlocks = (state = { name: "", locations_id: '' }, action) => {
+export const businessBlocks = (state = { name: "", locations_id: '', errors: {} }, action) => {
     let newState = state;
     switch (action.type) {
         case "BLOCK_NAME":
             newState = { ...state, name: action.value };
-            console.log("this is the unit", newState)
             break;
         case "LOCATION_ID":
             newState = { ...state, locations_id: action.value };
-            console.log("this is the unit", newState)
+            break;
+        case "ERROS":
+            newState = { ...state, errors: action.value };
             break;
     }
     return newState;
 };
 
-export const businessUnitTypes = (state = { name: "", length: "", height: "", width: "" }, action) => {
+export const businessUnitTypes = (state = { name: "", length: "", height: "", width: "", errors: {} }, action) => {
     let newState = state;
     switch (action.type) {
         case "NAME":
@@ -71,11 +71,15 @@ export const businessUnitTypes = (state = { name: "", length: "", height: "", wi
             break;
         case "WIDTH":
             newState = { ...state, width: action.value };
+            break;
+        case "ERROS":
+            newState = { ...state, errors: action.value };
+            break;
     }
     return newState;
 };
 
-export const businessUnits = (state = { unit_name: "", blocks_id: "", units_type_id: "" }, action) => {
+export const businessUnits = (state = { unit_name: "", blocks_id: "", units_type_id: "", errors: {} }, action) => {
     let newState = state;
     switch (action.type) {
         case "NAME":
@@ -86,6 +90,9 @@ export const businessUnits = (state = { unit_name: "", blocks_id: "", units_type
             break;
         case "UNIT_TYPES_ID":
             newState = { ...state, units_type_id: action.value };
+            break;
+        case "ERROS":
+            newState = { ...state, errors: action.value };
             break;
     }
     return newState;
@@ -102,26 +109,26 @@ export const selectValues = (state = { selections: '' }, action) => {
 
 };
 
-export const signUpPage = (state = { username: "", email: "", password: "" }, action) => {
+export const signUpPage = (state = { username: "", email: "", password: "", errors: {} }, action) => {
     let newState = state;
     switch (action.type) {
         case "ADD_USER_NAME":
             newState = { ...state, username: action.value };
-            console.log("name", newState);
             break;
         case "ADD_EMAIL":
             newState = { ...state, email: action.value };
-            console.log("email", newState);
             break;
         case "ADD_PASSWORD":
             newState = { ...state, password: action.value };
-            console.log("password", newState);
+            break;
+        case "ERROS":
+            newState = { ...state, errors: action.value };
             break;
     }
     return newState;
 }
 
-export const loginPage = (state = { email: "", password: "" }, action) => {
+export const loginPage = (state = { email: "", password: "", errors: {} }, action) => {
     let newState = state;
     switch (action.type) {
         case "CONFIRM_EMAIL":
@@ -131,6 +138,9 @@ export const loginPage = (state = { email: "", password: "" }, action) => {
         case "CONFIRM_PASSWORD":
             newState = { ...state, password: action.value };
             console.log("password", newState);
+            break;
+        case "ERROS":
+            newState = { ...state, errors: action.value };
             break;
     }
     return newState;

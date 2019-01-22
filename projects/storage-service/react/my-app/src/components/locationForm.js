@@ -80,7 +80,6 @@ class LocationForm extends React.Component {
                     <label>County</label>
                     <input data-toggle="tooltip" data-placement="top" title=" country" placeholder="e.g South Africa" type="text" onChange={this.inputBusinessCountry.bind(this)} />
                     <h4 style={{ color: "red" }}> {this.props.erros.country}</h4>
-
                 </div>
                 {this.renderRedirect()}
                 <div><button onClick={() => this.postData()}>Submit</button></div>
