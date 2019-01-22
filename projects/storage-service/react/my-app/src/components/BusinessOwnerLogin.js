@@ -22,25 +22,59 @@ class BusinessOwnerLogin extends React.Component {
         console.log("removed", sessionStorage.removeItem('jwt-secret'))
     }
     async  postData() {
-        var res = await axios.post('http://localhost:3002/loginData', {
+   
+
+        let formInput = {
             email: this.props.email,
             password: this.props.password
-        });
-        console.log("res", res.status);
+        }
 
-        if (res.status === 200) {
-            var obj = JSON.stringify(res.data);
-            sessionStorage.setItem("jwt-secret", obj);
-            sessionStorage.getItem('myData', obj);
+        let errors = this.validFormFields(formInput);
+        if (errors) {
+            this.props.showErros(errors)
+            console.log(errors);
+        }
+        // var res = await axios.post('http://localhost:3002/loginData', formInput);
+        if (this.isEmpty(errors)) {
+            var res = await axios.post('http://localhost:3002/loginData', formInput);
             this.setState({
                 redirect: true,
             })
-        } else {
-            this.setState({ redirect: false })
+            if (res.status === 200) {
+                var obj = JSON.stringify(res.data);
+                 sessionStorage.setItem("jwt-secret", obj);
+                 sessionStorage.getItem('myData', obj);
+                 this.setState({
+                     redirect: true,
+                 })
+             } else {
+                 this.setState({ redirect: false })
+             } 
+
+        }
+    };
+
+    validFormFields(data) {
+        let errors = {};
+        if (data.email == "") {
+            errors.email = "email is required";
         }
 
+        if (data.password == "") {
+            errors.password = "password is required"
+        }
 
+        this.props.showErros(errors)
+        return errors;
     };
+    isEmpty(obj) {
+        for (var key in obj) {
+            if (obj.hasOwnProperty(key))
+                return false;
+        }
+        return true;
+    };
+
     inputEmail(e) {
         this.props.updateEmail(e.target.value);
     };
@@ -70,10 +104,14 @@ class BusinessOwnerLogin extends React.Component {
                 <div>
                     <label>Email</label>
                     <input type="email" name="email" onChange={this.inputEmail} />
+                    <h4 style={{ color: "red" }}> {this.props.erros.email}</h4>
+               
                 </div>
                 <div>
                     <label>Password</label>
                     <input type="password" name="password" onChange={this.inputPassword} />
+                    <h4 style={{ color: "red" }}> {this.props.erros.password}</h4>
+               
                 </div>
                 <div>
                     {this.renderRedirect()}
@@ -87,7 +125,9 @@ class BusinessOwnerLogin extends React.Component {
 const mapStateToProps = (state) => {
     return {
         email: state.loginPage.email,
-        password: state.loginPage.password
+        password: state.loginPage.password,
+        erros: state.registerBusinesses.errors
+
     }
 }
 const mapDispatchToProps = (dispatch) => {
@@ -97,7 +137,10 @@ const mapDispatchToProps = (dispatch) => {
         },
         updatePassword: (password) => {
             dispatch(action.comfirmPassword(password))
-        }
+        },
+        showErros: (err) => {
+            dispatch(action.FieldsErros(err))
+        },
     }
 }
 export default connect(

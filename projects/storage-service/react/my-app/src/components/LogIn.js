@@ -53,10 +53,6 @@ class LogIn extends React.Component {
 
         }
 
-
-      
-
-
     };
 
     validFormFields(data) {
