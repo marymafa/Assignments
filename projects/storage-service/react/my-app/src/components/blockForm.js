@@ -38,7 +38,7 @@ class BlockFrom extends React.Component {
     validFormFields(data) {
         let errors = {};
         if (data.name == "") {
-            errors.address = "block name is required";
+            errors.name = "block name is required";
         }
 
         this.props.showErros(errors)
@@ -75,7 +75,7 @@ class BlockFrom extends React.Component {
                         type="text"
                         onChange={this.inputBlockName}
                     />
-                    <h4 style={{ color: "red" }}> {this.props.erros.country}</h4>
+                    <h4 style={{ color: "red" }}> {this.props.erros.name}</h4>
                 </div>
                 {this.renderRedirect()}
                 <div><button onClick={() => this.postData()}>Submit</button></div>
