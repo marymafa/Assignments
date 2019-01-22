@@ -88,3 +88,6 @@ export const customerId = (custid) => {
 export const unitId = (uniId) => {
     return { type: "UNIT_ID", value: uniId }
 }
+export const FieldsErros = (errors) => {
+    return { type: "ERROS", value: errors }
+}

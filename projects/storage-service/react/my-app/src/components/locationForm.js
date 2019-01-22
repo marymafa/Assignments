@@ -13,16 +13,47 @@ class LocationForm extends React.Component {
         }
     }
     async  postData() {
-        var postNewData = await axios.post('http://localhost:3002/locationData', {
+
+        let formInput = {
             address: this.props.address,
             country: this.props.country,
             businesses_id: this.props.businesses_id,
-        });
-        console.log("tess", this.props.address)
-        this.setState({
-            redirect: true
-        })
+        }
+
+        let errors = this.validFormFields(formInput);
+        if (errors) {
+            this.props.showErros(errors)
+            console.log(errors);
+        }
+
+        if (this.isEmpty(errors)) {
+            var postNewData = await axios.post('http://localhost:3002/locationData', formInput);
+            this.setState({
+                redirect: true,
+            })
+
+        }
     }
+    validFormFields(data) {
+        let errors = {};
+        if (data.address == "") {
+            errors.address = "address is required";
+        }
+        if (data.country == "") {
+            errors.country = "country  is required";
+        }
+
+        this.props.showErros(errors)
+        return errors;
+    };
+    isEmpty(obj) {
+        for (var key in obj) {
+            if (obj.hasOwnProperty(key))
+                return false;
+        }
+        return true;
+    };
+
     inputAddress(e) {
         this.props.updateAddress(e.target.value);
     }
@@ -42,10 +73,14 @@ class LocationForm extends React.Component {
                 <div>
                     <label>Address</label>
                     <input data-toggle="tooltip" data-placement="top" title=" address" placeholder="e.g bendor street polokwane" type="text" onChange={this.inputAddress.bind(this)} />
+                    <h4 style={{ color: "red" }}> {this.props.erros.address}</h4>
+
                 </div>
                 <div>
                     <label>County</label>
                     <input data-toggle="tooltip" data-placement="top" title=" country" placeholder="e.g South Africa" type="text" onChange={this.inputBusinessCountry.bind(this)} />
+                    <h4 style={{ color: "red" }}> {this.props.erros.country}</h4>
+
                 </div>
                 {this.renderRedirect()}
                 <div><button onClick={() => this.postData()}>Submit</button></div>
@@ -59,6 +94,7 @@ const mapStateToProps = (state) => {
         address: state.businessLocations.address,
         country: state.businessLocations.country,
         businesses_id: state.selectValues.selections,
+        erros: state.registerBusinesses.errors
     }
 }
 
@@ -72,7 +108,10 @@ const mapDispatchToProps = (dispatch) => {
         },
         updateBusinessID: (businesid) => {
             dispatch(action.businessId(businesid))
-        }
+        },
+        showErros: (err) => {
+            dispatch(action.FieldsErros(err))
+        },
     }
 }
 export default connect(

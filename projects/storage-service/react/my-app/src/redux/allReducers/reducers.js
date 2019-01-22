@@ -1,29 +1,28 @@
 
-export const registerBusinesses = (state = { name: "", contact_name: "", contact_email: "", contact_number: "" }, action) => {
+export const registerBusinesses = (state = { name: "", contact_name: "", contact_email: "", contact_number: "", errors: {} }, action) => {
     let newState = state
     switch (action.type) {
         case "NAME":
             newState = { ...state, name: action.value };
-            console.log("name", newState)
             break;
         case "CONTACT_NAME":
             newState = { ...state, contact_name: action.value };
-            console.log("contactNam", newState)
             break;
         case "CONTACT_EMAIL":
             newState = { ...state, contact_email: action.value };
-            console.log("email", newState)
             break;
         case "CONTACT_NUMBER":
             newState = { ...state, contact_number: action.value };
-            console.log("contactNum", newState)
+            break;
+        case "ERROS":
+            newState = { ...state, errors: action.value };
             break;
 
     }
     return newState;
 };
 
-export const businessLocations = (state = { address: "", country: "", businesses_id: '' }, action) => {
+export const businessLocations = (state = { address: "", country: "", businesses_id: '', errors: {} }, action) => {
     let newState = state
     switch (action.type) {
         case "ADDRESS":
@@ -35,6 +34,9 @@ export const businessLocations = (state = { address: "", country: "", businesses
         case "BUSINESS_ID":
             newState = { ...state, businesses_id: action.value };
             console.log("business id");
+            break;
+        case "ERROS":
+            newState = { ...state, errors: action.value };
             break;
     }
     return newState;

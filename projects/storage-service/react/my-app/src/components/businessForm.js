@@ -3,6 +3,7 @@ import { connect } from "react-redux";
 import * as action from "../redux/actions";
 import { Redirect, Link } from 'react-router-dom';
 import axios from 'axios';
+import { stringify } from "querystring";
 
 class BusinessFrom extends React.Component {
     constructor(props) {
@@ -14,20 +15,61 @@ class BusinessFrom extends React.Component {
         this.inputContactName = this.inputContactName.bind(this);
         this.inputContactEmail = this.inputContactEmail.bind(this);
         this.inputContactNumber = this.inputContactNumber.bind(this);
-        this.validFields = this.validFields.bind(this)
+    }
+
+
+    validFormFields(data) {
+        let errors = {};
+        if (data.contact_email == "") {
+            errors.contact_email = "email is required";
+        }
+        if (data.contact_name == "") {
+            errors.contact_name = "contact name is required";
+        }
+
+        if (data.name == "") {
+            errors.name = "name is required";
+        }
+
+        if (data.contact_number == "") {
+            errors.contact_number = "contact nember is required";
+        }
+
+        this.props.showErros(errors)
+        return errors;
+    }
+
+    isEmpty(obj) {
+        for (var key in obj) {
+            if (obj.hasOwnProperty(key))
+                return false;
+        }
+        return true;
     }
 
     async  postData() {
 
-        var postNewData = await axios.post('http://localhost:3002/data', {
+        let formInput = {
             name: this.props.name,
             contact_name: this.props.contact_name,
             contact_email: this.props.contact_email,
             contact_number: this.props.contact_number
-        });
-        this.setState({
-            redirect: true,
-        })
+        }
+
+        let errors = this.validFormFields(formInput);
+        if (errors) {
+            this.props.showErros(errors)
+            console.log(errors);
+            // return
+        }
+
+        if (this.isEmpty(errors)) {
+            var postNewData = await axios.post('http://localhost:3002/data', formInput);
+            this.setState({
+                redirect: true,
+            })
+
+        }
     }
     inputBusinessName(e) {
         this.props.updateName(e.target.value)
@@ -42,46 +84,13 @@ class BusinessFrom extends React.Component {
         this.props.updateContactNumber(e.target.value)
     }
 
-    validFields() {
-
-        var valid = true;
-        let validEmail = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
-        let testingEmail = validEmail.test(this.refs.email.value);
-        var message = "";
-        let validContactNumber = /[-]?[0-9]+[,.]?[0-9]*([\/][0-9]+[,.]?[0-9]*)*/;
-        let testContactNumber = validContactNumber.test(this.refs.contact_number.value)
-
-        if (testingEmail) {
-            return valid
-            message += "you have entered the wrong email('exmple@gmail.com')"
-            this.props.updateContactEmail({ email: valid })
-            console.log("email valid", this.props.email)
-
-        }
-
-        if (this.refs.name.value > 0) {
-            this.props.updateName({ name: valid })
-            console.log("name", this.props.updateName({ name: valid }))
-
-        }
-        if (this.refs.contact_name.value > 0) {
-            this.props.updateContactName({ contact_name: valid })
-            console.log("cname", this.props.updateContactName({ contact_name: valid }))
-
-        }
-        if (testContactNumber) {
-            return valid
-            this.props.updateContactNumber({ contact_number: valid })
-            console.log("contact_number", this.props.updateContactNumber({ contact_number: valid }))
-        }
-    }
-
     renderRedirect = () => {
         if (this.state.redirect) {
             return <Redirect to='/view_all_businesses' />
         }
     }
     render() {
+        console.log("this.props.erros", this.props.erros)
         return (
             <div>
                 <Link to="/businessOwnerLogin" >login</Link>|
@@ -97,9 +106,9 @@ class BusinessFrom extends React.Component {
                         data-toggle="tooltip"
                         data-placement="top"
                         title="name"
-                        onChange={(e) => { this.inputBusinessName(e); this.validFields() }}
-
+                        onChange={(e) => { this.inputBusinessName(e) }}
                     />
+                    <h4 style={{ color: "red" }}> {this.props.erros.name}</h4>
                 </div>
                 <div>
                     <label>Contact Name</label>
@@ -110,9 +119,9 @@ class BusinessFrom extends React.Component {
                         data-toggle="tooltip"
                         data-placement="top"
                         title=" contact name"
-                        onChange={(e) => { this.inputContactName(e); this.validFields() }}
+                        onChange={(e) => { this.inputContactName(e) }}
                     />
-
+                    <h4 style={{ color: "red" }}> {this.props.erros.contact_name}</h4>
                 </div>
                 <div>
                     <label>Contact Email</label>
@@ -123,8 +132,10 @@ class BusinessFrom extends React.Component {
                         data-toggle="tooltip"
                         data-placement="top"
                         title=" contact email"
-                        onChange={(e) => { this.inputContactEmail(e); this.validFields() }}
+                        onChange={(e) => { this.inputContactEmail(e) }}
                     />
+                    <h4 style={{ color: "red" }}> {this.props.erros.contact_email}</h4>
+
                 </div>
                 <div>
                     <label>Contact Number</label>
@@ -135,13 +146,15 @@ class BusinessFrom extends React.Component {
                         value={this.props.contact_number}
                         data-placement="top"
                         title=" contact number"
-                        onChange={(e) => { this.inputContactNumber(e); this.validFields() }}
+                        onChange={(e) => { this.inputContactNumber(e) }}
 
                     />
+                    <h4 style={{ color: "red" }}> {this.props.erros.contact_number}</h4>
+
                 </div>
                 <div>
                     {this.renderRedirect()}
-                    <button onClick={() => this.postData()}>Register</button>
+                    <button onClick={(e) => this.postData()}>Register</button>
 
                 </div>
             </div>
@@ -155,6 +168,7 @@ const mapStateToProps = (state) => {
         contact_name: state.registerBusinesses.contact_name,
         contact_email: state.registerBusinesses.contact_email,
         contact_number: state.registerBusinesses.contact_number,
+        erros: state.registerBusinesses.errors
     }
 }
 
@@ -171,6 +185,9 @@ const mapDispatchToProps = (dispatch) => {
         },
         updateContactNumber: (number) => {
             dispatch(action.saveContactNumber(number))
+        },
+        showErros: (err) => {
+            dispatch(action.FieldsErros(err))
         },
         submitNewData: (newData) => {
             dispatch(action.onSubmit(newData))
