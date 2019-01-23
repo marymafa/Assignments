@@ -69,7 +69,7 @@ class LocationForm extends React.Component {
         return (
             <div>
                 <h1>Storage Service</h1>
-                <h2> Business Locations</h2>
+                <h2> Please fill in this form </h2>
                 <div>
                     <label>Address</label>
                     <input data-toggle="tooltip" data-placement="top" title=" address" placeholder="e.g bendor street polokwane" type="text" onChange={this.inputAddress.bind(this)} />

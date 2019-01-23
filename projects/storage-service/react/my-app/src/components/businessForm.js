@@ -92,71 +92,85 @@ class BusinessFrom extends React.Component {
     render() {
         console.log("this.props.erros", this.props.erros)
         return (
-            <div>
-                <Link to="/businessOwnerLogin" >login</Link>|
+            <div style={{
+                position: 'absolute', left: '50%', top: '20%',
+                transform: 'translate(-20%, -20%)'
+            }}>
+                <form>
+                    <div className="link">
+                        <Link to="/businessOwnerLogin" >login</Link>|
                 <Link to="/" >Logout</Link>
-                <h1>Storage Service</h1>
-                <h2>Please login if you have registered your business Or   register your business, to get started </h2>
-                <div>
-                    <label>Name</label>
-                    <input
-                        ref="name"
-                        value={this.props.name}
-                        type="text"
-                        data-toggle="tooltip"
-                        data-placement="top"
-                        title="name"
-                        onChange={(e) => { this.inputBusinessName(e) }}
-                    />
-                    <h4 style={{ color: "red" }}> {this.props.erros.name}</h4>
-                </div>
-                <div>
-                    <label>Contact Name</label>
-                    <input
-                        ref="contact_name"
-                        type="text"
-                        value={this.props.contact_name}
-                        data-toggle="tooltip"
-                        data-placement="top"
-                        title=" contact name"
-                        onChange={(e) => { this.inputContactName(e) }}
-                    />
-                    <h4 style={{ color: "red" }}> {this.props.erros.contact_name}</h4>
-                </div>
-                <div>
-                    <label>Contact Email</label>
-                    <input
-                        ref="email"
-                        type="text"
-                        value={this.props.email}
-                        data-toggle="tooltip"
-                        data-placement="top"
-                        title=" contact email"
-                        onChange={(e) => { this.inputContactEmail(e) }}
-                    />
-                    <h4 style={{ color: "red" }}> {this.props.erros.contact_email}</h4>
+                    </div>
+                    <h1>Storage Service</h1>
+                    <h2>Please login if you have registered your business Or   register your business, to get started </h2>
+                    <div className="nam">
+                        <label className="label">Name</label>
+                        <input
+                            ref="name"
+                            value={this.props.name}
+                            type="text"
+                            data-toggle="tooltip"
+                            data-placement="top"
+                            title="name"
+                            placeholder="enter business name ('e.g thecodingground')"
+                            onChange={(e) => { this.inputBusinessName(e) }}
+                        />
+                        <h4 style={{ color: "red" }}> {this.props.erros.name}</h4>
+                    </div>
+                    <div class="col-25">
+                        <label>Contact Name</label>
+                        <input
+                            ref="contact_name"
+                            type="text"
+                            value={this.props.contact_name}
+                            data-toggle="tooltip"
+                            data-placement="top"
+                            title=" contact name"
+                            placeholder="enter  contact name('e.g mary')"
 
-                </div>
-                <div>
-                    <label>Contact Number</label>
-                    <input
-                        ref="contact_number"
-                        type="tel"
-                        data-toggle="tooltip"
-                        value={this.props.contact_number}
-                        data-placement="top"
-                        title=" contact number"
-                        onChange={(e) => { this.inputContactNumber(e) }}
+                            onChange={(e) => { this.inputContactName(e) }}
+                        />
+                        <h4 style={{ color: "red" }}> {this.props.erros.contact_name}</h4>
+                    </div>
+                    <div class="col-25">
+                        <label>Contact Email</label>
+                        <input
+                            ref="email"
+                            type="text"
+                            value={this.props.email}
+                            data-toggle="tooltip"
+                            data-placement="top"
+                            title=" contact email"
+                            placeholder="enter  contact email ('e.g example@gmail.com')"
 
-                    />
-                    <h4 style={{ color: "red" }}> {this.props.erros.contact_number}</h4>
+                            onChange={(e) => { this.inputContactEmail(e) }}
+                        />
+                        <h4 style={{ color: "red" }}> {this.props.erros.contact_email}</h4>
 
-                </div>
-                <div>
-                    {this.renderRedirect()}
-                    <button onClick={(e) => this.postData()}>Register</button>
+                    </div>
+                    <div class="col-75">
+                        <label>Contact Number</label>
+                        <input
+                            ref="contact_number"
+                            type="tel"
+                            data-toggle="tooltip"
+                            value={this.props.contact_number}
+                            data-placement="top"
+                            title=" contact number"
+                            placeholder="enter   contact number ('e.g 098 765 1234')"
 
-                </div>
+                            onChange={(e) => { this.inputContactNumber(e) }}
+
+                        />
+                        <h4 style={{ color: "red" }}> {this.props.erros.contact_number}</h4>
+
+                    </div>
+                    <div>
+                        {this.renderRedirect()}
+                        <button className="registerbutton" onClick={(e) => this.postData()}>Register</button>
+
+                    </div>
+                </form>
             </div>
         )
     }
