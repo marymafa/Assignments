@@ -8,7 +8,7 @@ export default class Home extends React.Component {
     render() {
         return (
             <div>
-                <h1 className="home">Storage Service</h1>
+                <h3 className="home">Storage Service</h3>
                 <Link className="homebutton" to="/business" ><button type="button">Register business</button></Link>
                 <Link className="rentbutton" to="/logIn" ><button type="button">Rent units</button></Link>
             </div>

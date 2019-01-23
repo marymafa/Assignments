@@ -23,13 +23,12 @@ export default class ViewCustomerDetails extends Component {
         sessionStorage.removeItem('jwt-secret');
     }
     render() {
-        console.log("this is the users", this.state.users)
         return (
             <div>
                 <button type="button" value="Submit" onClick={() => this.removeIten()}><Link to="/" >Logout</Link></button>|
                 <Link to="/business">register another business</Link>|
                 <Link to="/availableunits">remaining units</Link>
-                <h1>customer Details</h1>
+                <h3>customer Details</h3>
                 <div>
                     <thead>
                         <tr>
