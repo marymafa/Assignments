@@ -67,9 +67,12 @@ class LocationForm extends React.Component {
     }
     render() {
         return (
-            <div>
+            <div style={{
+                position: 'absolute', left: '50%', top: '20%',
+                transform: 'translate(-20%, -20%)'
+            }}>
                 <h1>Storage Service</h1>
-                <h2> Please fill in this form </h2>
+                <h2 className="text"> Please fill in this form </h2>
                 <div>
                     <label>Address</label>
                     <input data-toggle="tooltip" data-placement="top" title=" address" placeholder="e.g bendor street polokwane" type="text" onChange={this.inputAddress.bind(this)} />
@@ -82,7 +85,7 @@ class LocationForm extends React.Component {
                     <h4 style={{ color: "red" }}> {this.props.erros.country}</h4>
                 </div>
                 {this.renderRedirect()}
-                <div><button onClick={() => this.postData()}>Submit</button></div>
+                <button className="registerbutton" onClick={() => this.postData()}>Submit</button>
             </div>
         )
     }

@@ -94,7 +94,7 @@ class BusinessFrom extends React.Component {
         return (
             <div style={{
                 position: 'absolute', left: '50%', top: '20%',
-                transform: 'translate(-20%, -20%)'
+                transform: 'translate(-25%, -25%)'
             }}>
                 <form>
                     <div className="link">

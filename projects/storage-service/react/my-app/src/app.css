@@ -11,14 +11,19 @@ input{
   padding: 8px 8px 18px;
   display: inline-block;
 }
-
+.text{
+  text-align: center;
+  font-style: italic;
+   color: teal;
+   font-size: 150%;
+  margin-left:-35%
+}
 .link{
     float: right;
   font-style: italic;
   padding:-9%;
 
 }
-
 
 h1{
   text-align: center;
