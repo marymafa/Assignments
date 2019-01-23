@@ -12,10 +12,10 @@ input{
   display: inline-block;
 }
 .text{
-  text-align: center;
+text-align: center;
   font-style: italic;
    color: teal;
-   font-size: 150%;
+   font-size: 100%;
   margin-left:-35%
 }
 .link{
@@ -23,6 +23,34 @@ input{
   font-style: italic;
   padding:-9%;
 
+}
+.login{
+  text-align: center;
+  font-style: italic;
+   color: teal;
+   font-size: 200%;
+   margin-left:-25%;
+   padding: 15px;
+}
+h3{
+  font-style: italic;
+font-size: 200%
+}
+.blocks{
+    text-align: center;
+ font-style: italic;
+  color: teal;
+  font-size: 200%;
+  margin-left:-85%;
+  padding: 15px;
+}
+.block{
+  text-align: center;
+  font-style: italic;
+   color: teal;
+   font-size: 150%;
+   margin-left:-85%;
+   padding: 15px;
 }
 
 h1{

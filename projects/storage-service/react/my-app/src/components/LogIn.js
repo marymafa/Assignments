@@ -42,14 +42,14 @@ class LogIn extends React.Component {
             })
             if (res.status === 200) {
                 var obj = JSON.stringify(res.data);
-                 sessionStorage.setItem("jwt-secret", obj);
-                 sessionStorage.getItem('myData', obj);
-                 this.setState({
-                     redirect: true,
-                 })
-             } else {
-                 this.setState({ redirect: false })
-             } 
+                sessionStorage.setItem("jwt-secret", obj);
+                sessionStorage.getItem('myData', obj);
+                this.setState({
+                    redirect: true,
+                })
+            } else {
+                this.setState({ redirect: false })
+            }
 
         }
 
@@ -95,12 +95,12 @@ class LogIn extends React.Component {
     }
     render() {
         return (
-            <div>
-                <div>
+            <div >
+                <div className="link">
                     <Link to="/signUp" >signup</Link>
                     <Link to="/" >Logout</Link>
                 </div>
-                <div><h1>Enter your details</h1> </div>
+                <h3>please fill this form</h3>
                 <div>
                     <label>Email</label>
                     <input type="email" name="email" onChange={this.inputEmail} />
@@ -113,7 +113,7 @@ class LogIn extends React.Component {
                 </div>
                 <div>
                     {this.renderRedirect()}
-                    <button type="button" value="Submit" onClick={() => this.postData()} >Login</button>
+                    <button className="registerbutton" type="button" value="Submit" onClick={() => this.postData()} >Login</button>
                 </div>
 
             </div>

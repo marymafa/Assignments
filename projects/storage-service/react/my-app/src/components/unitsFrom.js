@@ -64,15 +64,15 @@ class UnitsFrom extends React.Component {
 
         return (
             <div>
-                <h1>Storage Service</h1>
-                <h2>Enter the block name of the business</h2>
+                <h1 className="blocks">Storage Service</h1>
+                <h2 className="block">please fill this form</h2>
                 <div>
                     <label>Units</label>
                     <input data-toggle="tooltip" data-placement="top" title="units" type="text" onChange={this.inputName} />
                     <h4 style={{ color: "red" }}> {this.props.erros.unit_name}</h4>
                 </div>
                 {this.renderRedirect()}
-                <div><button onClick={() => this.postData()}>Submit</button></div>
+                <button className="registerbutton" onClick={() => this.postData()}>Submit</button>
             </div>
         )
     }

@@ -95,11 +95,11 @@ class SignUp extends React.Component {
     render() {
         return (
             <div>
-                <div>
+                <div className="link"> 
                     <button type="button" value="Submit" onClick={() => this.removeIten()}><Link to="/" >Logout</Link></button>|
                     <Link to="/login" >login</Link>
                 </div>
-                <h1>Register here</h1>
+                <h3>please fill this form</h3>
                 <div>
                     <label>username</label>
                     <input type="text" name="username" onChange={this.inputusername} />
@@ -120,7 +120,7 @@ class SignUp extends React.Component {
                 </div>
                 <div className="register">
                     {this.renderRedirect()}
-                    <button type="button" value="Submit" onClick={() => this.postData()} >Register</button>
+                    <button className="registerbutton" type="button" value="Submit" onClick={() => this.postData()} >Register</button>
                 </div>
             </div>
         )

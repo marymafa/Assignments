@@ -95,12 +95,12 @@ class BusinessOwnerLogin extends React.Component {
 
         return (
             <div>
-                <div>
+                <div className="link">
                 <button type="button" value="Submit" onClick={() => this.removeIten()}><Link to="/" >Logout</Link></button>|
                     
                     <Link to="/businessOwnerSignup">signup</Link>
                 </div>
-                <div><h1>Enter your details</h1></div>
+                <h3>please fill this form</h3>
                 <div>
                     <label>Email</label>
                     <input type="email" name="email" onChange={this.inputEmail} />
@@ -115,7 +115,7 @@ class BusinessOwnerLogin extends React.Component {
                 </div>
                 <div>
                     {this.renderRedirect()}
-                    <button type="button" value="Submit" onClick={() => this.postData()} >busOwnerLogin</button>
+                    <button className="registerbutton" type="button" value="Submit" onClick={() => this.postData()} >busOwnerLogin</button>
                 </div>
 
             </div>

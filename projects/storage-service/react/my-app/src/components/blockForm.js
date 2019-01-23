@@ -64,10 +64,10 @@ class BlockFrom extends React.Component {
     }
     render() {
         return (
-            <div>
-                <h1>Storage Service</h1>
-                <h2>Enter  block name for the business</h2>
-                <div>
+            <div >
+                <h1 className="blocks">Storage Service</h1>
+                <h2 className="block">please fill this form</h2>
+                <div >
                     <label>Block</label>
                     <input
                         data-toggle="tooltip"
@@ -78,7 +78,7 @@ class BlockFrom extends React.Component {
                     <h4 style={{ color: "red" }}> {this.props.erros.name}</h4>
                 </div>
                 {this.renderRedirect()}
-                <div><button onClick={() => this.postData()}>Submit</button></div>
+                <button className="registerbutton" onClick={() => this.postData()}>Submit</button>
             </div>
         )
     }

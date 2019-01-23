@@ -87,9 +87,9 @@ class UnitTypesFrom extends React.Component {
     render() {
         console.log("props", this.props)
         return (
-            <div>
-                <h1>Storage Service</h1>
-                <h2>Fill in the details below</h2>
+            <div >
+                <h1 className="blocks">Storage Service</h1>
+                <h2 className="block">Fill in the details below</h2>
                 <div>
                     <label>Name</label>
                     <input data-toggle="tooltip" data-placement="top" title="name" type="text" onChange={this.inputName} />
@@ -114,7 +114,7 @@ class UnitTypesFrom extends React.Component {
                 </div>
 
                 {this.renderRedirect()}
-                <div><button onClick={() => this.postData()}>Submit</button></div>
+                <button className="registerbutton" onClick={() => this.postData()}>Submit</button>
 
             </div>
         )

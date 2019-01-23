@@ -92,11 +92,10 @@ class BusinessFrom extends React.Component {
     render() {
         console.log("this.props.erros", this.props.erros)
         return (
-            <div style={{
+        <div style={{
                 position: 'absolute', left: '50%', top: '20%',
-                transform: 'translate(-25%, -25%)'
+                transform: 'translate(-22%, -22%)'
             }}>
-                <form>
                     <div className="link">
                         <Link to="/businessOwnerLogin" >login</Link>|
                 <Link to="/" >Logout</Link>
@@ -170,7 +169,6 @@ class BusinessFrom extends React.Component {
                         <button className="registerbutton" onClick={(e) => this.postData()}>Register</button>
 
                     </div>
-                </form>
             </div>
         )
     }
