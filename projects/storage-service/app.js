@@ -114,6 +114,16 @@ app.post('/RentAUnit', async function (req, res) {
     res.status(201).end()
 })
 
+// app.post('/registerBusiness', async function (req, res) {
+//     var userEmailId = await client.query(`select * from businesses 
+//     inner join locations on businesses.id = locations.businesses_id 
+//     inner join blocks on locations.id = blocks.locations_id
+//     inner join units on blocks.id = units.blocks_id
+//     inner join units_type on units_type.id = units.units_type_id WHERE email = $1`, [req.body.customerEmail]);
+//     await client.query('INSERT INTO customer_units(customer_id, unit_id) VALUES ($1,$2)', [userEmailId.rows[0].id, +req.body.unit_id]);
+//     res.status(201).end()
+// })
+
 app.post('/unitsData', function (req, res) {
     console.log("unit details", req.body);
     client.query('INSERT INTO  units(unit_name,blocks_id,units_type_id) VALUES($1,$2,$3)', [req.body.unit_name, Number(req.body.blocks_id), Number(req.body.units_type_id)], (err, res) => {

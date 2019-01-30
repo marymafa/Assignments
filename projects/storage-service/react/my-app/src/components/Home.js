@@ -9,7 +9,7 @@ export default class Home extends React.Component {
         return (
             <div>
                 <h3 className="home">Storage Service</h3>
-                <Link className="homebutton" to="/business" ><button type="button">Register business</button></Link>
+                <Link className="homebutton" to="/businessOwnerLogin" ><button type="button">Register business</button></Link>
                 <Link className="rentbutton" to="/logIn" ><button type="button">Rent units</button></Link>
             </div>
         )

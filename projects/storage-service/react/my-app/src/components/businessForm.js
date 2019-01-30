@@ -98,7 +98,8 @@ class BusinessFrom extends React.Component {
             }}>
                     <div className="link">
                         <Link to="/businessOwnerLogin" >login</Link>|
-                <Link to="/" >Logout</Link>
+                <Link to="/" >Logout</Link>|
+                <Link to="/viewCustomerDetails" >view customer details</Link>
                     </div>
                     <h1>Storage Service</h1>
                     <h2>Please login if you have registered your business Or   register your business, to get started </h2>

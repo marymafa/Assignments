@@ -81,7 +81,7 @@ class BusinessOwnerSignUp extends React.Component {
     };
     renderRedirect = () => {
         if (this.state.redirect) {
-            return <Redirect to='/viewCustomerDetails' />
+            return <Redirect to='/businessOwnerLogin' />
         }
     }
     removeIten() {

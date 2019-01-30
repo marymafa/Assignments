@@ -25,7 +25,8 @@ import ViewCustomerDetails from './components/ViewCustomerDetails';
 import CustomerDetails from './components/customerUnit';
 import BusinessOwnerLogin from './components/BusinessOwnerLogin';
 import BusinessOwnerSignUp from './components/BusinessOwnerSignUp';
-import AvailableUnits from './components/AvailableUnits'
+import AvailableUnits from './components/AvailableUnits';
+import BusinessOwnerDetails from './components/businessOwnerDeatails';
 import "./app.css";
 
 ReactDOM.render(
@@ -55,6 +56,7 @@ ReactDOM.render(
                 <Route path="/viewCustomerDetails" component={ViewCustomerDetails} />
                 <Route path="/userdetails" component={CustomerDetails} />
                 <Route path="/availableunits" component={AvailableUnits} />
+                <Route path="/businessOwnerDetails" component={BusinessOwnerDetails} />
             </div>
         </Router>
     </Provider >,
