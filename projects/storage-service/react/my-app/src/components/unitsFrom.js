@@ -56,7 +56,7 @@ class UnitsFrom extends React.Component {
     }
     renderRedirect = () => {
         if (this.state.redirect) {
-            return <Redirect to='/businessOwnerDetails' />
+            return <Redirect to='/view_business' />
         }
     }
     render() {

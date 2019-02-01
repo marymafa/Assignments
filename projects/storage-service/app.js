@@ -29,7 +29,7 @@ require('./routes/loginUser')(app);
 require('./routes/registerUser')(app);
 
 app.get("/data", async (req, res) => {
-    var data = await client.query(`SELECT * FROM businesses`)
+    var data = await client.query(`SELECT * from businesses`)
     res.send(data.rows).status(201).end();
 });
 
@@ -78,7 +78,7 @@ app.get('/RentAUnit/:email', async (req, res) => {
 
 app.post('/data', (req, res) => {
     console.log("business details", req.body);
-    client.query('INSERT INTO businesses(name,contact_name,contact_email,contact_number) VALUES($1,$2,$3,$4)', [req.body.name, req.body.contact_name, req.body.contact_email, req.body.contact_number], (err, res) => {
+    client.query('INSERT INTO businesses(business_name,contact_name,contact_email,contact_number) VALUES($1,$2,$3,$4)', [req.body.business_name, req.body.contact_name, req.body.contact_email, req.body.contact_number], (err, res) => {
         console.log(err, res)
     })
     res.status(201).end()
@@ -94,7 +94,7 @@ app.post('/locationData', function (req, res) {
 
 app.post('/blockData', function (req, res) {
     console.log("block details", req.body.locations_id);
-    client.query('INSERT INTO blocks(name,locations_id) VALUES($1,$2)', [req.body.name, req.body.locations_id], (err, res) => {
+    client.query('INSERT INTO blocks(block_name,locations_id) VALUES($1,$2)', [req.body.block_name, req.body.locations_id], (err, res) => {
         console.log(err, res)
     })
     res.status(201).end()

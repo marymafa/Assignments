@@ -1,9 +1,9 @@
 
-export const registerBusinesses = (state = { name: "", contact_name: "", contact_email: "", contact_number: "", errors: {} }, action) => {
+export const registerBusinesses = (state = { business_name: "", contact_name: "", contact_email: "", contact_number: "", errors: {} }, action) => {
     let newState = state
     switch (action.type) {
         case "NAME":
-            newState = { ...state, name: action.value };
+            newState = { ...state, business_name: action.value };
             break;
         case "CONTACT_NAME":
             newState = { ...state, contact_name: action.value };
@@ -41,11 +41,11 @@ export const businessLocations = (state = { address: "", country: "", businesses
     return newState;
 };
 
-export const businessBlocks = (state = { name: "", locations_id: '', errors: {} }, action) => {
+export const businessBlocks = (state = { block_name: "", locations_id: '', errors: {} }, action) => {
     let newState = state;
     switch (action.type) {
         case "BLOCK_NAME":
-            newState = { ...state, name: action.value };
+            newState = { ...state, block_name: action.value };
             break;
         case "LOCATION_ID":
             newState = { ...state, locations_id: action.value };

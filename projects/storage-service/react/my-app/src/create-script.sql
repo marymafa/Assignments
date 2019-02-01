@@ -1,6 +1,6 @@
 CREATE TABLE IF NOT EXISTS businesses (
         id serial PRIMARY KEY,
-        name VARCHAR(100) NOT NULL,
+        business_name VARCHAR(100) NOT NULL,
         contact_name VARCHAR(100) NOT NULL,
         contact_number VARCHAR(100) NOT NULL,
         contact_email VARCHAR(100) NOT NULL
@@ -16,7 +16,7 @@ CREATE TABLE IF NOT EXISTS locations (
 
 CREATE TABLE IF NOT EXISTS blocks (
         id serial PRIMARY KEY,
-        name VARCHAR(100) NOT NULL,
+        block_name VARCHAR(100) NOT NULL,
         locations_id INT REFERENCES locations (id) NOT NULL
 );
 

@@ -33,6 +33,7 @@ class AllBusinesses extends Component {
         })
     }
     render() {
+        console.log("state", this.state.business)
         if (this.state.redirect) {
             return <Redirect to='/locations' />
         }
@@ -44,7 +45,7 @@ class AllBusinesses extends Component {
                         Business:
                             <select name="selectid" onChange={(e) => this.SelectValue(e)} >
                             <option value={0}>All businesses</option>
-                            {this.state.business.map(business => <option key={business.id} value={business.id}>{business.name}</option>)}
+                            {this.state.business.map(business => <option key={business.id} value={business.id}>{business.business_name}</option>)}
                         </select>
                     </label>
                 </div>

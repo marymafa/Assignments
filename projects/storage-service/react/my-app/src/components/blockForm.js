@@ -15,7 +15,7 @@ class BlockFrom extends React.Component {
     async  postData() {
 
         let formInput = {
-            name: this.props.name,
+            block_name: this.props.block_name,
             locations_id: this.props.locations_id
         }
 
@@ -37,8 +37,8 @@ class BlockFrom extends React.Component {
 
     validFormFields(data) {
         let errors = {};
-        if (data.name == "") {
-            errors.name = "block name is required";
+        if (data.block_name == "") {
+            errors.block_name = "block name is required";
         }
 
         this.props.showErros(errors)
@@ -86,7 +86,7 @@ class BlockFrom extends React.Component {
 
 const mapStateToProps = (state) => {
     return {
-        name: state.businessBlocks.name,
+        block_name: state.businessBlocks.block_name,
         locations_id: state.selectValues.selections,
         erros: state.registerBusinesses.errors
     }

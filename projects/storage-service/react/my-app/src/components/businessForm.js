@@ -27,8 +27,8 @@ class BusinessFrom extends React.Component {
             errors.contact_name = "contact name is required";
         }
 
-        if (data.name == "") {
-            errors.name = "name is required";
+        if (data.business_name == "") {
+            errors.business_name = "name is required";
         }
 
         if (data.contact_number == "") {
@@ -50,7 +50,7 @@ class BusinessFrom extends React.Component {
     async  postData() {
 
         let formInput = {
-            name: this.props.name,
+            business_name: this.props.business_name,
             contact_name: this.props.contact_name,
             contact_email: this.props.contact_email,
             contact_number: this.props.contact_number
@@ -107,7 +107,7 @@ class BusinessFrom extends React.Component {
                         <label className="label">Name</label>
                         <input
                             ref="name"
-                            value={this.props.name}
+                            value={this.props.business_name}
                             type="text"
                             data-toggle="tooltip"
                             data-placement="top"
@@ -115,7 +115,7 @@ class BusinessFrom extends React.Component {
                             placeholder="enter business name ('e.g thecodingground')"
                             onChange={(e) => { this.inputBusinessName(e) }}
                         />
-                        <h4 style={{ color: "red" }}> {this.props.erros.name}</h4>
+                        <h4 style={{ color: "red" }}> {this.props.erros.business_name}</h4>
                     </div>
                     <div class="col-25">
                         <label>Contact Name</label>
@@ -177,7 +177,7 @@ class BusinessFrom extends React.Component {
 
 const mapStateToProps = (state) => {
     return {
-        name: state.registerBusinesses.name,
+        business_name: state.registerBusinesses.business_name,
         contact_name: state.registerBusinesses.contact_name,
         contact_email: state.registerBusinesses.contact_email,
         contact_number: state.registerBusinesses.contact_number,
